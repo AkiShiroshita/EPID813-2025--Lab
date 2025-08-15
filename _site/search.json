@@ -1,0 +1,47 @@
+[
+  {
+    "objectID": "slide-embed.html",
+    "href": "slide-embed.html",
+    "title": "Embed Slides",
+    "section": "",
+    "text": "On this page, we show how we can embed a RevealJS Presentation inside of a Quarto Website."
+  },
+  {
+    "objectID": "slide-embed.html#presentation",
+    "href": "slide-embed.html#presentation",
+    "title": "Embed Slides",
+    "section": "Presentation",
+    "text": "Presentation\n\n\n\n\n\n\nImportant\n\n\n\nFor quarto-webr to work within RevealJS, you must use a pre-release version of Quarto that is 1.4.502 or greater that contains an updated copy of pandoc. For more details, please see Issue #14."
+  },
+  {
+    "objectID": "slide-embed.html#embed-code",
+    "href": "slide-embed.html#embed-code",
+    "title": "Embed Slides",
+    "section": "Embed Code",
+    "text": "Embed Code\nPlace the following code inside of the Quarto Document:\n&lt;style&gt;\n.slide-deck {\n    border: 3px solid #dee2e6;\n    width: 100%;\n    height: 475px;\n}\n&lt;/style&gt;\n\n&lt;div&gt;\n```{=html}\n&lt;iframe class=\"slide-deck\" src=\"path/to/presentation/\"&gt;&lt;/iframe&gt;\n```\n&lt;/div&gt;"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Welcome!\nThis website is a collection of labs from the EPID8313 course in 2025. The labs are designed to help you practice and apply the concepts learned in the course.\nDuring the lab session (usually, prior to the journal club), I will address your specific questions using the resources on this website. To ensure I can prepare the necessary materials, please post your questions at least one day in advance. If no questions are posted, I may skip the lab session and proceed directly to the journal club.\nFor the jounal club, you may prepare a few slides summarizing the assigned articles. Since these articles serve as important references rather than original studies for critique, focusing on sharing their core concepts would be most valuable.",
+    "crumbs": [
+      "Home",
+      "Content",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "Lab2.html",
+    "href": "Lab2.html",
+    "title": "Lab 2",
+    "section": "",
+    "text": "Data wrangling\n\nbase R\ntidyverse: clean and readable\ndata.table: Optimized for speed and memory efficiency\n\n\n\n\n\n\n\nNote\n\n\n\nAs I use very large-scale environmental data, I am switching from tidyverse to data.table.\n\n\n \n\nDT[i, j, by]\n\n\nWhere DT is a data.table object, the i argument is used for filtering and joining, the j argument is used for summarizing and transforming, and the by argument defines the groups to which to apply these operations.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nConvert objects to data.table:\n\nsetDT() vs. as.data.table()\nsetDT(): Converts in place\nas.data.table(): Creates a new data.table object\n\nFilter rows\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nChange data type\n\nModify-in-place\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nMake new columns\n\nModify-in-place\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nSummarize by group\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPiping\n\nIt takes the result of the expression on its left and “pipes” it into the function on its right.\nAfter R 4.3.0, the native pipe supports a _ placeholder to the right-hand side of the pipe.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nRegression models\nspeedglm package: more speedy than glm\nIt directly solves the normal equations of the weighted least squares problem at each iteration (rather than relies on a QR decomposition).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "Home",
+      "Content",
+      "Lab 2"
+    ]
+  }
+]
