@@ -1,0 +1,124 @@
+---
+title: "Lab 2"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+  packages: ['data.table', 'tidyverse', 'ggplot2', 'speedglm'] # Pre-install dependency
+editor_options: 
+  chunk_output_type: console
+---
+
+# Data wrangling
+
+* `base R`
+
+* `tidyverse`: clean and readable 
+
+* `data.table`: Optimized for speed and memory efficiency
+
+:::callout-note
+As I use very large-scale environmental data, I am switching from `tidyverse` to `data.table`.
+:::
+
+```{=html}
+<div  style=" margin-left: auto; margin-right: auto;display: block; text-align:center; width:fit-content;"> 
+<p style="font-size:200%;font-weight:bold" >
+<code>DT[<span class="rows">i</span>, <span class="columns">j</span>, <span class="by">by</span>]</code>
+</p>
+</div>
+```
+
+Where <code>**DT**</code> is a data.table object, the <code class="rows">[**i**]{.rows}</code> argument is used for filtering and joining, the <code class="columns">[**j**]{.columns}</code> argument is used for summarizing and transforming, and the <code class="by">[**by**]{.by}</code> argument defines the groups to which to apply these operations.
+
+```{webr}
+library(data.table)
+prostate <- fread('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')
+```
+
+* Convert objects to `data.table`: 
+
+`setDT()` vs. `as.data.table()`
+
+`setDT()`: Converts in place
+
+`as.data.table()`: Creates a new `data.table` object
+
+* Filter rows
+
+```{webr}
+prostate <- prostate[rx == "0.2 mg estrogen"]
+```
+
+* Change data type
+
+`Modify-in-place`
+
+```{webr}
+prostate[, age := as.numeric(age)]
+```
+
+```{webr}
+# Identify columns that are of type integer.
+int_cols <- names(prostate)[sapply(prostate, is.integer)]
+
+# Update these columns to numeric type using the := operator.
+# The '(int_cols)' syntax allows us to use a character vector of column names.
+prostate[, (int_cols) := lapply(.SD, as.numeric), .SDcols = int_cols]
+```
+
+* Make new columns
+
+`Modify-in-place`
+
+```{webr}
+prostate2 <- copy(prostate)
+prostate2[, `:=`(
+  estrogen     = fifelse(rx != "placebo", 1, 0),
+  dead         = fifelse(status != "alive", 1, 0),
+  abnormal_ekg = fifelse(ekg != "normal", 1, 0)
+)]
+```
+
+* Summarize by group
+
+```{webr}
+prostate2[, mean(age, na.rm=TRUE), by = rx]
+```
+
+```{webr}
+prostate2[rx == "0.2 mg estrogen", mean(age, na.rm=TRUE)]
+```
+
+```{webr}
+person_time_summary <- prostate2[, .(
+  events = sum(dead),
+  person_time = sum(dtime)
+), by = .(estrogen)]
+```
+
+* Piping
+
+It takes the result of the expression on its left and "pipes" it into the function on its right.
+
+After R 4.3.0, the native pipe supports a `_` placeholder to the right-hand side of the pipe.
+
+```{webr}
+prostate2[rx == "0.2 mg estrogen"] |> 
+  _[, .(mean_age = mean(age, na.rm=TRUE),
+        mean_wt = mean(wt, na.rm=TRUE)),
+    by = rx]
+```
+
+# Regression models
+
+`speedglm` package: more speedy than `glm`
+
+It directly solves the normal equations of the weighted least squares problem at each iteration (rather than relies on a QR decomposition).
+
+```{webr}
+library(speedglm)
+model <- speedglm(dead ~ estrogen + sbp + dbp + age + hx, data = prostate2, family = binomial())
+summary(model)
+```
+
+
+
