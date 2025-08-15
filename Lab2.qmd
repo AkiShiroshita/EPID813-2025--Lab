@@ -45,7 +45,7 @@ prostate <- fread('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025-
 * Filter rows
 
 ```{webr}
-prostate <- prostate[rx == "0.2 mg estrogen"]
+prostate[rx == "0.2 mg estrogen"]
 ```
 
 * Change data type
