@@ -19,6 +19,37 @@ editor_options:
 As I use very large-scale environmental data, I am switching from `tidyverse` to `data.table`.
 :::
 
+# `tidyverse`
+
+A philosophy created by Hadley Wickham
+
+* dplyr → data manipulation (filter, mutate, group, summarize)
+
+* ggplot2 → data visualization
+
+* tidyr → data tidying (reshaping, pivoting, separating)
+
+* readr → data import (CSV, TSV, etc.)
+
+* tibble → modern data frames (better printing, easier handling)
+
+* purrr → functional programming with lists (map, reduce)
+
+* stringr → string handling
+
+* forcats → categorical (factor) variables handling
+
+:::callout-note
+The pipe function (takes the result of the expression on its left and "pipes" it into the function on its right) `%>%` makes the workflow read like a sequence of steps
+:::
+
+```{webr}
+library(tidyverse)
+prostate <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')
+```
+
+# `data.table` (advanced)
+
 ```{=html}
 <div  style=" margin-left: auto; margin-right: auto;display: block; text-align:center; width:fit-content;"> 
 <p style="font-size:200%;font-weight:bold" >
@@ -108,7 +139,29 @@ prostate2[rx == "0.2 mg estrogen"] |>
     by = rx]
 ```
 
-# Regression models
+# Poisson regression
+
+* Conventional Poisson regression 
+
+For count data
+
+$log(E[Y_i|X_i])=\beta_0+\beta_1X_i$
+
+Effect measure: rate ratio
+
+* Modified Poisson regression
+
+For binary data
+
+$log(E[Y_i|X_i])=\beta_0+\beta_1X_i+log(T_i)$
+
+Effect measure: risk ratio
+
+:::callout-note
+Robust standard errors are recommended in both the conventional Poisson and the modified Poisson regression models.
+:::
+
+# Regression models (advanced)
 
 `speedglm` package: more speedy than `glm`
 

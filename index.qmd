@@ -8,5 +8,25 @@ This website is a collection of labs from the EPID8313 course in 2025. The labs 
 
 During the lab session (usually, prior to the journal club), I will address your specific questions using the resources on this website. To ensure I can prepare the necessary materials, please post your questions at least one day in advance. If no questions are posted, I may skip the lab session and proceed directly to the journal club.
 
-For the jounal club, you may prepare a few slides summarizing the assigned articles. Since these articles serve as important references rather than original studies for critique, focusing on sharing their core concepts would be most valuable.
+For the journal club, you may prepare several slides summarizing the assigned articles. Since these articles serve as important references rather than original studies for critique, focusing on sharing their core concepts would be most valuable.
+
+# Instroctor
+
+* Aki Shiroshita, MD, MPH
+
+* 4th-year Epidemiology PhD student
+
+* Originally from Japan
+
+* Fulbright grantee
+
+* Research interest: Environmental epidemiology, pharmacoepidemiology
+
+# Raffle
+
+```{webr}
+names <- c("Huy", "Ha", "Christopher", "Samuel", "Zicheng", "Usman")
+# Random order without replacement
+sample(names, size = length(names), replace = FALSE)
+```
 
