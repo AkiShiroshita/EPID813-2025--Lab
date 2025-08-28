@@ -4,11 +4,11 @@ title: "Overview"
 
 # Welcome!
 
-This website is a collection of labs from the EPID8313 course in 2025. The labs are designed to help you practice and apply the concepts learned in the course.
+This website is a collection of lab materials for the EPID8313 course (2025). The labs are designed to help you practice and apply the concepts covered in the course.
 
-During the lab session (usually, prior to the journal club), I will address your specific questions using the resources on this website. To ensure I can prepare the necessary materials, please post your questions at least one day in advance. If no questions are posted, I may skip the lab session and proceed directly to the journal club.
+During each lab session (typically held before the journal club), I will address your specific questions using the resources provided here. To allow sufficient preparation time, please submit your questions at least one day in advance. If no questions are submitted, I will review the core concepts of the lab material for about 10–15 minutes before transitioning to the journal club.
 
-For the journal club, you may prepare several slides summarizing the assigned articles. Since these articles serve as important references rather than original studies for critique, focusing on sharing their core concepts would be most valuable.
+For the journal club, you should prepare several slides summarizing the assigned articles. Each presentation will typically take around 15 minutes per article.
 
 # Instroctor
 
@@ -22,11 +22,10 @@ For the journal club, you may prepare several slides summarizing the assigned ar
 
 * Research interest: Environmental epidemiology, pharmacoepidemiology
 
-# Raffle
+* Dissertation: Traffic-related environmental exposures during early life and adverse health outcomes
 
-```{webr}
-names <- c("Huy", "Ha", "Christopher", "Samuel", "Zicheng", "Usman")
-# Random order without replacement
-sample(names, size = length(names), replace = FALSE)
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/modified_degauss.png")
 ```
+
 

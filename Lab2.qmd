@@ -7,6 +7,12 @@ editor_options:
   chunk_output_type: console
 ---
 
+Lab 2 covers 
+
+* **data wrangling** 
+
+* **regression models**.
+
 # Data wrangling
 
 * `base R`
@@ -23,30 +29,44 @@ As I use very large-scale environmental data, I am switching from `tidyverse` to
 
 A philosophy created by Hadley Wickham
 
-* dplyr → data manipulation (filter, mutate, group, summarize)
+* `dplyr` → data manipulation (filter, mutate, group, summarize)
 
-* ggplot2 → data visualization
+* `ggplot2` → data visualization
 
-* tidyr → data tidying (reshaping, pivoting, separating)
+* `tidyr` → data tidying (reshaping, pivoting, separating)
 
-* readr → data import (CSV, TSV, etc.)
+* `readr` → data import (CSV, TSV, etc.)
 
-* tibble → modern data frames (better printing, easier handling)
+* `tibble` → modern data frames (better printing, easier handling)
 
-* purrr → functional programming with lists (map, reduce)
+* `purrr` → functional programming with lists (map, reduce)
 
-* stringr → string handling
+* `stringr` → string handling
 
-* forcats → categorical (factor) variables handling
+* `forcats` → categorical (factor) variables handling
 
 :::callout-note
-The pipe function (takes the result of the expression on its left and "pipes" it into the function on its right) `%>%` makes the workflow read like a sequence of steps
+The pipe function (takes the result of the expression on its left and "pipes" it into the function on its right) `%>%` makes the workflow read like a sequence of steps.
 :::
+
+Demonstrations
 
 ```{webr}
 library(tidyverse)
 prostate <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')
 ```
+
+# My tips and tricks
+
+* For moderate-sized datasets, I recommend using `tidyverse` for its readability.
+
+* Memorize the basic commands for descriptive analyses.
+
+* Check the unique values and summaries of each column (e.g., `unique()`, `summary()`)
+
+* Check a lot of contingency tables (e.g., `table()`)
+
+* Visualize the variables as needed (e.g., `ggplot()`)
 
 # `data.table` (advanced)
 
@@ -145,7 +165,7 @@ prostate2[rx == "0.2 mg estrogen"] |>
 
 For count data
 
-$log(E[Y_i|X_i])=\beta_0+\beta_1X_i$
+$log(E[Y_i|X_i])=\beta_0+\beta_1X_i+log(T_i)$
 
 Effect measure: rate ratio
 
@@ -153,7 +173,7 @@ Effect measure: rate ratio
 
 For binary data
 
-$log(E[Y_i|X_i])=\beta_0+\beta_1X_i+log(T_i)$
+$log(E[Y_i|X_i])=\beta_0+\beta_1X_i$
 
 Effect measure: risk ratio
 
@@ -166,6 +186,10 @@ Robust standard errors are recommended in both the conventional Poisson and the 
 `speedglm` package: more speedy than `glm`
 
 It directly solves the normal equations of the weighted least squares problem at each iteration (rather than relies on a QR decomposition).
+
+Why does this important? 
+
+$\rightarrow$ In G-methods, you often create many derived variables and fit many regression models across "copied" datasets.
 
 ```{webr}
 library(speedglm)

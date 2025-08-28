@@ -1,0 +1,54 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Overview\"\n",
+        "---\n",
+        "\n",
+        "\n",
+        "# Welcome!\n",
+        "\n",
+        "This website is a collection of labs from the EPID8313 course in 2025. The labs are designed to help you practice and apply the concepts learned in the course.\n",
+        "\n",
+        "During the lab session (usually, prior to the journal club), I will address your specific questions using the resources on this website. To ensure I can prepare the necessary materials, please post your questions at least one day in advance. If no questions are posted, I may skip the lab session and proceed directly to the journal club.\n",
+        "\n",
+        "For the journal club, you may prepare several slides summarizing the assigned articles. Since these articles serve as important references rather than original studies for critique, focusing on sharing their core concepts would be most valuable.\n",
+        "\n",
+        "# Instroctor\n",
+        "\n",
+        "* Aki Shiroshita, MD, MPH\n",
+        "\n",
+        "* 4th-year Epidemiology PhD student\n",
+        "\n",
+        "* Originally from Japan\n",
+        "\n",
+        "* Fulbright grantee\n",
+        "\n",
+        "* Research interest: Environmental epidemiology, pharmacoepidemiology\n",
+        "\n",
+        "# Raffle\n",
+        "\n",
+        "\n",
+        "```{webr}\n",
+        "names <- c(\"Huy\", \"Ha\", \"Christopher\", \"Samuel\", \"Zicheng\", \"Usman\")\n",
+        "# Random order without replacement\n",
+        "sample(names, size = length(names), replace = FALSE)\n",
+        "```"
+      ],
+      "id": "89d19901"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\akihi\\miniconda3\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
