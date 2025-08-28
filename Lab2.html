@@ -2040,6 +2040,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
+<p>Lab 2 covers</p>
+<ul>
+<li><p><strong>data wrangling</strong></p></li>
+<li><p><strong>regression models</strong>.</p></li>
+</ul>
 <section id="data-wrangling" class="level1">
 <h1>Data wrangling</h1>
 <ul>
@@ -2065,14 +2070,14 @@ Note
 <h1><code>tidyverse</code></h1>
 <p>A philosophy created by Hadley Wickham</p>
 <ul>
-<li><p>dplyr → data manipulation (filter, mutate, group, summarize)</p></li>
-<li><p>ggplot2 → data visualization</p></li>
-<li><p>tidyr → data tidying (reshaping, pivoting, separating)</p></li>
-<li><p>readr → data import (CSV, TSV, etc.)</p></li>
-<li><p>tibble → modern data frames (better printing, easier handling)</p></li>
-<li><p>purrr → functional programming with lists (map, reduce)</p></li>
-<li><p>stringr → string handling</p></li>
-<li><p>forcats → categorical (factor) variables handling</p></li>
+<li><p><code>dplyr</code> → data manipulation (filter, mutate, group, summarize)</p></li>
+<li><p><code>ggplot2</code> → data visualization</p></li>
+<li><p><code>tidyr</code> → data tidying (reshaping, pivoting, separating)</p></li>
+<li><p><code>readr</code> → data import (CSV, TSV, etc.)</p></li>
+<li><p><code>tibble</code> → modern data frames (better printing, easier handling)</p></li>
+<li><p><code>purrr</code> → functional programming with lists (map, reduce)</p></li>
+<li><p><code>stringr</code> → string handling</p></li>
+<li><p><code>forcats</code> → categorical (factor) variables handling</p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2084,11 +2089,22 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The pipe function (takes the result of the expression on its left and “pipes” it into the function on its right) <code>%&gt;%</code> makes the workflow read like a sequence of steps</p>
+<p>The pipe function (takes the result of the expression on its left and “pipes” it into the function on its right) <code>%&gt;%</code> makes the workflow read like a sequence of steps.</p>
 </div>
 </div>
+<p>Demonstrations</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="my-tips-and-tricks" class="level1">
+<h1>My tips and tricks</h1>
+<ul>
+<li><p>For moderate-sized datasets, I recommend using <code>tidyverse</code> for its readability.</p></li>
+<li><p>Memorize the basic commands for descriptive analyses.</p></li>
+<li><p>Check the unique values and summaries of each column (e.g., <code>unique()</code>, <code>summary()</code>)</p></li>
+<li><p>Check a lot of contingency tables (e.g., <code>table()</code>)</p></li>
+<li><p>Visualize the variables as needed (e.g., <code>ggplot()</code>)</p></li>
+</ul>
 </section>
 <section id="data.table-advanced" class="level1">
 <h1><code>data.table</code> (advanced)</h1>
@@ -2148,13 +2164,13 @@ Note
 <li>Conventional Poisson regression</li>
 </ul>
 <p>For count data</p>
-<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i\)</span></p>
+<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i+log(T_i)\)</span></p>
 <p>Effect measure: rate ratio</p>
 <ul>
 <li>Modified Poisson regression</li>
 </ul>
 <p>For binary data</p>
-<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i+log(T_i)\)</span></p>
+<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i\)</span></p>
 <p>Effect measure: risk ratio</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2174,6 +2190,8 @@ Note
 <h1>Regression models (advanced)</h1>
 <p><code>speedglm</code> package: more speedy than <code>glm</code></p>
 <p>It directly solves the normal equations of the weighted least squares problem at each iteration (rather than relies on a QR decomposition).</p>
+<p>Why does this important?</p>
+<p><span class="math inline">\(\rightarrow\)</span> In G-methods, you often create many derived variables and fit many regression models across “copied” datasets.</p>
 <div id="qwebr-insertion-location-11"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 
