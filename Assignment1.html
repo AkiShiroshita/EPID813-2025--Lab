@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 2 – EPID8313 (year 2025) Lab Review</title>
+<title>Assignment 1 – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -344,7 +344,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['data.table', 'tidyverse', 'ggplot2', 'speedglm'];
+globalThis.qwebrInstallRPackagesList = [''];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -366,7 +366,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\nprostate <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(data.table)\nprostate <- fread('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate[rx == \"0.2 mg estrogen\"]","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate[, age := as.numeric(age)]","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Identify columns that are of type integer.\nint_cols <- names(prostate)[sapply(prostate, is.integer)]\n\n# Update these columns to numeric type using the := operator.\n# The '(int_cols)' syntax allows us to use a character vector of column names.\nprostate[, (int_cols) := lapply(.SD, as.numeric), .SDcols = int_cols]","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2 <- copy(prostate)\nprostate2[, `:=`(\n  estrogen     = fifelse(rx != \"placebo\", 1, 0),\n  dead         = fifelse(status != \"alive\", 1, 0),\n  abnormal_ekg = fifelse(ekg != \"normal\", 1, 0)\n)]","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2[, mean(age, na.rm=TRUE), by = rx]","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2[rx == \"0.2 mg estrogen\", mean(age, na.rm=TRUE)]","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"person_time_summary <- prostate2[, .(\n  events = sum(dead),\n  person_time = sum(dtime)\n), by = .(estrogen)]","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2[rx == \"0.2 mg estrogen\"] |> \n  _[, .(mean_age = mean(age, na.rm=TRUE),\n        mean_wt = mean(wt, na.rm=TRUE)),\n    by = rx]","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(speedglm)\nmodel <- speedglm(dead ~ estrogen + sbp + dbp + age + hx, data = prostate2, family = binomial())\nsummary(model)","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"names <- c(\"Huy\", \"Ha\", \"Christopher\", \"Samuel\", \"Zicheng\", \"Usman\")\n# Random order without replacement\nsample(names, size = length(names), replace = FALSE)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1620,35 +1620,6 @@ globalThis.qwebrExecuteCode = async function (
 
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -1697,7 +1668,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab2.html">Lab 2</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment1.html">Assignment 1</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -1726,13 +1697,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab2.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment1.html" class="sidebar-item-text sidebar-link">
+  <a href="./Assignment1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 1</span></a>
   </div>
 </li>
@@ -2031,9 +2002,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 }
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab2.html">Lab 2</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment1.html">Assignment 1</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 2</h1>
+<h1 class="title">Assignment 1</h1>
 </div>
 
 
@@ -2050,160 +2021,105 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<p>Lab 2 covers</p>
+<section id="comments-on-the-assignment-1" class="level1">
+<h1>Comments on the assignment 1</h1>
+<p>I prefer to provide a simple framework and/or figures alongside the text.</p>
 <ul>
-<li><p><strong>data wrangling</strong></p></li>
-<li><p><strong>regression models</strong>.</p></li>
+<li><p>Q1: the PECO format</p></li>
+<li><p>Q3: subject selection flow</p></li>
+<li><p>Q6: DAG</p></li>
 </ul>
-<section id="data-wrangling" class="level1">
-<h1>Data wrangling</h1>
+</section>
+<section id="dag-may-help-understand-the-bias" class="level1">
+<h1>DAG may help understand the bias</h1>
 <ul>
-<li><p><code>base R</code></p></li>
-<li><p><code>tidyverse</code>: clean and readable</p></li>
-<li><p><code>data.table</code>: Optimized for speed and memory efficiency</p></li>
+<li>Selection bias</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/dag1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Note
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>As I use very large-scale environmental data, I am switching from <code>tidyverse</code> to <code>data.table</code>.</p>
+<ul>
+<li>Misclassification (Differentiality vs.&nbsp;Dependence)</li>
+</ul>
+<section id="differentiality" class="level3">
+<h3 class="anchored" data-anchor-id="differentiality">Differentiality</h3>
+<p>Nondifferential: Sensitivity and specificity are independent of another key variable</p>
+<p>vs.&nbsp;</p>
+<p>Differential: Sensitivity and specificity are not independent of another key variable</p>
+</section>
+<section id="dependence" class="level3">
+<h3 class="anchored" data-anchor-id="dependence">Dependence</h3>
+<p>Independent: Misclassification of one variable does not change the probability that subjects will be misclassified on a second variable</p>
+<p>vs.&nbsp;</p>
+<p>Dependent: The probability of being doubly misclassified is not equal to the product of the probabilities of being singly misclassified with respect to exposure and outcome. (e.g., sensitivity of exposure misclassification is correlated with sensitivity of outcome misclassification)</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/dag0.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/dag2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/dag3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/dag4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/dag5.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/dag6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="tidyverse" class="level1">
-<h1><code>tidyverse</code></h1>
-<p>A philosophy created by Hadley Wickham</p>
-<ul>
-<li><p><code>dplyr</code> → data manipulation (filter, mutate, group, summarize)</p></li>
-<li><p><code>ggplot2</code> → data visualization</p></li>
-<li><p><code>tidyr</code> → data tidying (reshaping, pivoting, separating)</p></li>
-<li><p><code>readr</code> → data import (CSV, TSV, etc.)</p></li>
-<li><p><code>tibble</code> → modern data frames (better printing, easier handling)</p></li>
-<li><p><code>purrr</code> → functional programming with lists (map, reduce)</p></li>
-<li><p><code>stringr</code> → string handling</p></li>
-<li><p><code>forcats</code> → categorical (factor) variables handling</p></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The pipe function (takes the result of the expression on its left and “pipes” it into the function on its right) <code>%&gt;%</code> makes the workflow read like a sequence of steps.</p>
-</div>
-</div>
-<p>Demonstrations</p>
+</section>
+<section id="presentation" class="level1">
+<h1>Presentation</h1>
+<div class="cell">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="my-tips-and-tricks" class="level1">
-<h1>My tips and tricks</h1>
-<ul>
-<li><p>For moderate-sized datasets, I recommend using <code>tidyverse</code> for its readability.</p></li>
-<li><p>Memorize the basic commands for descriptive analyses.</p></li>
-<li><p>Check the unique values and summaries of each column (e.g., <code>unique()</code>, <code>summary()</code>)</p></li>
-<li><p>Check a lot of contingency tables (e.g., <code>table()</code>)</p></li>
-<li><p>Visualize the variables as needed (e.g., <code>ggplot()</code>)</p></li>
-</ul>
-</section>
-<section id="data.table-advanced" class="level1">
-<h1><code>data.table</code> (advanced)</h1>
-<div style=" margin-left: auto; margin-right: auto;display: block; text-align:center; width:fit-content;"> 
-<p style="font-size:200%;font-weight:bold">
-<code>DT[<span class="rows">i</span>, <span class="columns">j</span>, <span class="by">by</span>]</code>
-</p>
 </div>
-<p>Where <code><strong>DT</strong></code> is a data.table object, the <code class="rows"><span class="rows"><strong>i</strong></span></code> argument is used for filtering and joining, the <code class="columns"><span class="columns"><strong>j</strong></span></code> argument is used for summarizing and transforming, and the <code class="by"><span class="by"><strong>by</strong></span></code> argument defines the groups to which to apply these operations.</p>
-<div id="qwebr-insertion-location-2"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Convert objects to <code>data.table</code>:</li>
-</ul>
-<p><code>setDT()</code> vs.&nbsp;<code>as.data.table()</code></p>
-<p><code>setDT()</code>: Converts in place</p>
-<p><code>as.data.table()</code>: Creates a new <code>data.table</code> object</p>
-<ul>
-<li>Filter rows</li>
-</ul>
-<div id="qwebr-insertion-location-3"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Change data type</li>
-</ul>
-<p><code>Modify-in-place</code></p>
-<div id="qwebr-insertion-location-4"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-5"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Make new columns</li>
-</ul>
-<p><code>Modify-in-place</code></p>
-<div id="qwebr-insertion-location-6"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Summarize by group</li>
-</ul>
-<div id="qwebr-insertion-location-7"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-8"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-9"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Piping</li>
-</ul>
-<p>It takes the result of the expression on its left and “pipes” it into the function on its right.</p>
-<p>After R 4.3.0, the native pipe supports a <code>_</code> placeholder to the right-hand side of the pipe.</p>
-<div id="qwebr-insertion-location-10"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="poisson-regression" class="level1">
-<h1>Poisson regression</h1>
-<ul>
-<li>Conventional Poisson regression</li>
-</ul>
-<p>For count data</p>
-<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i+log(T_i)\)</span></p>
-<p>Effect measure: rate ratio</p>
-<ul>
-<li>Modified Poisson regression</li>
-</ul>
-<p>For binary data</p>
-<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i\)</span></p>
-<p>Effect measure: risk ratio</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Robust standard errors are recommended in both the conventional Poisson and the modified Poisson regression models.</p>
-</div>
-</div>
-</section>
-<section id="regression-models-advanced" class="level1">
-<h1>Regression models (advanced)</h1>
-<p><code>speedglm</code> package: more speedy than <code>glm</code></p>
-<p>It directly solves the normal equations of the weighted least squares problem at each iteration (rather than relies on a QR decomposition).</p>
-<p>Why does this important?</p>
-<p><span class="math inline">\(\rightarrow\)</span> In G-methods, you often create many derived variables and fit many regression models across “copied” datasets.</p>
-<div id="qwebr-insertion-location-11"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 
 
 </section>
