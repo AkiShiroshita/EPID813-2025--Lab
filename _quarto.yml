@@ -11,6 +11,8 @@ website:
         text: Home
       - href: Lab2.qmd
         text: Lab2
+      - href: Assignment1.qmd
+        text: Assignment1
   sidebar:
     style: "floating"
     contents:
@@ -18,6 +20,7 @@ website:
         contents:
           - index.qmd
           - Lab2.qmd
+          - Assignment1.qmd
 
   page-footer: 
     left: "Created by Aki Shiroshita"

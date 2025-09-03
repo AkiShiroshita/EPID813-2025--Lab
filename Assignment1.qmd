@@ -1,0 +1,77 @@
+---
+title: "Assignment 1"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+editor_options: 
+  chunk_output_type: console
+---
+
+# Comments on the assignment 1
+
+I prefer to provide a simple framework and/or figures alongside the text.
+
+* Q1: the PECO format
+
+* Q3: subject selection flow
+
+* Q6: DAG
+
+# DAG may help understand the bias
+
+* Selection bias
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/dag1.png")
+```
+
+* Misclassification (Differentiality vs. Dependence)
+
+### Differentiality
+
+Nondifferential: Sensitivity and specificity are independent of another key variable
+
+vs. 
+
+Differential: Sensitivity and specificity are not independent of another key variable
+
+### Dependence
+
+Independent: Misclassification of one variable does not change the probability that subjects will be misclassified on a second variable
+
+vs. 
+
+Dependent: The probability of being doubly misclassified is not equal to the product of the probabilities of being singly misclassified with respect to exposure and outcome. (e.g., sensitivity of exposure misclassification is correlated with sensitivity of outcome misclassification)
+
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/dag0.png")
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/dag2.png")
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/dag3.png")
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/dag4.png")
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/dag5.png")
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/dag6.png")
+```
+
+# Presentation
+
+```{webr}
+names <- c("Huy", "Ha", "Christopher", "Samuel", "Zicheng", "Usman")
+# Random order without replacement
+sample(names, size = length(names), replace = FALSE)
+```
+
