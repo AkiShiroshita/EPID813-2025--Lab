@@ -8,13 +8,21 @@ editor_options:
 
 # Comments on the assignment 1
 
-I prefer to provide a simple framework and/or figures alongside the text.
+* I prefer to provide a simple framework and/or figures alongside the text.
 
-* Q1: the PECO format
+Q1: the PECO format
 
-* Q3: subject selection flow
+Q3: subject selection flow
 
-* Q6: DAG
+Q6: DAG
+
+* Measurement error vs. information bias
+
+Both means inaccuracy in measuring variables
+
+Measurement error: continuous scale
+
+Information bias: categorical scale (misclassification)
 
 # DAG may help understand the bias
 

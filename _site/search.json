@@ -21,18 +21,6 @@
     "text": "Embed Code\nPlace the following code inside of the Quarto Document:\n&lt;style&gt;\n.slide-deck {\n    border: 3px solid #dee2e6;\n    width: 100%;\n    height: 475px;\n}\n&lt;/style&gt;\n\n&lt;div&gt;\n```{=html}\n&lt;iframe class=\"slide-deck\" src=\"path/to/presentation/\"&gt;&lt;/iframe&gt;\n```\n&lt;/div&gt;"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Welcome!\nThis website is a collection of lab materials for the EPID8313 course (2025). The labs are designed to help you practice and apply the concepts covered in the course.\nDuring each lab session (typically held before the journal club), I will address your specific questions using the resources provided here. To allow sufficient preparation time, please submit your questions at least one day in advance. If no questions are submitted, I will review the core concepts of the lab material for about 10–15 minutes before transitioning to the journal club.\nFor the journal club, you should prepare several slides summarizing the assigned articles. Each presentation will typically take around 15 minutes per article.\n\n\nInstroctor\n\nAki Shiroshita, MD, MPH\n4th-year Epidemiology PhD student\nOriginally from Japan\nFulbright grantee\nResearch interest: Environmental epidemiology, pharmacoepidemiology\nDissertation: Traffic-related environmental exposures during early life and adverse health outcomes",
-    "crumbs": [
-      "Home",
-      "Content",
-      "Overview"
-    ]
-  },
-  {
     "objectID": "Lab2.html",
     "href": "Lab2.html",
     "title": "Lab 2",
@@ -49,11 +37,30 @@
     "href": "Assignment1.html",
     "title": "Assignment 1",
     "section": "",
-    "text": "Comments on the assignment 1\nI prefer to provide a simple framework and/or figures alongside the text.\n\nQ1: the PECO format\nQ3: subject selection flow\nQ6: DAG\n\n\n\nDAG may help understand the bias\n\nSelection bias\n\n\n\n\n\n\n\n\n\n\n\nMisclassification (Differentiality vs. Dependence)\n\n\nDifferentiality\nNondifferential: Sensitivity and specificity are independent of another key variable\nvs. \nDifferential: Sensitivity and specificity are not independent of another key variable\n\n\nDependence\nIndependent: Misclassification of one variable does not change the probability that subjects will be misclassified on a second variable\nvs. \nDependent: The probability of being doubly misclassified is not equal to the product of the probabilities of being singly misclassified with respect to exposure and outcome. (e.g., sensitivity of exposure misclassification is correlated with sensitivity of outcome misclassification)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPresentation\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "text": "Comments on the assignment 1\n\nI prefer to provide a simple framework and/or figures alongside the text.\n\nQ1: the PECO format\nQ3: subject selection flow\nQ6: DAG\n\nMeasurement error vs. information bias\n\nBoth means inaccuracy in measuring variables\nMeasurement error: continuous scale\nInformation bias: categorical scale (misclassification)\n\n\nDAG may help understand the bias\n\nSelection bias\n\n\n\n\n\n\n\n\n\n\n\nMisclassification (Differentiality vs. Dependence)\n\n\nDifferentiality\nNondifferential: Sensitivity and specificity are independent of another key variable\nvs. \nDifferential: Sensitivity and specificity are not independent of another key variable\n\n\nDependence\nIndependent: Misclassification of one variable does not change the probability that subjects will be misclassified on a second variable\nvs. \nDependent: The probability of being doubly misclassified is not equal to the product of the probabilities of being singly misclassified with respect to exposure and outcome. (e.g., sensitivity of exposure misclassification is correlated with sensitivity of outcome misclassification)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPresentation\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
     "crumbs": [
       "Home",
       "Content",
       "Assignment 1"
     ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Welcome!\nThis website is a collection of lab materials for the EPID8313 course (2025). The labs are designed to help you practice and apply the concepts covered in the course.\nDuring each lab session (typically held before the journal club), I will address your specific questions using the resources provided here. To allow sufficient preparation time, please submit your questions at least one day in advance. If no questions are submitted, I will review the core concepts of the lab material for about 10–15 minutes before transitioning to the journal club.\nFor the journal club, you should prepare several slides summarizing the assigned articles. Each presentation will typically take around 15 minutes per article.\n\n\nInstroctor\n\nAki Shiroshita, MD, MPH\n4th-year Epidemiology PhD student\nOriginally from Japan\nFulbright grantee\nResearch interest: Environmental epidemiology, pharmacoepidemiology\nDissertation: Traffic-related environmental exposures during early life and adverse health outcomes",
+    "crumbs": [
+      "Home",
+      "Content",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "Lab3.html",
+    "href": "Lab3.html",
+    "title": "Lab 2",
+    "section": "",
+    "text": "Lab 3 covers\n\nMissing data\n\n\nData wrangling\n\nbase R\ntidyverse: clean and readable\ndata.table: Optimized for speed and memory efficiency\n\n\n\n\n\n\n\nNote\n\n\n\nAs I use very large-scale environmental data, I am switching from tidyverse to data.table.\n\n\n\n\ntidyverse\nA philosophy created by Hadley Wickham\n\ndplyr → data manipulation (filter, mutate, group, summarize)\nggplot2 → data visualization\ntidyr → data tidying (reshaping, pivoting, separating)\nreadr → data import (CSV, TSV, etc.)\ntibble → modern data frames (better printing, easier handling)\npurrr → functional programming with lists (map, reduce)\nstringr → string handling\nforcats → categorical (factor) variables handling\n\n\n\n\n\n\n\nNote\n\n\n\nThe pipe function (takes the result of the expression on its left and “pipes” it into the function on its right) %&gt;% makes the workflow read like a sequence of steps.\n\n\nDemonstrations\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nMy tips and tricks\n\nFor moderate-sized datasets, I recommend using tidyverse for its readability.\nMemorize the basic commands for descriptive analyses.\nCheck the unique values and summaries of each column (e.g., unique(), summary())\nCheck a lot of contingency tables (e.g., table())\nVisualize the variables as needed (e.g., ggplot())\n\n\n\ndata.table (advanced)\n \n\nDT[i, j, by]\n\n\nWhere DT is a data.table object, the i argument is used for filtering and joining, the j argument is used for summarizing and transforming, and the by argument defines the groups to which to apply these operations.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nConvert objects to data.table:\n\nsetDT() vs. as.data.table()\nsetDT(): Converts in place\nas.data.table(): Creates a new data.table object\n\nFilter rows\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nChange data type\n\nModify-in-place\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nMake new columns\n\nModify-in-place\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nSummarize by group\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPiping\n\nIt takes the result of the expression on its left and “pipes” it into the function on its right.\nAfter R 4.3.0, the native pipe supports a _ placeholder to the right-hand side of the pipe.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nPoisson regression\n\nConventional Poisson regression\n\nFor count data\n\\(log(E[Y_i|X_i])=\\beta_0+\\beta_1X_i+log(T_i)\\)\nEffect measure: rate ratio\n\nModified Poisson regression\n\nFor binary data\n\\(log(E[Y_i|X_i])=\\beta_0+\\beta_1X_i\\)\nEffect measure: risk ratio\n\n\n\n\n\n\nNote\n\n\n\nRobust standard errors are recommended in both the conventional Poisson and the modified Poisson regression models.\n\n\n\n\nRegression models (advanced)\nspeedglm package: more speedy than glm\nIt directly solves the normal equations of the weighted least squares problem at each iteration (rather than relies on a QR decomposition).\nWhy does this important?\n\\(\\rightarrow\\) In G-methods, you often create many derived variables and fit many regression models across “copied” datasets.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
