@@ -16,13 +16,11 @@ Q3: subject selection flow
 
 Q6: DAG
 
-* Measurement error vs. information bias
+* Information bias
 
-Both means inaccuracy in measuring variables
+Measurement error: mismeasurment of continuous variables
 
-Measurement error: continuous scale
-
-Information bias: categorical scale (misclassification)
+Misclassification: inaccuracy of categorical variables (sometimes, this is called "information bias")
 
 # DAG may help understand the bias
 
