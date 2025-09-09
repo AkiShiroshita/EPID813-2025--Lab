@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Assignment 1 – EPID8313 (year 2025) Lab Review</title>
+<title>Lab 3 – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -344,7 +344,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = [''];
+globalThis.qwebrInstallRPackagesList = ['data.table', 'tidyverse', 'ggplot2', 'mice'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -366,7 +366,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"names <- c(\"Huy\", \"Ha\", \"Christopher\", \"Samuel\", \"Zicheng\", \"Usman\")\n# Random order without replacement\nsample(names, size = length(names), replace = FALSE)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\nsupport2 <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/support2.csv')\n\n# For this lab, we'll focus on a subset of variables\nkeep_vars <- c(\"age\", \"death\", \"sex\", \"dzclass\", \"edu\", \"income\", \"race\", \"diabetes\", \"wblc\")\n\nsupport <- support2 %>%\n  select(all_of(keep_vars)) %>%\n  # Ensure numeric variables are correctly typed\n  mutate_if(is.integer, as.numeric) %>%\n  mutate_if(is.double, as.numeric)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# 1. IMPUTE: Create 10 imputed datasets\nimp_multi <- mice(support, m = 10, printFlag = FALSE, seed = 123)\n\n# It's good practice to save the imputation object\n# write_rds(imp_multi, 'imputed_data.rds')","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Convert the mice object to a long-format tibble\nimp_long <- complete(imp_multi, action = \"long\") %>%\n  as_tibble() ","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"imp_analysis <- imp_long %>%\n  group_by(.imp) %>%\n  nest() %>%\n  mutate(\n    fit = map(data, ~ glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,\n                          family = binomial, data = .x)),\n    # We can also extract coefficients and variance-covariance matrices\n    coefs = map(fit, coef),\n    vcovs = map(fit, vcov)\n  )","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1652,6 +1652,10 @@ globalThis.qwebrExecuteCode = async function (
     <a class="nav-link" href="./Assignment1.html"> 
 <span class="menu-text">Assignment1</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Lab3.html"> 
+<span class="menu-text">Lab3</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -1668,7 +1672,7 @@ globalThis.qwebrExecuteCode = async function (
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment1.html">Assignment 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab3.html">Lab 3</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -1703,8 +1707,14 @@ globalThis.qwebrExecuteCode = async function (
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Assignment1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab 3</span></a>
   </div>
 </li>
       </ul>
@@ -2002,9 +2012,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 }
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment1.html">Assignment 1</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab3.html">Lab 3</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 1</h1>
+<h1 class="title">Lab 3</h1>
 </div>
 
 
@@ -2021,110 +2031,109 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<section id="comments-on-the-assignment-1" class="level1">
-<h1>Comments on the assignment 1</h1>
+<p>Lab 3 covers</p>
 <ul>
-<li>I prefer to provide a simple framework and/or figures alongside the text.</li>
+<li><strong>Missing data</strong></li>
 </ul>
-<p>Q1: the PECO format</p>
-<p>Q3: subject selection flow</p>
-<p>Q6: DAG</p>
+<section id="missing-mechanism" class="level1">
+<h1>Missing mechanism</h1>
+<p>Missing completely at random (MCAR), Missing at random (MAR), and Missing not at random (MNAR)</p>
+<p>These are <strong>assumptions</strong> that cannot be directly verified using the data.</p>
 <ul>
-<li>Information bias</li>
+<li>Example writing of your method section</li>
 </ul>
-<p>Measurement error: mismeasurment of continuous variables (sometimes, random error, not systemic error, is called “measurement error”)</p>
-<p>Misclassification: inaccuracy of categorical variables (sometimes, this is called “information bias”)</p>
-</section>
-<section id="dag-may-help-understand-the-bias" class="level1">
-<h1>DAG may help understand the bias</h1>
-<ul>
-<li>Selection bias</li>
-</ul>
+<blockquote class="blockquote">
+<p>Missing data were handled using multiple imputation by chained equations, assuming data were missing at random. The imputation model included the covariates used in the outcome analysis (XXX, YYY, and ZZZ), the treatment variable, the outcome variable, and ABC as an auxiliary variable. XXX regression models were fit to each imputed dataset, and the results from 100 imputations were combined using Rubin’s rules. … As a sensitivity analysis, we performed a complete case analysis.</p>
+</blockquote>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/dag1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li>Misclassification (Differentiality vs.&nbsp;Dependence)</li>
-</ul>
-<section id="differentiality" class="level3">
-<h3 class="anchored" data-anchor-id="differentiality">Differentiality</h3>
-<p>Nondifferential: Sensitivity and specificity are independent of another key variable</p>
-<p>vs.&nbsp;</p>
-<p>Differential: Sensitivity and specificity are not independent of another key variable</p>
-</section>
-<section id="dependence" class="level3">
-<h3 class="anchored" data-anchor-id="dependence">Dependence</h3>
-<p>Independent: Misclassification of one variable does not change the probability that subjects will be misclassified on a second variable</p>
-<p>vs.&nbsp;</p>
-<p>Dependent: The probability of being doubly misclassified is not equal to the product of the probabilities of being singly misclassified with respect to exposure and outcome. (e.g., sensitivity of exposure misclassification is correlated with sensitivity of outcome misclassification)</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag0.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag5.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<p><img src="figures/imp.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="presentation" class="level1">
-<h1>Presentation</h1>
+<section id="my-favoriate-workflow" class="level1">
+<h1>My favoriate workflow</h1>
+<ul>
+<li>Package-dependent practice</li>
+</ul>
+<p>The standard <code>mice</code> workflow often uses <code>with()</code> and <code>pool()</code>.</p>
+<pre><code># 1. IMPUTE: Create 10 imputed datasets
+imp_multi &lt;- mice(support, m = 10, printFlag = FALSE, seed = 123)
+
+# It's good practice to save the imputation object
+# write_rds(imp_multi, 'imputed_data.rds')
+
+# 2. ANALYZE: Run the model on each imputed dataset
+# The 'with()' function does this automatically
+analysis_results &lt;- with(imp_multi,
+                         glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
+                             family = binomial))
+
+# 3. POOL: Combine the results using Rubin's Rules
+pooled_results &lt;- pool(analysis_results)</code></pre>
+<ul>
+<li>My favorite workflow</li>
+</ul>
+<p>However, you may encounter situations where existing packages do not support your study design (e.g., performing propensity score analysis with multiple imputation).</p>
 <div class="cell">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+<ul>
+<li>Multiple imputation</li>
+</ul>
+<div class="cell">
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ul>
+<li>Stack</li>
+</ul>
+<p>Convert your multiply imputed datasets into a single dataframe where each imputed dataset is stacked on top of each other.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/stack.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ul>
+<li>Nest</li>
+</ul>
+<ol type="1">
+<li><p><code>group_by(.imp)</code> -&gt; Treat each imputed dataset separately</p></li>
+<li><p><code>nest()</code> -&gt; Creates a list-column where each row contains one dataset (<code>data</code> column)</p></li>
+<li><p><code>mutate(fit = map(...))</code> -&gt; Iterate over the list of datasets, run the model on each one, and store the model object in a new list-column called <code>fit</code>.</p></li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/nest.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<ul>
+<li>Rubin’s rule</li>
+</ul>
+<p>Now we can pool the results using the <code>mitools</code> package.</p>
+<pre><code>summary(mitools::MIcombine(imp_analysis$fit))</code></pre>
+<p>You can use <code>coefs</code> and <code>vcovs</code>, instead of <code>fit</code>.</p>
 
 
 </section>
@@ -2220,7 +2229,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/AkiShiroshita\.github\.io\/EPID813-2025--Lab\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

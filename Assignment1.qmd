@@ -18,7 +18,7 @@ Q6: DAG
 
 * Information bias
 
-Measurement error: mismeasurment of continuous variables
+Measurement error: mismeasurment of continuous variables (sometimes, random error, not systemic error, is called "measurement error")
 
 Misclassification: inaccuracy of categorical variables (sometimes, this is called "information bias")
 

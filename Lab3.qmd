@@ -1,0 +1,130 @@
+---
+title: "Lab 3"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+  packages: ['data.table', 'tidyverse', 'ggplot2', 'mice'] # Pre-install dependency
+editor_options: 
+  chunk_output_type: console
+---
+
+Lab 3 covers 
+
+* **Missing data** 
+
+# Missing mechanism
+
+Missing completely at random (MCAR), Missing at random (MAR), and Missing not at random (MNAR) 
+
+These are **assumptions** that cannot be directly verified using the data.
+
+* Example writing of your method section
+
+>Missing data were handled using multiple imputation by chained equations, assuming data were missing at random. The imputation model included the covariates used in the outcome analysis (XXX, YYY, and ZZZ), the treatment variable, the outcome variable, and ABC as an auxiliary variable. XXX regression models were fit to each imputed dataset, and the results from 100 imputations were combined using Rubin’s rules.
+...
+As a sensitivity analysis, we performed a complete case analysis.
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/imp.png")
+```
+
+# My favoriate workflow
+
+* Package-dependent practice
+
+The standard `mice` workflow often uses `with()` and `pool()`.
+
+```
+# 1. IMPUTE: Create 10 imputed datasets
+imp_multi <- mice(support, m = 10, printFlag = FALSE, seed = 123)
+
+# It's good practice to save the imputation object
+# write_rds(imp_multi, 'imputed_data.rds')
+
+# 2. ANALYZE: Run the model on each imputed dataset
+# The 'with()' function does this automatically
+analysis_results <- with(imp_multi,
+                         glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
+                             family = binomial))
+
+# 3. POOL: Combine the results using Rubin's Rules
+pooled_results <- pool(analysis_results)
+```
+
+* My favorite workflow
+
+However, you may encounter situations where existing packages do not support your study design (e.g., performing propensity score analysis with multiple imputation).
+
+```{webr}
+library(tidyverse)
+support2 <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/support2.csv')
+
+# For this lab, we'll focus on a subset of variables
+keep_vars <- c("age", "death", "sex", "dzclass", "edu", "income", "race", "diabetes", "wblc")
+
+support <- support2 %>%
+  select(all_of(keep_vars)) %>%
+  # Ensure numeric variables are correctly typed
+  mutate_if(is.integer, as.numeric) %>%
+  mutate_if(is.double, as.numeric)
+```
+
+* Multiple imputation
+
+```{webr}
+# 1. IMPUTE: Create 10 imputed datasets
+imp_multi <- mice(support, m = 10, printFlag = FALSE, seed = 123)
+
+# It's good practice to save the imputation object
+# write_rds(imp_multi, 'imputed_data.rds')
+```
+
+* Stack
+
+Convert your multiply imputed datasets into a single dataframe where each imputed dataset is stacked on top of each other.
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/stack.png")
+```
+
+```{webr}
+# Convert the mice object to a long-format tibble
+imp_long <- complete(imp_multi, action = "long") %>%
+  as_tibble() 
+```
+
+* Nest
+
+1. `group_by(.imp)` -> Treat each imputed dataset separately
+
+2. `nest()` -> Creates a list-column where each row contains one dataset (`data` column)
+
+3. `mutate(fit = map(...))` -> Iterate over the list of datasets, run the model on each one, and store the model object in a new list-column called `fit`.
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/nest.png")
+```
+
+```{webr}
+imp_analysis <- imp_long %>%
+  group_by(.imp) %>%
+  nest() %>%
+  mutate(
+    fit = map(data, ~ glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
+                          family = binomial, data = .x)),
+    # We can also extract coefficients and variance-covariance matrices
+    coefs = map(fit, coef),
+    vcovs = map(fit, vcov)
+  )
+```
+
+* Rubin's rule
+
+Now we can pool the results using the `mitools` package.
+
+```
+summary(mitools::MIcombine(imp_analysis$fit))
+```
+
+You can use `coefs` and `vcovs`, instead of `fit`.
+
+
