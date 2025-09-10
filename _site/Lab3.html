@@ -366,7 +366,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\nsupport2 <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/support2.csv')\n\n# For this lab, we'll focus on a subset of variables\nkeep_vars <- c(\"age\", \"death\", \"sex\", \"dzclass\", \"edu\", \"income\", \"race\", \"diabetes\", \"wblc\")\n\nsupport <- support2 %>%\n  select(all_of(keep_vars)) %>%\n  # Ensure numeric variables are correctly typed\n  mutate_if(is.integer, as.numeric) %>%\n  mutate_if(is.double, as.numeric)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# 1. IMPUTE: Create 10 imputed datasets\nimp_multi <- mice(support, m = 10, printFlag = FALSE, seed = 123)\n\n# It's good practice to save the imputation object\n# write_rds(imp_multi, 'imputed_data.rds')","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Convert the mice object to a long-format tibble\nimp_long <- complete(imp_multi, action = \"long\") %>%\n  as_tibble() ","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"imp_analysis <- imp_long %>%\n  group_by(.imp) %>%\n  nest() %>%\n  mutate(\n    fit = map(data, ~ glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,\n                          family = binomial, data = .x)),\n    # We can also extract coefficients and variance-covariance matrices\n    coefs = map(fit, coef),\n    vcovs = map(fit, vcov)\n  )","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\nsupport2 <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/support2.csv')\n\n# For this lab, we'll focus on a subset of variables\nkeep_vars <- c(\"age\", \"death\", \"sex\", \"dzclass\", \"edu\", \"income\", \"race\", \"diabetes\", \"wblc\")\n\nsupport <- support2 %>%\n  select(all_of(keep_vars)) %>%\n  # Ensure numeric variables are correctly typed\n  mutate_if(is.integer, as.numeric) %>%\n  mutate_if(is.double, as.numeric)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(mice)\n# 1. IMPUTE: Create 10 imputed datasets\nimp_multi <- mice(support, m = 10, printFlag = FALSE, seed = 123)\n\n# It's good practice to save the imputation object\n# write_rds(imp_multi, 'imputed_data.rds')","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Convert the mice object to a long-format tibble\nimp_long <- complete(imp_multi, action = \"long\") %>%\n  as_tibble() ","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"imp_analysis <- imp_long %>%\n  group_by(.imp) %>%\n  nest() %>%\n  mutate(\n    fit = map(data, ~ glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,\n                          family = binomial, data = .x)),\n    # We can also extract coefficients and variance-covariance matrices\n    coefs = map(fit, coef),\n    vcovs = map(fit, vcov)\n  )","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -2070,8 +2070,8 @@ imp_multi &lt;- mice(support, m = 10, printFlag = FALSE, seed = 123)
 # 2. ANALYZE: Run the model on each imputed dataset
 # The 'with()' function does this automatically
 analysis_results &lt;- with(imp_multi,
-                         glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
-                             family = binomial))
+glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
+family = binomial))
 
 # 3. POOL: Combine the results using Rubin's Rules
 pooled_results &lt;- pool(analysis_results)</code></pre>
@@ -2134,6 +2134,26 @@ pooled_results &lt;- pool(analysis_results)</code></pre>
 <p>Now we can pool the results using the <code>mitools</code> package.</p>
 <pre><code>summary(mitools::MIcombine(imp_analysis$fit))</code></pre>
 <p>You can use <code>coefs</code> and <code>vcovs</code>, instead of <code>fit</code>.</p>
+</section>
+<section id="more-advanced-coding" class="level1">
+<h1>More advanced coding</h1>
+<p>You can speed up your work by using <code>data.table</code> and <code>speedglm</code>.</p>
+<pre><code>imp_long_dt &lt;- complete(imp_multi, action = "long")
+setDT(imp_long_dt)
+
+library(speedglm)
+
+imp_analysis &lt;- imp_long_dt[, {
+  # For each group, fit the logistic regression model
+  model &lt;- speedglm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
+                    family = binomial(), data = .SD)
+  # Return a list containing the coefficients and vcov matrix for this group
+  # These are wrapped in an outer list() to create list-columns.
+  list(coefs = list(coef(model)), vcovs = list(vcov(model)))
+}, by = .imp]
+
+pooled_results &lt;- mitools::MIcombine(imp_analysis$coefs, imp_analysis$vcovs)
+summary(pooled_results)</code></pre>
 
 
 </section>

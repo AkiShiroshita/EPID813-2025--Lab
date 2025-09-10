@@ -43,8 +43,8 @@ imp_multi <- mice(support, m = 10, printFlag = FALSE, seed = 123)
 # 2. ANALYZE: Run the model on each imputed dataset
 # The 'with()' function does this automatically
 analysis_results <- with(imp_multi,
-                         glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
-                             family = binomial))
+glm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
+family = binomial))
 
 # 3. POOL: Combine the results using Rubin's Rules
 pooled_results <- pool(analysis_results)
@@ -71,6 +71,7 @@ support <- support2 %>%
 * Multiple imputation
 
 ```{webr}
+library(mice)
 # 1. IMPUTE: Create 10 imputed datasets
 imp_multi <- mice(support, m = 10, printFlag = FALSE, seed = 123)
 
@@ -127,4 +128,25 @@ summary(mitools::MIcombine(imp_analysis$fit))
 
 You can use `coefs` and `vcovs`, instead of `fit`.
 
+# More advanced coding
 
+You can speed up your work by using `data.table` and `speedglm`.
+
+```
+imp_long_dt <- complete(imp_multi, action = "long")
+setDT(imp_long_dt)
+
+library(speedglm)
+
+imp_analysis <- imp_long_dt[, {
+  # For each group, fit the logistic regression model
+  model <- speedglm(death ~ dzclass + age + sex + edu + income + race + diabetes + wblc,
+                    family = binomial(), data = .SD)
+  # Return a list containing the coefficients and vcov matrix for this group
+  # These are wrapped in an outer list() to create list-columns.
+  list(coefs = list(coef(model)), vcovs = list(vcov(model)))
+}, by = .imp]
+
+pooled_results <- mitools::MIcombine(imp_analysis$coefs, imp_analysis$vcovs)
+summary(pooled_results)
+```
