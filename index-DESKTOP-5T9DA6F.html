@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 4 – EPID8313 (year 2025) Lab Review</title>
+<title>Overview – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -101,35 +67,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -186,7 +123,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./index.html">Overview</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -209,7 +146,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -233,7 +170,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab4.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 4</span></a>
   </div>
 </li>
@@ -248,9 +185,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./index.html">Overview</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 4</h1>
+<h1 class="title">Overview</h1>
 </div>
 
 
@@ -267,107 +204,29 @@ window.Quarto = {
 </header>
 
 
-<p>Lab 4 covers</p>
-<ul>
-<li><strong>Power and sample size calculation</strong></li>
-</ul>
-<p>In many cases, we want to perform power calculations for multivariable regression models.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Power = probability of rejecting the null hypothesis if a specific alternative is true</p>
-</div>
-</div>
-<section id="brief-overview-of-software" class="level1">
-<h1>Brief overview of software</h1>
-<ul>
-<li><p>R packages: <code>pwr</code>, <code>pwrss</code>, etc.</p></li>
-<li><p>STATA</p></li>
-<li><p>SAS Proc Power</p></li>
-<li><p>PS: Power and Sample Size Calculation (Vanderbilt University, free): https://cqsclinical.app.vumc.org/ps/</p></li>
-<li><p>G*Power (free, less intuitive): https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower</p></li>
-<li><p>PASS (NCSS, <strong>commercial</strong>, <strong>most flexible</strong>): https://www.ncss.com/software/pass/</p></li>
-<li><p>EPI Info (CDC, free): https://www.cdc.gov/epiinfo/index.html</p></li>
-<li><p>Optimal Design (free, program for multilevel modeling): https://www.wtgrantfoundation.org/resources/optimal-design</p></li>
-<li><p>For conducting complex statistical analyses (e.g., propensity score analysis), I recommend using Monte Carlo simulations.</p></li>
-</ul>
+<section id="welcome" class="level1">
+<h1>Welcome!</h1>
+<p>This website is a collection of lab materials for the EPID8313 course (2025). The labs are designed to help you practice and apply the concepts covered in the course.</p>
+<p>During each lab session (typically held before the journal club), I will address your specific questions using the resources provided here. To allow sufficient preparation time, please submit your questions at least one day in advance. If no questions are submitted, I will review the core concepts of the lab material for about 10–15 minutes before transitioning to the journal club.</p>
+<p>For the journal club, you should prepare several slides summarizing the assigned articles. Each presentation will typically take around 15 minutes per article.</p>
 </section>
-<section id="r-pwrss-package" class="level1">
-<h1>R <code>pwrss</code> package</h1>
-<p>Tutorial: https://rpubs.com/metinbulus/pwrss</p>
-<p>Power and sample size calculation based on the Wald test.</p>
-<p><strong>Scenario:</strong> You are planning a study where the outcome is binary and will be analyzed with logistic regression.</p>
-<p>What you need is</p>
+<section id="instroctor" class="level1">
+<h1>Instroctor</h1>
 <ul>
-<li><p><code>p0</code>: probability of the outcome when the predictor is at reference level (e.g., control group).</p></li>
-<li><p><code>p1</code>: probability of the outcome when the predictor is at the exposure level (e.g., treatment group).</p></li>
-<li><p><code>r2.other.x</code>: A squared multiple correlation between an exposure and other covariates</p></li>
+<li><p>Aki Shiroshita, MD, MPH</p></li>
+<li><p>4th-year Epidemiology PhD student</p></li>
+<li><p>Originally from Japan</p></li>
+<li><p>Fulbright grantee</p></li>
+<li><p>Research interest: Environmental epidemiology, pharmacoepidemiology</p></li>
+<li><p>Dissertation: Traffic-related environmental exposures during early life and adverse health outcomes</p></li>
 </ul>
-<p>Higher values indicate more correlation, which will increase the required sample size.</p>
-<p>You can calculate <code>r2.other.x</code> by fitting a linear regression model where your main predictor of interest is treated as the outcome and all other covariates are the predictors.</p>
-<pre><code>fit &lt;- lm(exposure ~ cov1+cov2, data = data)
-# Extract the R-squared value
-summary_model &lt;- summary(fit)
-r2_estimate &lt;- summary_model$r.squared</code></pre>
-<ul>
-<li><p><code>dist</code>: distribution of the predictor (e.g., normal, bernoulli, etc.)</p></li>
-<li><p><code>n</code>: total sample size</p></li>
-<li><p><code>alpha = 0.05</code>: significance level</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pwrss<span class="sc">::</span><span class="fu">pwrss.z.logreg</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p0 =</span> <span class="fl">0.11</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p1 =</span> <span class="fl">0.10</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r2.other.x =</span> <span class="fl">0.10</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist =</span> <span class="fu">list</span>(<span class="at">dist =</span> <span class="st">"normal"</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">8000</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Logistic Regression Coefficient 
- (Large Sample Approx. Wald's z Test) 
- H0: beta1 = 0 
- HA: beta1 != 0 
- Distribution of X = 'normal' 
- Method = DEMIDENKO(VC) 
- ------------------------------ 
-  Statistical power = 0.95 
-  n = 8000 
- ------------------------------ 
- Alternative = "not equal" 
- Non-centrality parameter = -3.602 
- Type I error rate = 0.05 
- Type II error rate = 0.05 </code></pre>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/modified_degauss.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
 </div>
-</div>
-<ul>
-<li>Example writing of your method section</li>
-</ul>
-<blockquote class="blockquote">
-<p>For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for PM2.5, assuming a baseline outcome prevalence of 11% and a normally distributed PM2.5 exposure (mean = 10, SD = 2). This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)</p>
-</blockquote>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Odds for the reference group: <span class="math inline">\(0.11/(1−0.11)=0.1236\)</span></p></li>
-<li><p>Odds for the comparison group: <span class="math inline">\(0.10/(1−0.10)=0.1111\)</span></p></li>
-<li><p>Odds Ratio <span class="math inline">\(= 0.1111/0.1236 \approx 0.90\)</span></p></li>
-</ul>
 </div>
 </div>
 

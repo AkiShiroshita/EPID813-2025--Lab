@@ -292,10 +292,8 @@ Note
 <li><p>STATA</p></li>
 <li><p>SAS Proc Power</p></li>
 <li><p>PS: Power and Sample Size Calculation (Vanderbilt University, free): https://cqsclinical.app.vumc.org/ps/</p></li>
-<li><p>G*Power (free, less intuitive): https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower</p></li>
 <li><p>PASS (NCSS, <strong>commercial</strong>, <strong>most flexible</strong>): https://www.ncss.com/software/pass/</p></li>
 <li><p>EPI Info (CDC, free): https://www.cdc.gov/epiinfo/index.html</p></li>
-<li><p>Optimal Design (free, program for multilevel modeling): https://www.wtgrantfoundation.org/resources/optimal-design</p></li>
 <li><p>For conducting complex statistical analyses (e.g., propensity score analysis), I recommend using Monte Carlo simulations.</p></li>
 </ul>
 </section>
@@ -317,7 +315,6 @@ Note
 summary_model &lt;- summary(fit)
 r2_estimate &lt;- summary_model$r.squared</code></pre>
 <ul>
-<li><p><code>dist</code>: distribution of the predictor (e.g., normal, bernoulli, etc.)</p></li>
 <li><p><code>n</code>: total sample size</p></li>
 <li><p><code>alpha = 0.05</code>: significance level</p></li>
 </ul>
@@ -326,10 +323,9 @@ r2_estimate &lt;- summary_model$r.squared</code></pre>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p0 =</span> <span class="fl">0.11</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p1 =</span> <span class="fl">0.10</span>,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r2.other.x =</span> <span class="fl">0.10</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist =</span> <span class="fu">list</span>(<span class="at">dist =</span> <span class="st">"normal"</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">8000</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">8000</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Logistic Regression Coefficient 
  (Large Sample Approx. Wald's z Test) 
@@ -338,20 +334,20 @@ r2_estimate &lt;- summary_model$r.squared</code></pre>
  Distribution of X = 'normal' 
  Method = DEMIDENKO(VC) 
  ------------------------------ 
-  Statistical power = 0.95 
+  Statistical power = 0.807 
   n = 8000 
  ------------------------------ 
  Alternative = "not equal" 
- Non-centrality parameter = -3.602 
+ Non-centrality parameter = -2.827 
  Type I error rate = 0.05 
- Type II error rate = 0.05 </code></pre>
+ Type II error rate = 0.193 </code></pre>
 </div>
 </div>
 <ul>
 <li>Example writing of your method section</li>
 </ul>
 <blockquote class="blockquote">
-<p>For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for PM2.5, assuming a baseline outcome prevalence of 11% and a normally distributed PM2.5 exposure (mean = 10, SD = 2). This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)</p>
+<p>For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for the main exposure of interest, assuming a baseline outcome prevalence of 11%. This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)</p>
 </blockquote>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
