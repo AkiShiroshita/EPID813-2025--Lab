@@ -1,0 +1,88 @@
+---
+title: "Lab 4"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+  packages: ['data.table', 'tidyverse', 'ggplot2'] # Pre-install dependency
+editor_options: 
+  chunk_output_type: console
+---
+
+Lab 4 covers 
+
+* **Power and sample size calculation** 
+
+In many cases, we want to perform power calculations for multivariable regression models.
+
+:::callout-note
+Power = probability of rejecting the null hypothesis if a specific alternative is true
+:::
+
+# Brief overview of software
+
+* R packages: `pwr`, `pwrss`, etc.
+
+* STATA
+
+* SAS Proc Power
+
+* PS: Power and Sample Size Calculation (Vanderbilt University, free): https://cqsclinical.app.vumc.org/ps/
+
+* PASS (NCSS, **commercial**, **most flexible**): https://www.ncss.com/software/pass/
+
+* EPI Info (CDC, free): https://www.cdc.gov/epiinfo/index.html
+
+* For conducting complex statistical analyses (e.g., propensity score analysis), I recommend using Monte Carlo simulations.
+
+# R `pwrss` package
+
+Tutorial: https://rpubs.com/metinbulus/pwrss
+
+Power and sample size calculation based on the Wald test.
+
+**Scenario:** You are planning a study where the outcome is binary and will be analyzed with logistic regression.
+
+What you need is 
+
+* `p0`: probability of the outcome when the predictor is at reference level (e.g., control group).
+
+* `p1`: probability of the outcome when the predictor is at the exposure level (e.g., treatment group).
+
+* `r2.other.x`: A squared multiple correlation between an exposure and other covariates
+
+Higher values indicate more correlation, which will increase the required sample size.
+
+You can calculate `r2.other.x` by fitting a linear regression model where your main predictor of interest is treated as the outcome and all other covariates are the predictors. 
+
+```
+fit <- lm(exposure ~ cov1+cov2, data = data)
+# Extract the R-squared value
+summary_model <- summary(fit)
+r2_estimate <- summary_model$r.squared
+```
+
+* `n`: total sample size
+
+* `alpha = 0.05`: significance level
+
+```{r}
+pwrss::pwrss.z.logreg(
+  p0 = 0.11,
+  p1 = 0.10,
+  r2.other.x = 0.10,
+  n = 8000,
+  alpha = 0.05
+)
+```
+
+* Example writing of your method section
+
+>For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for the main exposure of interest, assuming a baseline outcome prevalence of 11%. This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)
+
+:::callout-note
+
+* Odds for the reference group: $0.11/(1−0.11)=0.1236$
+
+* Odds for the comparison group: $0.10/(1−0.10)=0.1111$
+
+* Odds Ratio $= 0.1111/0.1236 \approx 0.90$
+:::
