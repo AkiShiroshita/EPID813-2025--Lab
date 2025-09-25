@@ -170,6 +170,10 @@ window.Quarto = {
     <a class="nav-link" href="./Lab4.html"> 
 <span class="menu-text">Lab4</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Assignment2.html"> 
+<span class="menu-text">Assignment2</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -235,6 +239,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Lab4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2</span></a>
   </div>
 </li>
       </ul>
@@ -331,20 +341,28 @@ r2_estimate &lt;- summary_model$r.squared</code></pre>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> Logistic Regression Coefficient 
- (Large Sample Approx. Wald's z Test) 
- H0: beta1 = 0 
- HA: beta1 != 0 
- Distribution of X = 'normal' 
- Method = DEMIDENKO(VC) 
- ------------------------------ 
-  Statistical power = 0.95 
-  n = 8000 
- ------------------------------ 
- Alternative = "not equal" 
- Non-centrality parameter = -3.602 
- Type I error rate = 0.05 
- Type II error rate = 0.05 </code></pre>
+<pre><code>+--------------------------------------------------+
+|                POWER CALCULATION                 |
++--------------------------------------------------+
+
+Logistic Regression Coefficient (Wald's Z-Test)
+
+  Method          : Demidenko (Variance Corrected)
+  Predictor Dist. : Normal
+
+---------------------------------------------------
+Hypotheses
+---------------------------------------------------
+  H0 (Null Claim) : Odds Ratio = 1
+  H1 (Alt. Claim) : Odds Ratio != 1
+
+---------------------------------------------------
+Results
+---------------------------------------------------
+  Sample Size          = 8000
+  Type 1 Error (alpha) = 0.050
+  Type 2 Error (beta)  = 0.050
+  Statistical Power    = 0.95  &lt;&lt;</code></pre>
 </div>
 </div>
 <ul>
