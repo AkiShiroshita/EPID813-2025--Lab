@@ -27,9 +27,13 @@ Power = probability of rejecting the null hypothesis if a specific alternative i
 
 * PS: Power and Sample Size Calculation (Vanderbilt University, free): https://cqsclinical.app.vumc.org/ps/
 
+* G*Power (free, less intuitive): https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower
+
 * PASS (NCSS, **commercial**, **most flexible**): https://www.ncss.com/software/pass/
 
 * EPI Info (CDC, free): https://www.cdc.gov/epiinfo/index.html
+
+* Optimal Design (free, program for multilevel modeling): https://www.wtgrantfoundation.org/resources/optimal-design
 
 * For conducting complex statistical analyses (e.g., propensity score analysis), I recommend using Monte Carlo simulations.
 
@@ -60,6 +64,8 @@ summary_model <- summary(fit)
 r2_estimate <- summary_model$r.squared
 ```
 
+* `dist`: distribution of the predictor (e.g., normal, bernoulli, etc.)
+
 * `n`: total sample size
 
 * `alpha = 0.05`: significance level
@@ -69,6 +75,7 @@ pwrss::pwrss.z.logreg(
   p0 = 0.11,
   p1 = 0.10,
   r2.other.x = 0.10,
+  dist = list(dist = "normal", mean = 10, sd = 2),
   n = 8000,
   alpha = 0.05
 )
@@ -76,7 +83,7 @@ pwrss::pwrss.z.logreg(
 
 * Example writing of your method section
 
->For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for the main exposure of interest, assuming a baseline outcome prevalence of 11%. This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)
+>For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for PM2.5, assuming a baseline outcome prevalence of 11% and a normally distributed PM2.5 exposure (mean = 10, SD = 2). This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)
 
 :::callout-note
 

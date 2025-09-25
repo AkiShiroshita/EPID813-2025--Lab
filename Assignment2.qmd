@@ -1,0 +1,69 @@
+---
+title: "Assignment 2"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+editor_options: 
+  chunk_output_type: console
+---
+
+# Comments on the assignment 2
+
+* Significant Digits (or significant figures)
+
+Significant digits and decimal points are two different concepts. We usually use significant digits in scientific papers, although we prioritize adhere to the guidelines provided by the journal to which you are submitting. 
+
+**Ensure that significant digits are consistent and meaningful.** 
+
+For example, someone said that decimal places in percentages may not provide meaningful information and rounding to a whole number may be better (e.g., $12.2$% $\rightarrow$ $12%$)
+
+How many significant digits are in the following numbers?
+
+* $287$
+
+Non-zero digits are always significant.
+
+* $50.03$
+
+Zeros between non-zero digits are significant.
+
+* $0.0045$
+
+Leading zeros (zeros at the beginning of a number) are never significant.
+
+* $3.20 \times 10^3$
+
+Trailing zeros (zeros at the end of a number) are significant only if the number contains a decimal point.
+
+* $1,200.0$
+
+:::callout-note
+While `tableone` is excellent, `gtsummary` generally offers more flexible control for formatting by significant digits.
+:::
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(gtsummary)
+prostate <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')
+
+# custom function
+fmt_sigfig <- function(x, sigfig = 3) {
+  signif(x, sigfig)
+}
+
+# tbl_summary() applies whatever function you provide to format the numbers.
+prostate %>%
+  dplyr::select(age, sbp, hg, ap) %>%
+  gtsummary::tbl_summary(
+    statistic = all_continuous() ~ "{mean} ({sd})",
+    digits = all_continuous() ~ function(x) fmt_sigfig(x, sigfig = 3)
+  )
+```
+
+# Presentation
+
+```{webr}
+names <- c("Huy", "Ha", "Christopher", "Samuel", "Zicheng", "Usman")
+# Random order without replacement
+sample(names, size = length(names), replace = FALSE)
+```
+
