@@ -59,6 +59,18 @@ prostate %>%
   )
 ```
 
+* `round()`
+
+R uses round to even (also known as "bankers' rounding") to handle ties. This means that if the number to be rounded is exactly halfway between two possible rounded values, it rounds to the nearest even number. 
+
+The underlying behavior of `tableone` and `gtsummary`is the same.
+
+```{webr}
+round(3.5)
+round(2.5)
+round(-2.5)
+```
+
 # Presentation
 
 ```{webr}
