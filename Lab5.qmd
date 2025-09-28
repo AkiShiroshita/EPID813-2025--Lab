@@ -1,0 +1,107 @@
+---
+title: "Lab 5"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+  packages: ['data.table', 'tidyverse', 'ggplot2', 'speedglm'] # Pre-install dependency
+editor_options: 
+  chunk_output_type: console
+---
+
+Lab 5 covers 
+
+* **Propensity score analysis** 
+
+```{webr}
+library(tidyverse)
+diabetes <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/diabetes.csv')
+
+diabetes_clean <- diabetes %>%
+  # Ensure correct variable types
+  mutate_if(is.integer, as.numeric) %>%
+  # Create exposure and outcome variables
+  mutate(
+    diab = factor(if_else(glyhb >= 6.5, 1, 0), labels = c("No Diabetes", "Diabetes")),
+    htn = factor(if_else(bp.1s > 130, 1, 0), labels = c("No HTN", "HTN"))
+  ) %>%
+  # Select variables for analysis
+  select(htn, diab, age, height, weight, frame, hdl) %>%
+  # Remove rows with any missing data
+  drop_na()
+```
+
+* Very simplified workflow
+
+1. Estimate the propensity score
+
+```{webr}
+# Model the propensity score
+ps_model <- glm(diab ~ age + height + weight + hdl,
+                data = diabetes_clean, family = binomial)
+
+# Add the propensity score to our dataframe
+diabetes_ps <- diabetes_clean %>%
+  mutate(ps_score = predict(ps_model, type = "response"))
+```
+
+2. Use the propensity score: weighting, matching, stratification, etc.
+
+```{webr}
+diabetes_ps <- diabetes_ps %>%
+  mutate(ipw = if_else(diab == "Diabetes", 1/ps_score, 1/(1 - ps_score)))
+```
+
+3. Balance check
+
+```{webr}
+treat_b0_w <- subset(diabetes_ps,diab=="No Diabetes")
+treat_b1_w <- subset(diabetes_ps,diab=="Diabetes")
+
+weighted_smd_func <- function(x) {
+  # Isolate the variable and weights for each group
+  var_t0 <- treat_b0_w[[x]]
+  weights_t0 <- treat_b0_w$ipw
+  
+  var_t1 <- treat_b1_w[[x]]
+  weights_t1 <- treat_b1_w$ipw
+  
+  # Calculate the weighted mean for each group
+  mean_t0_w <- weighted.mean(var_t0, weights_t0)
+  mean_t1_w <- weighted.mean(var_t1, weights_t1)
+  
+  # Use the standard deviation of the original, unweighted treatment group
+  sd_t1_unweighted <- sd(treat_b1_w[[x]])
+  
+  # Calculate the weighted SMD
+  smd <- (mean_t1_w - mean_t0_w) / sd_t1_unweighted
+  
+  return(c(var = x, smd = smd))
+}
+
+varlist <- c("age", "height", "weight", "hdl")
+
+cov_plot_vars <- lapply(varlist, weighted_smd_func) %>% do.call(rbind,.) %>% as_tibble() 
+cov_plot_vars$smd <- as.numeric(cov_plot_vars$smd)
+
+# Balance check
+ggplot(data = cov_plot_vars) + 
+  geom_point(aes(x = smd, y = var), color = "blue") + 
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = c(-0.25, 0.25), linetype = "dashed", color = "red") +
+  xlim(-1, 1) +
+  labs(y = "Covariates", x = "Standardized mean difference") 
+```
+
+
+4. Run the outcome analysis
+
+```{webr}
+# Outcome analysis
+fit <- glm(htn ~ diab, data = diabetes_ps, weights = ipw, family = binomial())
+summary(fit)
+```
+
+We will elaborate on this workflow in Lab 5.
+
+:::callout-note
+Consider uncertainty of propensity score estimation!
+:::

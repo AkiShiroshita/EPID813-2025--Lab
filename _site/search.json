@@ -91,5 +91,17 @@
       "Content",
       "Lab 4"
     ]
+  },
+  {
+    "objectID": "Lab5.html",
+    "href": "Lab5.html",
+    "title": "Lab 5",
+    "section": "",
+    "text": "Lab 5 covers\n\nPropensity score analysis\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nVery simplified workflow\n\n\nEstimate the propensity score\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nUse the propensity score: weighting, matching, stratification, etc.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nBalance check\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nRun the outcome analysis\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nWe will elaborate on this workflow in Lab 5.\n\n\n\n\n\n\nNote\n\n\n\nConsider uncertainty of propensity score estimation!",
+    "crumbs": [
+      "Home",
+      "Content",
+      "Lab 5"
+    ]
   }
 ]
