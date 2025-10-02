@@ -24,7 +24,7 @@ diabetes_clean <- diabetes %>%
     htn = factor(if_else(bp.1s > 130, 1, 0), labels = c("No HTN", "HTN"))
   ) %>%
   # Select variables for analysis
-  select(htn, diab, age, height, weight, frame, hdl) %>%
+  dplyr::select(htn, diab, age, height, weight, frame, hdl) %>%
   # Remove rows with any missing data
   drop_na()
 ```
@@ -32,6 +32,8 @@ diabetes_clean <- diabetes %>%
 * Very simplified workflow
 
 1. Estimate the propensity score
+
+$Pr(Tr=1|Covariates)$
 
 ```{webr}
 # Model the propensity score
@@ -45,6 +47,12 @@ diabetes_ps <- diabetes_clean %>%
 
 2. Use the propensity score: weighting, matching, stratification, etc.
 
+Inverse probability weighting
+
+* Among treated: $W = 1/PS$
+
+* Among untreated: $W = 1/(1-PS)$
+
 ```{webr}
 diabetes_ps <- diabetes_ps %>%
   mutate(ipw = if_else(diab == "Diabetes", 1/ps_score, 1/(1 - ps_score)))
@@ -52,43 +60,102 @@ diabetes_ps <- diabetes_ps %>%
 
 3. Balance check
 
-```{webr}
-treat_b0_w <- subset(diabetes_ps,diab=="No Diabetes")
-treat_b1_w <- subset(diabetes_ps,diab=="Diabetes")
+Love plot, histogram, etc.
 
-weighted_smd_func <- function(x) {
-  # Isolate the variable and weights for each group
-  var_t0 <- treat_b0_w[[x]]
-  weights_t0 <- treat_b0_w$ipw
+Ensure that the weighted standardized mean difference for each covariate is less than 0.1 (or, if acceptable, less than 0.25).
+
+* Unweighted samples
+
+Continuous variables: $d=100*\frac{\bar{x}_{treatment}-\bar{x}_{control}}{\sqrt{\frac{S^2_{treatment}+S^2_{control}}{2}}}$
+
+Binary variables: $d=100*\frac{\hat{p}_{treatment}-\hat{p}_{control}}{\sqrt{\frac{\hat{p}_{treatment}(1-\hat{p}_{treatment})+\hat{p}_{control}(1-\hat{p}_{control}}{2}}}$
+
+* Weighted samples
+
+$\bar{x}_{weight}=\frac{\sum w_i x_i}{\sum w_i}$
+
+$s^2_{weight}=\frac{\sum w_i}{(\sum w_i)^2-\sum w_i} \sum w_i (x_i-\bar{x}_{weight})^2$
+
+```{webr}
+weighted_var <- function(x, w, na.rm = TRUE) {
+  sum_w <- sum(w)
+  sum_w2 <- sum(w^2)
+  mean_w <- sum(x * w) / sum_w
+  var_w <- sum(w * (x - mean_w)^2) / (sum_w - (sum_w2 / sum_w))
+  return(var_w)
+} 
+
+calculate_smd <- function(data, treatment_var, covariates, weights_var = NULL) {
+  is_weighted <- !is.null(weights_var)
+  data$..treatment.. <- factor(data[[treatment_var]])
   
-  var_t1 <- treat_b1_w[[x]]
-  weights_t1 <- treat_b1_w$ipw
+  treat_level <- levels(data$..treatment..)[2]
+  control_level <- levels(data$..treatment..)[1]
   
-  # Calculate the weighted mean for each group
-  mean_t0_w <- weighted.mean(var_t0, weights_t0)
-  mean_t1_w <- weighted.mean(var_t1, weights_t1)
+  treat_data <- data[data$..treatment.. == treat_level, ]
+  control_data <- data[data$..treatment.. == control_level, ]
   
-  # Use the standard deviation of the original, unweighted treatment group
-  sd_t1_unweighted <- sd(treat_b1_w[[x]])
+  smd_list <- list()
+  for (cov in covariates) {
+    var_t <- treat_data[[cov]]; var_c <- control_data[[cov]]
+    w_t <- if (is_weighted) treat_data[[weights_var]] else rep(1, nrow(treat_data))
+    w_c <- if (is_weighted) control_data[[weights_var]] else rep(1, nrow(control_data))
+    is_binary <- length(unique(na.omit(data[[cov]]))) == 2
+    
+    if (is_binary) {
+      mean_t <- weighted.mean(var_t, w_t, na.rm = TRUE); mean_c <- weighted.mean(var_c, w_c, na.rm = TRUE)
+      var_t_stat <- mean_t * (1 - mean_t); var_c_stat <- mean_c * (1 - mean_c)
+    } else {
+      mean_t <- weighted.mean(var_t, w_t, na.rm = TRUE); mean_c <- weighted.mean(var_c, w_c, na.rm = TRUE)
+      var_t_stat <- if (is_weighted) weighted_var(var_t, w_t) else var(var_t, na.rm = TRUE)
+      var_c_stat <- if (is_weighted) weighted_var(var_c, w_c) else var(var_c, na.rm = TRUE)
+    }
+    
+    mean_diff <- mean_t - mean_c
+    pooled_sd <- sqrt((var_t_stat + var_c_stat) / 2)
+    smd <- if (pooled_sd > 0) abs(mean_diff / pooled_sd) else 0
+    smd_list[[cov]] <- smd
+  }
   
-  # Calculate the weighted SMD
-  smd <- (mean_t1_w - mean_t0_w) / sd_t1_unweighted
-  
-  return(c(var = x, smd = smd))
+  output_df <- data.frame(Covariate = names(smd_list), SMD = as.numeric(smd_list), row.names = NULL)
+  return(output_df)
 }
 
-varlist <- c("age", "height", "weight", "hdl")
+covariates <- c("age", "height", "weight", "hdl")
+treatment_var <- "diab"
 
-cov_plot_vars <- lapply(varlist, weighted_smd_func) %>% do.call(rbind,.) %>% as_tibble() 
-cov_plot_vars$smd <- as.numeric(cov_plot_vars$smd)
+# 1. Calculate Unweighted SMDs
+unweighted_smds <- calculate_smd(
+  data = diabetes_ps,
+  treatment_var = treatment_var,
+  covariates = covariates
+) %>%
+  dplyr::mutate(Type = "Unweighted")
 
-# Balance check
-ggplot(data = cov_plot_vars) + 
-  geom_point(aes(x = smd, y = var), color = "blue") + 
-  geom_vline(xintercept = 0) +
-  geom_vline(xintercept = c(-0.25, 0.25), linetype = "dashed", color = "red") +
-  xlim(-1, 1) +
-  labs(y = "Covariates", x = "Standardized mean difference") 
+# 2. Calculate Weighted SMDs
+weighted_smds <- calculate_smd(
+  data = diabetes_ps,
+  treatment_var = treatment_var,
+  covariates = covariates,
+  weights_var = "ipw" 
+) %>%
+  dplyr::mutate(Type = "Weighted")
+
+love_data <- dplyr::bind_rows(unweighted_smds, weighted_smds)
+love_data$Type <- factor(love_data$Type, levels = c("Unweighted", "Weighted"))
+
+ggplot(data = love_data, aes(x = SMD, y = Covariate, group = Covariate)) +
+  geom_point(aes(color = Type), size = 3) +
+  geom_vline(xintercept = 0.1, linetype = "dashed", color = "red") +
+  labs(
+    title = "Covariate Balance Before and After Weighting",
+    x = "Absolute Standardized Mean Difference",
+    y = "Covariate",
+    color = "Sample"
+  ) +
+  scale_color_manual(values = c("Unweighted" = "grey", "Weighted" = "navy")) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "top")
 ```
 
 
@@ -104,4 +171,5 @@ We will elaborate on this workflow in Lab 5.
 
 :::callout-note
 Consider uncertainty of propensity score estimation!
+$\rightarrow$ Use robust standard error or bootstrap confidence interval
 :::
