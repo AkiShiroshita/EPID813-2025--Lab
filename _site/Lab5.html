@@ -2119,7 +2119,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <ol start="2" type="1">
 <li>Use the propensity score: weighting, matching, stratification, etc.</li>
 </ol>
-<p>Inverse probability weighting</p>
+<p>Inverse probability weighting (ATE)</p>
 <ul>
 <li><p>Among treated: <span class="math inline">\(W = 1/PS\)</span></p></li>
 <li><p>Among untreated: <span class="math inline">\(W = 1/(1-PS)\)</span></p></li>
@@ -2135,12 +2135,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>Unweighted samples</li>
 </ul>
 <p>Continuous variables: <span class="math inline">\(d=100*\frac{\bar{x}_{treatment}-\bar{x}_{control}}{\sqrt{\frac{S^2_{treatment}+S^2_{control}}{2}}}\)</span></p>
-<p>Binary variables: <span class="math inline">\(d=100*\frac{\hat{p}_{treatment}-\hat{p}_{control}}{\sqrt{\frac{\hat{p}_{treatment}(1-\hat{p}_{treatment})+\hat{p}_{control}(1-\hat{p}_{control}}{2}}}\)</span></p>
+<p>Binary variables: <span class="math inline">\(d=100*\frac{\hat{p}_{treatment}-\hat{p}_{control}}{\sqrt{\frac{\hat{p}_{treatment}(1-\hat{p}_{treatment})+\hat{p}_{control}(1-\hat{p}_{control})}{2}}}\)</span></p>
 <ul>
 <li>Weighted samples</li>
 </ul>
 <p><span class="math inline">\(\bar{x}_{weight}=\frac{\sum w_i x_i}{\sum w_i}\)</span></p>
-<p><span class="math inline">\(s^2_{weight}=\frac{\sum w_i}{(\sum w_i)^2-\sum w_i} \sum w_i (x_i-\bar{x}_{weight})^2\)</span></p>
+<p><span class="math inline">\(s^2_{weight}=\frac{\sum w_i}{(\sum w_i)^2-\sum w_i^2} \sum w_i (x_i-\bar{x}_{weight})^2\)</span></p>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <ol start="4" type="1">
