@@ -69,7 +69,7 @@ A: The observed odds ratio is (32\*102)/(48\*18)=3.78. This bias is called non-d
 ::: {.callout-tip collapse="true"}
 ### Q3: Non-differential misclassification always biased the estimate toward the null. Is that correct?
 
-A: FALSE.
+A: FALSE
 
 Exceptions:
 
@@ -103,7 +103,7 @@ knitr::include_graphics("figures/bias.png")
 ::: {.callout-tip collapse="true"}
 ### Q5: One important difference between single imputation and multiple imputation is that the latter can appropriately account for the uncertainty of the imputed values. Another important difference is that the outcome variable should be included in the multiple imputation model. Is that correct?
 
-A: TRUE.
+A: TRUE
 
 It is recommended to include the outcome variable in the imputation model, even if the outcome is not missing, because omitting it can bias regression coefficients. However, imputing outcome is a debatable topic.
 :::
@@ -141,7 +141,7 @@ Naturally occurring pairs, such as twins, can violate this principle in matched 
 ::: {.callout-tip collapse="true"}
 ### Q8: In an individual (pair) case-control study, if you match on age and sex, you do not need to adjust for them in the conditional logistic regression model, even if they are potential confounders. Is that correct?
 
-A: False.
+A: FALSE
 
 Matching is for efficiency gain, not for controlling for confounders. Therefore, conditional logistic regression models should include all potential confounders, even if they are matching factors. (If we use frequency matching, we may use unconditional logistic regression with adjustment for all potential confounders, including matching factors)
 
@@ -185,7 +185,7 @@ knitr::include_graphics("figures/sccs.png")
 ::: {.callout-tip collapse="true"}
 ### Q11: Propensity score is the probability of receiving treatment given covariates. Therefore, we should include predictors of treatment in the propensity score model. Is that correct?
 
-A: False.
+A: FALSE
 
 The propensity score model should include confounders and predictors of the outcome, but not instrumental variables.
 :::
@@ -240,7 +240,7 @@ Propensity score calculation
 
 $Pr(Tr=1|C=0)=800/(800+3200)=0.2$
 
-$Pr(Tr=1|C=1)=1000/(1000+1000)=0.2$
+$Pr(Tr=1|C=1)=1000/(1000+1000)=0.5$
 
 -   Propensity score matching (1:1 matching)
 

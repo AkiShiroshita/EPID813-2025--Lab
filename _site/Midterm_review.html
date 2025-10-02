@@ -443,7 +443,7 @@ Q3: Non-differential misclassification always biased the estimate toward the nul
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A: FALSE.</p>
+<p>A: FALSE</p>
 <p>Exceptions:</p>
 <ul>
 <li><p>If the exposure has more than two categories</p></li>
@@ -497,7 +497,7 @@ Q5: One important difference between single imputation and multiple imputation i
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A: TRUE.</p>
+<p>A: TRUE</p>
 <p>It is recommended to include the outcome variable in the imputation model, even if the outcome is not missing, because omitting it can bias regression coefficients. However, imputing outcome is a debatable topic.</p>
 </div>
 </div>
@@ -563,7 +563,7 @@ Q8: In an individual (pair) case-control study, if you match on age and sex, you
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A: False.</p>
+<p>A: FALSE</p>
 <p>Matching is for efficiency gain, not for controlling for confounders. Therefore, conditional logistic regression models should include all potential confounders, even if they are matching factors. (If we use frequency matching, we may use unconditional logistic regression with adjustment for all potential confounders, including matching factors)</p>
 <p>In addition, please note that association of age and sex with the outcome as well as interactions between the exposure and these matching factors cannot be estimated in the conditional logistic regression model.</p>
 </div>
@@ -642,7 +642,7 @@ Q11: Propensity score is the probability of receiving treatment given covariates
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A: False.</p>
+<p>A: FALSE</p>
 <p>The propensity score model should include confounders and predictors of the outcome, but not instrumental variables.</p>
 </div>
 </div>
@@ -762,7 +762,7 @@ Q13: Is C a confounder or effect modifier? Hand-calculate adjusted risk ratio us
 </ol>
 <p>Propensity score calculation</p>
 <p><span class="math inline">\(Pr(Tr=1|C=0)=800/(800+3200)=0.2\)</span></p>
-<p><span class="math inline">\(Pr(Tr=1|C=1)=1000/(1000+1000)=0.2\)</span></p>
+<p><span class="math inline">\(Pr(Tr=1|C=1)=1000/(1000+1000)=0.5\)</span></p>
 <ul>
 <li>Propensity score matching (1:1 matching)</li>
 </ul>
