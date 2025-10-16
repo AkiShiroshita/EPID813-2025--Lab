@@ -1,0 +1,220 @@
+---
+title: "Lab 6"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+  packages: ['data.table', 'tidyverse', 'ggplot2', 'survival', 'survmine'] # Pre-install dependency
+editor_options: 
+  chunk_output_type: console
+---
+
+Lab 6 covers 
+
+* **Survival analysis** 
+
+# Kaplan-Meier curve and Risk set
+
+* The `interval` in the survival analysis is `(start, stop]` (open on the left and closed on the right).
+
+e.g., `(0, 10]` means from just after time 0 to and including time 10.
+
+Do you find any unusual points in this Kaplan-Meier curve?
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(survival)
+library(survminer) 
+
+data(colon, package = "biostat3")
+colon_clean <- colon %>%
+  mutate(
+    # 1 if dead from any cause, 0 if alive (censored)
+    death_all = if_else(status == "Alive", 0, 1),
+    surv_yy = if_else(surv_yy == 0.5, 0, surv_yy) 
+  )
+
+# Fit the Kaplan-Meier curve for the whole population
+km_fit_overall <- survfit(Surv(surv_yy, death_all) ~ 1, data = colon_clean)
+
+# Use ggsurvplot for a publication-quality plot
+ggsurvplot(
+  km_fit_overall,
+  data = colon_clean,
+  risk.table = TRUE,       # Add a risk table below the plot
+  conf.int = TRUE,         # Show confidence intervals
+  xlab = "Years Since Diagnosis",
+  ylab = "Overall Survival Probability",
+  title = "Kaplan-Meier Curve for Overall Survival",
+  risk.table.y.text = FALSE,
+  ggtheme = theme_light()
+)
+
+summary(km_fit_overall)
+```
+
+::: {.callout-tip collapse="true"}
+### Q: In a randomized controlled trial, we included 1,000 patients and conducted a longitudinal follow-up to assess the hazard ratio of death between Treatment A and Treatment B. We found 10 patients died on **day 0**, the same day the follow-up period began. Should we excluded these 10 patients?
+
+Answer: It depends.
+
+If the follow-up began around 8 a.m. and the patients died around 11 p.m., they could be included in the analysis (for example, by assigning a small value such as 0.5 days instead of 0 days). However, if the follow-up started around 1 p.m. and the patients died before that time, they should be excluded.
+
+$\rightarrow$ We require detailed information on timing and/or the application of consistent criteria across all patients in the cohort.
+
+```{r}
+data(colon, package = "biostat3")
+colon_clean <- colon %>%
+  mutate(
+    # 1 if dead from any cause, 0 if alive (censored)
+    death_all = if_else(status == "Alive", 0, 1) 
+  )
+
+# Fit the Kaplan-Meier curve for the whole population
+km_fit_overall <- survfit(Surv(surv_yy, death_all) ~ 1, data = colon_clean)
+
+# Use ggsurvplot for a publication-quality plot
+ggsurvplot(
+  km_fit_overall,
+  data = colon_clean,
+  risk.table = TRUE,       # Add a risk table below the plot
+  conf.int = TRUE,         # Show confidence intervals
+  xlab = "Years Since Diagnosis",
+  ylab = "Overall Survival Probability",
+  title = "Kaplan-Meier Curve for Overall Survival",
+  risk.table.y.text = FALSE,
+  ggtheme = theme_light()
+)
+
+summary(km_fit_overall)
+```
+:::
+
+* Describe a Kaplan-Meier curve manually.
+
+```{r echo=FALSE}
+data<-list(t0=c(0.5, 0.5, 1, 2.5, 0,
+                2, 1.5, 1.5, 2, 1)) %>% 
+    as_tibble() %>% 
+    mutate(censored=t0>2, t=if_else(censored,2,t0)) 
+
+data[1,3] <- 0.25
+data[7,2] <- TRUE
+
+ggplot(data, aes(x=t, y=1:10, shape=censored) ) +
+  geom_segment(aes(x=0, y=1:10, xend=t, yend=1:10), linetype=3) +
+  geom_point() +
+  xlab("Time to death (years)") + ylab("Subject ID") +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(1,10,1)) +
+  theme_bw()
+```
+
+Rules in KM curve
+
+* Divide intervals at the time the event occurs
+
+* Censoring within an interval is subtracted from the risk set at the end of the interval
+
+* If censoring and the event occur at the same time, censoring is assumed to occur immediately after the event.
+
+```{r echo=FALSE}
+#| message: false
+#| warning: false
+library(kableExtra)
+tab <- data.frame(`Time` = c(0.25, 0.5, 1.0, 1.5, 2.0),
+                  `Risk set` = c(9, 8, 7, 5, 3),
+                  `N of events` = c(1, 1, 2, 1, 2),
+                  `Interval-specific event rate` = round(c(1/9, 1/8, 2/7, 1/5, 2/3),3))
+
+tab %>% knitr::kable('html') %>% kable_styling(font_size = 20)
+```
+
+```{r}
+#| echo: false
+data <- data %>% 
+  mutate(event = 1-censored)
+
+data <- as_tibble(data) %>% arrange(t) 
+surv <- Surv(time = data$t, event = data$event)
+km <- survfit(surv~1, type="kaplan-meier")
+plot(km, mark.time = TRUE)
+```
+
+# Proportional hazards assumption
+
+When you check the proportional hazards assumption, ensure that categorical variables are converted to dummy variables beforehan.
+
+Or you may acknowledge that `term=TRUE` (default) in `cox.zph()` function checks the proportional hazards assumption for each variable as a whole, while `term=FALSE` checks it for each level of the categorical variable.
+
+```{webr}
+colon <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/colon.csv')
+colon_clean <- colon %>%
+  mutate(
+    # 1 if dead from any cause, 0 if alive (censored)
+    death_all = if_else(status == "Alive", 0, 1) 
+  )
+glimpse(colon)
+```
+
+```{webr}
+cox_model_age <- coxph(Surv(surv_yy, death_all) ~ factor(agegrp), data = colon_clean)
+cox_model_age
+cox.zph(cox_model_age)
+#cox.zph(cox_model_age, term = FALSE)
+```
+
+```{webr}
+dummy_vars <- model.matrix(~ agegrp - 1, data = colon_clean)
+
+colon_clean2 <- colon_clean %>%
+  bind_cols(as_tibble(dummy_vars))
+
+cox_model_age2 <- coxph(Surv(surv_yy, death_all) ~ `agegrp45-59`+`agegrp60-74`+`agegrp75+`, data = colon_clean2)
+cox_model_age2
+cox.zph(cox_model_age2)
+```
+
+# Counting process data (Advanced topic)
+
+Mainly for extended Cox regression model (time-varying exposure)
+
+* Wide-format data
+
+```{r, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| 患者ID | Treatment | Time to treatment |  Event indicator | Time to death |
+|--------|:---------:|:-----------------:|:--------------:| :--------------:|
+| 1 | 1 | 13 | 1 | 30 | 
+| 2 | 0 | NA | 0 | 30 | 
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
+* What is counting process data?
+
+Long-format data data where the exposure remains the same from the beginning to the end of the interval, and the outcome occurs at the end of the interval.
+
+`(start, stop]`: open on the left and closed on the right  
+
+```{r, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
+tabl <- "
+| 患者ID | Start | Stop |  Treatment |  Death |
+|--------|:---------:|:-----------------:|:--------------:|:--------------:|
+| 1 | 0  | 13 | 0 | 0 | 
+| 1 | 13 | 30 | 1 | 1 | 
+| 2 | 0 | 30 | 0 | 0 |
+"
+cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
+```
+
+::: {.callout-tip collapse="true"}
+### Q: We found that some patients received treatment at time 13 and died on the same day. Should we classify them as exposed?
+
+Answer: Again, it depends.
+
+If the treatment began around 8 a.m. and the patients died around 11 p.m., they could be classified as "exposed" in the analysis (for example, by subtracting a small value from 13). However, if the treatment started around 1 p.m. and the patients died before that time, they should not be classified as "exposed".
+
+$\rightarrow$ We require detailed information on timing and/or the application of consistent criteria across all patients in the cohort.
+:::
