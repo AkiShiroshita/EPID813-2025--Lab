@@ -103,11 +103,22 @@ data<-list(t0=c(0.5, 0.5, 1, 2.5, 0,
 data[1,3] <- 0.25
 data[7,2] <- TRUE
 
-ggplot(data, aes(x=t, y=1:10, shape=censored) ) +
-  geom_segment(aes(x=0, y=1:10, xend=t, yend=1:10), linetype=3) +
-  geom_point() +
-  xlab("Time to death (years)") + ylab("Subject ID") +
-  scale_y_continuous(limits = c(0, 10), breaks = seq(1,10,1)) +
+ggplot(data, aes(x = t, y = 1:10, shape = censored, color = censored)) +
+  geom_segment(aes(x = 0, y = 1:10, xend = t, yend = 1:10), linetype = 3) +
+  geom_point(size = 3) +
+  scale_color_manual(
+    name = "Censoring status",
+    values = c("FALSE" = "blue", "TRUE" = "red"),
+    labels = c("FALSE" = "Event", "TRUE" = "Censored")
+  ) +
+  scale_shape_manual(
+    name = "Censoring status",
+    values = c("FALSE" = 16, "TRUE" = 1),   # <--- specify shapes
+    labels = c("FALSE" = "Event", "TRUE" = "Censored")
+  ) +
+  xlab("Time to death (years)") + 
+  ylab("Subject ID") +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(1, 10, 1)) +
   theme_bw()
 ```
 
@@ -123,7 +134,22 @@ Rules in KM curve
 #| message: false
 #| warning: false
 library(kableExtra)
-tab <- data.frame(`Time` = c(0.25, 0.5, 1.0, 1.5, 2.0),
+tab <- data.frame(`Time` = c("(0,0.25]", "(0.25,0.5]", "(0.5,1.0]", "(1.0,1.5]", "(1.5,2.0]"),
+                  `Risk set` = c("?", "?", "?", "?", "?"),
+                  `N of events` = c("?", "?", "?", "?", "?"),
+                  `Interval-specific event rate` = c("?", "?", "?", "?", "?"))
+
+tab %>% knitr::kable('html') %>% kable_styling(font_size = 20)
+```
+
+::: {.callout-tip collapse="true"}
+### Q: Fill in the blanks.
+
+```{r echo=FALSE}
+#| message: false
+#| warning: false
+library(kableExtra)
+tab <- data.frame(`Time` = c("(0,0.25]", "(0.25,0.5]", "(0.5,1.0]", "(1.0,1.5]", "(1.5,2.0]"),
                   `Risk set` = c(9, 8, 7, 5, 3),
                   `N of events` = c(1, 1, 2, 1, 2),
                   `Interval-specific event rate` = round(c(1/9, 1/8, 2/7, 1/5, 2/3),3))
@@ -141,6 +167,8 @@ surv <- Surv(time = data$t, event = data$event)
 km <- survfit(surv~1, type="kaplan-meier")
 plot(km, mark.time = TRUE)
 ```
+
+:::
 
 # Proportional hazards assumption
 
