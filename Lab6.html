@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 2 – EPID8313 (year 2025) Lab Review</title>
+<title>Lab 6 – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +102,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
@@ -345,7 +384,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['data.table', 'tidyverse', 'ggplot2', 'speedglm'];
+globalThis.qwebrInstallRPackagesList = ['data.table', 'tidyverse', 'ggplot2', 'survival', 'survmine'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -367,7 +406,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\nprostate <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(data.table)\nprostate <- fread('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/prostate.csv')","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate[rx == \"0.2 mg estrogen\"]","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate[, age := as.numeric(age)]","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Identify columns that are of type integer.\nint_cols <- names(prostate)[sapply(prostate, is.integer)]\n\n# Update these columns to numeric type using the := operator.\n# The '(int_cols)' syntax allows us to use a character vector of column names.\nprostate[, (int_cols) := lapply(.SD, as.numeric), .SDcols = int_cols]","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2 <- copy(prostate)\nprostate2[, `:=`(\n  estrogen     = fifelse(rx != \"placebo\", 1, 0),\n  dead         = fifelse(status != \"alive\", 1, 0),\n  abnormal_ekg = fifelse(ekg != \"normal\", 1, 0)\n)]","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2[, mean(age, na.rm=TRUE), by = rx]","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2[rx == \"0.2 mg estrogen\", mean(age, na.rm=TRUE)]","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"person_time_summary <- prostate2[, .(\n  events = sum(dead),\n  person_time = sum(dtime)\n), by = .(estrogen)]","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"prostate2[rx == \"0.2 mg estrogen\"] |> \n  _[, .(mean_age = mean(age, na.rm=TRUE),\n        mean_wt = mean(wt, na.rm=TRUE)),\n    by = rx]","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(speedglm)\nmodel <- speedglm(dead ~ estrogen + sbp + dbp + age + hx, data = prostate2, family = binomial())\nsummary(model)","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"colon <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/colon.csv')\ncolon_clean <- colon %>%\n  mutate(\n    # 1 if dead from any cause, 0 if alive (censored)\n    death_all = if_else(status == \"Alive\", 0, 1) \n  )\nglimpse(colon)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"cox_model_age <- coxph(Surv(surv_yy, death_all) ~ factor(agegrp), data = colon_clean)\ncox_model_age\ncox.zph(cox_model_age)\n#cox.zph(cox_model_age, term = FALSE)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"dummy_vars <- model.matrix(~ agegrp - 1, data = colon_clean)\n\ncolon_clean2 <- colon_clean %>%\n  bind_cols(as_tibble(dummy_vars))\n\ncox_model_age2 <- coxph(Surv(surv_yy, death_all) ~ `agegrp45-59`+`agegrp60-74`+`agegrp75+`, data = colon_clean2)\ncox_model_age2\ncox.zph(cox_model_age2)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1722,7 +1761,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab2.html">Lab 2</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -1751,7 +1790,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab2.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 2</span></a>
   </div>
 </li>
@@ -1793,7 +1832,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 6</span></a>
   </div>
 </li>
@@ -2092,9 +2131,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 }
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab2.html">Lab 2</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 2</h1>
+<h1 class="title">Lab 6</h1>
 </div>
 
 
@@ -2111,160 +2150,339 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<p>Lab 2 covers</p>
+<p>Lab 6 covers</p>
 <ul>
-<li><p><strong>data wrangling</strong></p></li>
-<li><p><strong>regression models</strong>.</p></li>
+<li><strong>Survival analysis</strong></li>
 </ul>
-<section id="data-wrangling" class="level1">
-<h1>Data wrangling</h1>
+<section id="kaplan-meier-curve-and-risk-set" class="level1">
+<h1>Kaplan-Meier curve and Risk set</h1>
 <ul>
-<li><p><code>base R</code></p></li>
-<li><p><code>tidyverse</code>: clean and readable</p></li>
-<li><p><code>data.table</code>: Optimized for speed and memory efficiency</p></li>
+<li>The <code>interval</code> in the survival analysis is <code>(start, stop]</code> (open on the left and closed on the right).</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<p>e.g., <code>(0, 10]</code> means from just after time 0 to and including time 10.</p>
+<p>Do you find any unusual points in this Kaplan-Meier curve?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(surv_yy, death_all) ~ 1, data = colon_clean)
+
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  0.0  15564    5475    0.648 0.00383        0.641        0.656
+  1.5  10089    1886    0.527 0.00400        0.519        0.535
+  2.5   7536     919    0.463 0.00404        0.455        0.471
+  3.5   6114     609    0.417 0.00404        0.409        0.425
+  4.5   5028     456    0.379 0.00405        0.371        0.387
+  5.5   4210     356    0.347 0.00404        0.339        0.355
+  6.5   3511     254    0.322 0.00405        0.314        0.330
+  7.5   2939     196    0.300 0.00406        0.292        0.308
+  8.5   2476     158    0.281 0.00407        0.273        0.289
+  9.5   2085     146    0.261 0.00410        0.254        0.270
+ 10.5   1725     105    0.246 0.00414        0.238        0.254
+ 11.5   1447      90    0.230 0.00418        0.222        0.239
+ 12.5   1177      74    0.216 0.00424        0.208        0.224
+ 13.5    957      48    0.205 0.00431        0.197        0.214
+ 14.5    735      42    0.193 0.00442        0.185        0.202
+ 15.5    559      36    0.181 0.00460        0.172        0.190
+ 16.5    421      35    0.166 0.00487        0.157        0.176
+ 17.5    293      15    0.157 0.00509        0.148        0.168
+ 18.5    211       7    0.152 0.00529        0.142        0.163
+ 19.5    132      12    0.138 0.00613        0.127        0.151
+ 20.5     56       3    0.131 0.00714        0.118        0.146</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Q: In a randomized controlled trial, we included 1,000 patients and conducted a longitudinal follow-up to assess the hazard ratio of death between Treatment A and Treatment B. We found 10 patients died on <strong>day 0</strong>, the same day the follow-up period began. Should we excluded these 10 patients?
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>As I use very large-scale environmental data, I am switching from <code>tidyverse</code> to <code>data.table</code>.</p>
+<p>Answer: It depends.</p>
+<p>If the follow-up began around 8 a.m. and the patients died around 11 p.m., they could be included in the analysis (for example, by assigning a small value such as 0.5 days instead of 0 days). However, if the follow-up started around 1 p.m. and the patients died before that time, they should be excluded.</p>
+<p><span class="math inline">\(\rightarrow\)</span> We require detailed information on timing and/or the application of consistent criteria across all patients in the cohort.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(colon, <span class="at">package =</span> <span class="st">"biostat3"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>colon_clean <span class="ot">&lt;-</span> colon <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1 if dead from any cause, 0 if alive (censored)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">death_all =</span> <span class="fu">if_else</span>(status <span class="sc">==</span> <span class="st">"Alive"</span>, <span class="dv">0</span>, <span class="dv">1</span>) </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the Kaplan-Meier curve for the whole population</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>km_fit_overall <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(surv_yy, death_all) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> colon_clean)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Use ggsurvplot for a publication-quality plot</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  km_fit_overall,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> colon_clean,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table =</span> <span class="cn">TRUE</span>,       <span class="co"># Add a risk table below the plot</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">TRUE</span>,         <span class="co"># Show confidence intervals</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Years Since Diagnosis"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Overall Survival Probability"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Kaplan-Meier Curve for Overall Survival"</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table.y.text =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_light</span>()</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Ignoring unknown labels:
+• fill : "Strata"
+Ignoring unknown labels:
+• fill : "Strata"
+Ignoring unknown labels:
+• fill : "Strata"
+Ignoring unknown labels:
+• fill : "Strata"
+Ignoring unknown labels:
+• colour : "Strata"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km_fit_overall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = Surv(surv_yy, death_all) ~ 1, data = colon_clean)
+
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  0.5  15564    5475    0.648 0.00383        0.641        0.656
+  1.5  10089    1886    0.527 0.00400        0.519        0.535
+  2.5   7536     919    0.463 0.00404        0.455        0.471
+  3.5   6114     609    0.417 0.00404        0.409        0.425
+  4.5   5028     456    0.379 0.00405        0.371        0.387
+  5.5   4210     356    0.347 0.00404        0.339        0.355
+  6.5   3511     254    0.322 0.00405        0.314        0.330
+  7.5   2939     196    0.300 0.00406        0.292        0.308
+  8.5   2476     158    0.281 0.00407        0.273        0.289
+  9.5   2085     146    0.261 0.00410        0.254        0.270
+ 10.5   1725     105    0.246 0.00414        0.238        0.254
+ 11.5   1447      90    0.230 0.00418        0.222        0.239
+ 12.5   1177      74    0.216 0.00424        0.208        0.224
+ 13.5    957      48    0.205 0.00431        0.197        0.214
+ 14.5    735      42    0.193 0.00442        0.185        0.202
+ 15.5    559      36    0.181 0.00460        0.172        0.190
+ 16.5    421      35    0.166 0.00487        0.157        0.176
+ 17.5    293      15    0.157 0.00509        0.148        0.168
+ 18.5    211       7    0.152 0.00529        0.142        0.163
+ 19.5    132      12    0.138 0.00613        0.127        0.151
+ 20.5     56       3    0.131 0.00714        0.118        0.146</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Describe a Kaplan-Meier curve manually.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Rules in KM curve</p>
+<ul>
+<li><p>Divide intervals at the time the event occurs</p></li>
+<li><p>Censoring within an interval is subtracted from the risk set at the end of the interval</p></li>
+<li><p>If censoring and the event occur at the same time, censoring is assumed to occur immediately after the event.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Time</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Risk.set</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">N.of.events</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Interval.specific.event.rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.111</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.125</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.286</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.50</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.667</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="tidyverse" class="level1">
-<h1><code>tidyverse</code></h1>
-<p>A philosophy created by Hadley Wickham</p>
-<ul>
-<li><p><code>dplyr</code> → data manipulation (filter, mutate, group, summarize)</p></li>
-<li><p><code>ggplot2</code> → data visualization</p></li>
-<li><p><code>tidyr</code> → data tidying (reshaping, pivoting, separating)</p></li>
-<li><p><code>readr</code> → data import (CSV, TSV, etc.)</p></li>
-<li><p><code>tibble</code> → modern data frames (better printing, easier handling)</p></li>
-<li><p><code>purrr</code> → functional programming with lists (map, reduce)</p></li>
-<li><p><code>stringr</code> → string handling</p></li>
-<li><p><code>forcats</code> → categorical (factor) variables handling</p></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The pipe function (takes the result of the expression on its left and “pipes” it into the function on its right) <code>%&gt;%</code> makes the workflow read like a sequence of steps.</p>
-</div>
-</div>
-<p>Demonstrations</p>
+<section id="proportional-hazards-assumption" class="level1">
+<h1>Proportional hazards assumption</h1>
+<p>When you check the proportional hazards assumption, ensure that categorical variables are converted to dummy variables beforehan.</p>
+<p>Or you may acknowledge that <code>term=TRUE</code> (default) in <code>cox.zph()</code> function checks the proportional hazards assumption for each variable as a whole, while <code>term=FALSE</code> checks it for each level of the categorical variable.</p>
+<div class="cell">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="my-tips-and-tricks" class="level1">
-<h1>My tips and tricks</h1>
-<ul>
-<li><p>For moderate-sized datasets, I recommend using <code>tidyverse</code> for its readability.</p></li>
-<li><p>Memorize the basic commands for descriptive analyses.</p></li>
-<li><p>Check the unique values and summaries of each column (e.g., <code>unique()</code>, <code>summary()</code>)</p></li>
-<li><p>Check a lot of contingency tables (e.g., <code>table()</code>)</p></li>
-<li><p>Visualize the variables as needed (e.g., <code>ggplot()</code>)</p></li>
-</ul>
-</section>
-<section id="data.table-advanced" class="level1">
-<h1><code>data.table</code> (advanced)</h1>
-<div style=" margin-left: auto; margin-right: auto;display: block; text-align:center; width:fit-content;"> 
-<p style="font-size:200%;font-weight:bold">
-<code>DT[<span class="rows">i</span>, <span class="columns">j</span>, <span class="by">by</span>]</code>
-</p>
 </div>
-<p>Where <code><strong>DT</strong></code> is a data.table object, the <code class="rows"><span class="rows"><strong>i</strong></span></code> argument is used for filtering and joining, the <code class="columns"><span class="columns"><strong>j</strong></span></code> argument is used for summarizing and transforming, and the <code class="by"><span class="by"><strong>by</strong></span></code> argument defines the groups to which to apply these operations.</p>
+<div class="cell">
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Convert objects to <code>data.table</code>:</li>
-</ul>
-<p><code>setDT()</code> vs.&nbsp;<code>as.data.table()</code></p>
-<p><code>setDT()</code>: Converts in place</p>
-<p><code>as.data.table()</code>: Creates a new <code>data.table</code> object</p>
-<ul>
-<li>Filter rows</li>
-</ul>
+</div>
+<div class="cell">
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Change data type</li>
-</ul>
-<p><code>Modify-in-place</code></p>
-<div id="qwebr-insertion-location-4"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-5"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Make new columns</li>
-</ul>
-<p><code>Modify-in-place</code></p>
-<div id="qwebr-insertion-location-6"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Summarize by group</li>
-</ul>
-<div id="qwebr-insertion-location-7"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-8"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-9"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<ul>
-<li>Piping</li>
-</ul>
-<p>It takes the result of the expression on its left and “pipes” it into the function on its right.</p>
-<p>After R 4.3.0, the native pipe supports a <code>_</code> placeholder to the right-hand side of the pipe.</p>
-<div id="qwebr-insertion-location-10"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
 </section>
-<section id="poisson-regression" class="level1">
-<h1>Poisson regression</h1>
+<section id="counting-process-data-advanced-topic" class="level1">
+<h1>Counting process data (Advanced topic)</h1>
+<p>Mainly for extended Cox regression model (time-varying exposure)</p>
 <ul>
-<li>Conventional Poisson regression</li>
+<li>Wide-format data</li>
 </ul>
-<p>For count data</p>
-<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i+log(T_i)\)</span></p>
-<p>Effect measure: rate ratio</p>
+<div class="cell" data-warnings="false">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 27%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>患者ID</th>
+<th style="text-align: center;">Treatment</th>
+<th style="text-align: center;">Time to treatment</th>
+<th style="text-align: center;">Event indicator</th>
+<th style="text-align: center;">Time to death</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">30</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">30</td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul>
-<li>Modified Poisson regression</li>
+<li>What is counting process data?</li>
 </ul>
-<p>For binary data</p>
-<p><span class="math inline">\(log(E[Y_i|X_i])=\beta_0+\beta_1X_i\)</span></p>
-<p>Effect measure: risk ratio</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<p>Long-format data data where the exposure remains the same from the beginning to the end of the interval, and the outcome occurs at the end of the interval.</p>
+<p><code>(start, stop]</code>: open on the left and closed on the right</p>
+<div class="cell" data-warnings="false">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 27%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>患者ID</th>
+<th style="text-align: center;">Start</th>
+<th style="text-align: center;">Stop</th>
+<th style="text-align: center;">Treatment</th>
+<th style="text-align: center;">Death</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Q: We found that some patients received treatment at time 13 and died on the same day. Should we classify them as exposed?
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Robust standard errors are recommended in both the conventional Poisson and the modified Poisson regression models.</p>
+<p>Answer: Again, it depends.</p>
+<p>If the treatment began around 8 a.m. and the patients died around 11 p.m., they could be classified as “exposed” in the analysis (for example, by subtracting a small value from 13). However, if the treatment started around 1 p.m. and the patients died before that time, they should not be classified as “exposed”.</p>
+<p><span class="math inline">\(\rightarrow\)</span> We require detailed information on timing and/or the application of consistent criteria across all patients in the cohort.</p>
 </div>
 </div>
-</section>
-<section id="regression-models-advanced" class="level1">
-<h1>Regression models (advanced)</h1>
-<p><code>speedglm</code> package: more speedy than <code>glm</code></p>
-<p>It directly solves the normal equations of the weighted least squares problem at each iteration (rather than relies on a QR decomposition).</p>
-<p>Why does this important?</p>
-<p><span class="math inline">\(\rightarrow\)</span> In G-methods, you often create many derived variables and fit many regression models across “copied” datasets.</p>
-<div id="qwebr-insertion-location-11"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
 
 
 </section>

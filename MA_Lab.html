@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 4 – EPID8313 (year 2025) Lab Review</title>
+<title>Meta-analysis Lab – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -204,7 +169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Meta-analysis Lab</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -251,7 +216,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab4.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 4</span></a>
   </div>
 </li>
@@ -290,9 +255,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 4</h1>
+<h1 class="title">Meta-analysis Lab</h1>
 </div>
 
 
@@ -309,120 +274,134 @@ window.Quarto = {
 </header>
 
 
-<p>Lab 4 covers</p>
-<ul>
-<li><strong>Power and sample size calculation</strong></li>
-</ul>
-<p>In many cases, we want to perform power calculations for multivariable regression models.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<p>You are supervising a medical student conducting a systematic review and meta-analysis of RCTs on the effects of a new drug X (vs.&nbsp;placebo) on some QOL scores (e.g., SF36 [0-100], EQ-5D [-0.594 to 1.0], etc). The student has gathered data from the included studies, however, the reporting formats differ across studies. The student is uncertain about how to proceed with the meta-analysis.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Q1: What effect size measure would you use for the meta-analysis? Why?
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Power = probability of rejecting the null hypothesis if a specific alternative is true</p>
+<p>Answer: Standardized mean difference (SMD) because the QOL scores are measured on different scales across studies, and SMD allows for comparison by standardizing the differences.</p>
+<p>Option A: Meta-analysis of QOL scores at the follow-up visit</p>
+<p>If randomization worked and baseline means are similar, this is usually acceptable.</p>
+<p>Option B: Meta-analysis of change scores (follow-up minus baseline) in QOL scores</p>
+<p>From here,</p>
+<p><strong>because change scores in QOL scores are not reported in many studies, you decided to focus on Option A.</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/pre_post.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
 </div>
 </div>
-<section id="brief-overview-of-software" class="level1">
-<h1>Brief overview of software</h1>
-<ul>
-<li><p>R packages: <code>pwr</code>, <code>pwrss</code>, etc.</p></li>
-<li><p>STATA</p></li>
-<li><p>SAS Proc Power</p></li>
-<li><p>PS: Power and Sample Size Calculation (Vanderbilt University, free): https://cqsclinical.app.vumc.org/ps/</p></li>
-<li><p>G*Power (free, less intuitive): https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower</p></li>
-<li><p>PASS (NCSS, <strong>commercial</strong>, <strong>most flexible</strong>): https://www.ncss.com/software/pass/</p></li>
-<li><p>EPI Info (CDC, free): https://www.cdc.gov/epiinfo/index.html</p></li>
-<li><p>Optimal Design (free, program for multilevel modeling): https://www.wtgrantfoundation.org/resources/optimal-design</p></li>
-<li><p>For conducting complex statistical analyses (e.g., propensity score analysis), I recommend using Monte Carlo simulations.</p></li>
-</ul>
-</section>
-<section id="r-pwrss-package" class="level1">
-<h1>R <code>pwrss</code> package</h1>
-<p>Tutorial: https://rpubs.com/metinbulus/pwrss</p>
-<p>Power and sample size calculation based on the Wald test.</p>
-<p><strong>Scenario:</strong> You are planning a study where the outcome is binary and will be analyzed with logistic regression.</p>
-<p>What you need is</p>
-<ul>
-<li><p><code>p0</code>: probability of the outcome when the predictor is at reference level (e.g., control group).</p></li>
-<li><p><code>p1</code>: probability of the outcome when the predictor is at the exposure level (e.g., treatment group).</p></li>
-<li><p><code>r2.other.x</code>: A squared multiple correlation between an exposure and other covariates</p></li>
-</ul>
-<p>Higher values indicate more correlation, which will increase the required sample size.</p>
-<p>You can calculate <code>r2.other.x</code> by fitting a linear regression model where your main predictor of interest is treated as the outcome and all other covariates are the predictors.</p>
-<pre><code>fit &lt;- lm(exposure ~ cov1+cov2, data = data)
-# Extract the R-squared value
-summary_model &lt;- summary(fit)
-r2_estimate &lt;- summary_model$r.squared</code></pre>
-<ul>
-<li><p><code>dist</code>: distribution of the predictor (e.g., normal, bernoulli, etc.)</p></li>
-<li><p><code>n</code>: total sample size</p></li>
-<li><p><code>alpha = 0.05</code>: significance level</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pwrss<span class="sc">::</span><span class="fu">pwrss.z.logreg</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p0 =</span> <span class="fl">0.11</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p1 =</span> <span class="fl">0.10</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r2.other.x =</span> <span class="fl">0.10</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist =</span> <span class="fu">list</span>(<span class="at">dist =</span> <span class="st">"normal"</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">8000</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+--------------------------------------------------+
-|                POWER CALCULATION                 |
-+--------------------------------------------------+
-
-Logistic Regression Coefficient (Wald's Z-Test)
-
-  Method          : Demidenko (Variance Corrected)
-  Predictor Dist. : Normal
-
----------------------------------------------------
-Hypotheses
----------------------------------------------------
-  H0 (Null Claim) : Odds Ratio = 1
-  H1 (Alt. Claim) : Odds Ratio != 1
-
----------------------------------------------------
-Results
----------------------------------------------------
-  Sample Size          = 8000
-  Type 1 Error (alpha) = 0.050
-  Type 2 Error (beta)  = 0.050
-  Statistical Power    = 0.95  &lt;&lt;</code></pre>
 </div>
 </div>
-<ul>
-<li>Example writing of your method section</li>
-</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q2: Study A reported the standardized mean difference (SMD) and its standard error (SE), comparing follow-up scores between the treatment and control groups. However, it reported a “strange” happiness score ranging from -50 to 50, where lower scores indicate better QOL (In other QOL scores, higher scores indicate better QOL). Can this study be included in the meta-analysis?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Answer: Yes.</p>
+<p>You can include this study by reversing the sign of the SMD and its SE.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q3: Study B did not report the standardized mean difference (SMD) or its standard error (SE). However, it provided the mean and standard deviation (SD) for both the drug X and placebo groups at the follow-up visit. Can this study still be included in the meta-analysis?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Answer: Yes.</p>
+<p><span class="math inline">\(SMD=\frac{Mean_{Drug}-Mean_{Placebo}}{SD_{pooled}}\)</span></p>
+<p>where</p>
+<p><span class="math inline">\(SD_{pooled}=\sqrt{\frac{(n_1-1)SD^2_1 + (n_2-1)SD^2_2}{n_1+n_2-2}}\)</span></p>
+<p>Then, SE of SMD can be calculated as:</p>
+<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
+<p>(There are other formulas for SE of SMD. This is one of the commonly used formulas.)</p>
+<p><strong>Please note that you do not use SMD for pre- and post- comparisons within the same group.</strong></p>
+<p><span class="math inline">\(SMD = \frac{Mean_{post}-Mean_{pre}}{SD_{change}}\)</span></p>
+<p>where <span class="math inline">\(SD_{change}\)</span> : standard deviation of the change scores</p>
+<p>or <span class="math inline">\(SD_{change}=\sqrt{SD^2_{pre}+SD^2_{post}-2 \times r \times SD_{pre} \times SD_{post}}\)</span></p>
+<p>(You need correlation coefficient <span class="math inline">\(r\)</span> )</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q4: Study C did not report SMD and its standard error (SE). However, it reported the mean difference (MD) and SE(MD) between the drug X and placebo groups at the follow-up visit. The means and standard deviations (SDs) for the drug X and placebo groups at follow-up are not available. Are you able to use this study in the meta-analysis?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Answer: Yes.</p>
+<p><span class="math inline">\(SMD=\frac{Mean_{Drug}-Mean_{Placebo}}{SD_{pooled}}\)</span></p>
+<p>where</p>
+<p><span class="math inline">\(SD_{pooled}=\sqrt{\frac{(n_1-1)SD^2_1 + (n_2-1)SD^2_2}{n_1+n_2-2}}\)</span></p>
+<p>Then, SE of SMD can be calculated as:</p>
+<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
+<p>If you do not have SDs, you cannot directly compute SMD.</p>
+<p>However, you can approximate SMD if you have a “reasonable” estimate of the SD from other studies.:</p>
+<p><span class="math inline">\(SMD \approx \frac{MD}{SD_{reference}}\)</span></p>
+<p>and adjust SE accordingly:</p>
+<p><span class="math inline">\(SE_{SMD} \approx \frac{SE_{MD}}{SD_{reference}}\)</span></p>
+<p>There is no clear rule for this, as the evidence is based on case series. In general, we select a study with a similar design, sample size, and other relevant characteristics.</p>
 <blockquote class="blockquote">
-<p>For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for PM2.5, assuming a baseline outcome prevalence of 11% and a normally distributed PM2.5 exposure (mean = 10, SD = 2). This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)</p>
+<p>The simplest imputation is to borrow the SD from one or more other studies. Furukawa and colleagues found that imputing SDs either from other studies in the same meta-analysis, or from studies in another meta-analysis, yielded approximately correct results in two case studies (Furukawa et al 2006). If several candidate SDs are available, review authors should decide whether to use their average, the highest, a ‘reasonably high’ value, or some other strategy. For meta-analyses of MDs, choosing a higher SD down-weights a study and yields a wider confidence interval. However, for SMD meta-analyses, choosing a higher SD will bias the result towards a lack of effect. More complicated alternatives are available for making use of multiple candidate SDs. For example, Marinho and colleagues implemented a linear regression of log(SD) on log(mean), because of a strong linear relationship between the two (Marinho et al 2003).</p>
 </blockquote>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<p>https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-06</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Q5: Study D reported Cohen’s d comparing pre- and post-intervention QOL scores within both the treatment and control groups. Can this study be included in the meta-analysis?
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ul>
-<li><p>Odds for the reference group: <span class="math inline">\(0.11/(1−0.11)=0.1236\)</span></p></li>
-<li><p>Odds for the comparison group: <span class="math inline">\(0.10/(1−0.10)=0.1111\)</span></p></li>
-<li><p>Odds Ratio <span class="math inline">\(= 0.1111/0.1236 \approx 0.90\)</span></p></li>
-</ul>
+<p>Answer: No.</p>
+<p>In Q1, you decided to focus on Option A (meta-analysis of QOL scores at the follow-up visit). Therefore, pre-post comparisons within the same group cannot be used for this meta-analysis.</p>
+<p>If this study reported Cohen’s d comparing the drug X and placebo groups at follow-up, then it could be included, even if SD or SE of Cohen’s d were not reported.</p>
+<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
+<p>(There are other formulas for SE of SMD. This is one of the commonly used formulas.)</p>
+</div>
 </div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
