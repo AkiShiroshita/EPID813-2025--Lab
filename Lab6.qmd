@@ -146,6 +146,34 @@ tab %>% knitr::kable('html') %>% kable_styling(font_size = 20)
 ### Q: Fill in the blanks.
 
 ```{r echo=FALSE}
+data<-list(t0=c(0.5, 0.5, 1, 2.5, 0,
+                2, 1.5, 1.5, 2, 1)) %>% 
+    as_tibble() %>% 
+    mutate(censored=t0>2, t=if_else(censored,2,t0)) 
+
+data[1,3] <- 0.25
+data[7,2] <- TRUE
+
+ggplot(data, aes(x = t, y = 1:10, shape = censored, color = censored)) +
+  geom_segment(aes(x = 0, y = 1:10, xend = t, yend = 1:10), linetype = 3) +
+  geom_point(size = 3) +
+  scale_color_manual(
+    name = "Censoring status",
+    values = c("FALSE" = "blue", "TRUE" = "red"),
+    labels = c("FALSE" = "Event", "TRUE" = "Censored")
+  ) +
+  scale_shape_manual(
+    name = "Censoring status",
+    values = c("FALSE" = 16, "TRUE" = 1),   # <--- specify shapes
+    labels = c("FALSE" = "Event", "TRUE" = "Censored")
+  ) +
+  xlab("Time to death (years)") + 
+  ylab("Subject ID") +
+  scale_y_continuous(limits = c(0, 10), breaks = seq(1, 10, 1)) +
+  theme_bw()
+```
+
+```{r echo=FALSE}
 #| message: false
 #| warning: false
 library(kableExtra)

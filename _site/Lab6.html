@@ -2362,6 +2362,15 @@ Q: Fill in the blanks.
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
@@ -2410,7 +2419,7 @@ Q: Fill in the blanks.
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2621,7 +2630,7 @@ Q: We found that some patients received treatment at time 13 and died on the sam
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/AkiShiroshita\.github\.io\/EPID813-2025--Lab\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
