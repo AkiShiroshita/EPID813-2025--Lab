@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meta-analysis Lab – EPID8313 (year 2025) Lab Review</title>
+<title>Lab 8 – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -173,7 +173,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Meta-analysis Lab</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Lab 8</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -267,7 +267,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meta-analysis Lab</h1>
+<h1 class="title">Lab 8</h1>
 </div>
 
 
@@ -284,134 +284,56 @@ window.Quarto = {
 </header>
 
 
-<p>You are supervising a medical student conducting a systematic review and meta-analysis of RCTs on the effects of a new drug X (vs.&nbsp;placebo) on some QOL scores (e.g., SF36 [0-100], EQ-5D [-0.594 to 1.0], etc). The student has gathered data from the included studies, however, the reporting formats differ across studies. The student is uncertain about how to proceed with the meta-analysis.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q1: What effect size measure would you use for the meta-analysis? Why?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Standardized mean difference (SMD) because the QOL scores are measured on different scales across studies, and SMD allows for comparison by standardizing the differences.</p>
-<p>Option A: Meta-analysis of QOL scores at the follow-up visit</p>
-<p>If randomization worked and baseline means are similar, this is usually acceptable.</p>
-<p>Option B: Meta-analysis of change scores (follow-up minus baseline) in QOL scores</p>
-<p>From here,</p>
-<p><strong>because change scores in QOL scores are not reported in many studies, you decided to focus on Option A.</strong></p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/pre_post.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q2: Study A reported the standardized mean difference (SMD) and its standard error (SE), comparing follow-up scores between the treatment and control groups. However, it reported a “strange” happiness score ranging from -50 to 50, where lower scores indicate better QOL (In other QOL scores, higher scores indicate better QOL). Can this study be included in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Yes.</p>
-<p>You can include this study by reversing the sign of the SMD and its SE.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q3: Study B did not report the standardized mean difference (SMD) or its standard error (SE). However, it provided the mean and standard deviation (SD) for both the drug X and placebo groups at the follow-up visit. Can this study still be included in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Yes.</p>
-<p><span class="math inline">\(SMD=\frac{Mean_{Drug}-Mean_{Placebo}}{SD_{pooled}}\)</span></p>
-<p>where</p>
-<p><span class="math inline">\(SD_{pooled}=\sqrt{\frac{(n_1-1)SD^2_1 + (n_2-1)SD^2_2}{n_1+n_2-2}}\)</span></p>
-<p>Then, SE of SMD can be calculated as:</p>
-<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
-<p>(There are other formulas for SE of SMD. This is one of the commonly used formulas.)</p>
-<p><strong>Please note that you do not use SMD for pre- and post- comparisons within the same group.</strong></p>
-<p><span class="math inline">\(SMD = \frac{Mean_{post}-Mean_{pre}}{SD_{change}}\)</span></p>
-<p>where <span class="math inline">\(SD_{change}\)</span> : standard deviation of the change scores</p>
-<p>or <span class="math inline">\(SD_{change}=\sqrt{SD^2_{pre}+SD^2_{post}-2 \times r \times SD_{pre} \times SD_{post}}\)</span></p>
-<p>(You need correlation coefficient <span class="math inline">\(r\)</span> )</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q4: Study C did not report SMD and its standard error (SE). However, it reported the mean difference (MD) and SE(MD) between the drug X and placebo groups at the follow-up visit. The means and standard deviations (SDs) for the drug X and placebo groups at follow-up are not available. Are you able to use this study in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Yes.</p>
-<p><span class="math inline">\(SMD=\frac{Mean_{Drug}-Mean_{Placebo}}{SD_{pooled}}\)</span></p>
-<p>where</p>
-<p><span class="math inline">\(SD_{pooled}=\sqrt{\frac{(n_1-1)SD^2_1 + (n_2-1)SD^2_2}{n_1+n_2-2}}\)</span></p>
-<p>Then, SE of SMD can be calculated as:</p>
-<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
-<p>If you do not have SDs, you cannot directly compute SMD.</p>
-<p>However, you can approximate SMD if you have a “reasonable” estimate of the SD from other studies.:</p>
-<p><span class="math inline">\(SMD \approx \frac{MD}{SD_{reference}}\)</span></p>
-<p>and adjust SE accordingly:</p>
-<p><span class="math inline">\(SE_{SMD} \approx \frac{SE_{MD}}{SD_{reference}}\)</span></p>
-<p>There is no clear rule for this, as the evidence is based on case series. In general, we select a study with a similar design, sample size, and other relevant characteristics.</p>
-<blockquote class="blockquote">
-<p>The simplest imputation is to borrow the SD from one or more other studies. Furukawa and colleagues found that imputing SDs either from other studies in the same meta-analysis, or from studies in another meta-analysis, yielded approximately correct results in two case studies (Furukawa et al 2006). If several candidate SDs are available, review authors should decide whether to use their average, the highest, a ‘reasonably high’ value, or some other strategy. For meta-analyses of MDs, choosing a higher SD down-weights a study and yields a wider confidence interval. However, for SMD meta-analyses, choosing a higher SD will bias the result towards a lack of effect. More complicated alternatives are available for making use of multiple candidate SDs. For example, Marinho and colleagues implemented a linear regression of log(SD) on log(mean), because of a strong linear relationship between the two (Marinho et al 2003).</p>
-</blockquote>
-<p>https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-06</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q5: Study D reported Cohen’s d comparing pre- and post-intervention QOL scores within both the treatment and control groups. Can this study be included in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: No.</p>
-<p>In Q1, you decided to focus on Option A (meta-analysis of QOL scores at the follow-up visit). Therefore, pre-post comparisons within the same group cannot be used for this meta-analysis.</p>
-<p>If this study reported Cohen’s d comparing the drug X and placebo groups at follow-up, then it could be included, even if SD or SE of Cohen’s d were not reported.</p>
-<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
-<p>(There are other formulas for SE of SMD. This is one of the commonly used formulas.)</p>
-</div>
-</div>
-</div>
+<p>Lab 9 covers</p>
+<ul>
+<li><strong>Bias analysis</strong></li>
+</ul>
+<section id="quantitative-bias-analysis" class="level1">
+<h1>Quantitative bias analysis</h1>
+<ul>
+<li><p>Simple bias analysis: aggregated data <span class="math inline">\(\rightarrow\)</span> Using provided Excel Spreadsheets</p></li>
+<li><p>Probalistic bias analysis: Specify the bias distributions and assume that there are no other sources of error</p></li>
+</ul>
+</section>
+<section id="probalistic-bias-analysis" class="level1">
+<h1>Probalistic bias analysis</h1>
+<p>Aggregated data vs.&nbsp;Individual-level data</p>
+<ul>
+<li>Aggregated data</li>
+</ul>
+<ol type="1">
+<li><p>Identify the likely source of important bias in the data</p></li>
+<li><p>Identify the bias parameters needed to adjust for the bias</p></li>
+<li><p>Assign probability distributions to each bias parameter</p></li>
+<li><p>Use simple bias analysis methods to incorporate uncertainty in the bias parameters and random error</p></li>
+</ol>
+<p>4a. Incorporate bias parameter uncertainty by randomly sampling from each bias parameter distribution</p>
+<p>4b. Generate bias-adjusted data using simple bias analysis method and the sampled bias parameters</p>
+<p>4c. Incorporate conventional random error by sampling summary statistics</p>
+<ol start="5" type="1">
+<li><p>Save the bias-adjusted estimate and repeat steps 4a-c</p></li>
+<li><p>Summarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval</p></li>
+</ol>
+<ul>
+<li>Individual-level data</li>
+</ul>
+<p><strong>The measure limitation of the summary-level bias analysis is that is it difficult to adjust for other measured confounders for which adjustment have been.</strong></p>
+<ol type="1">
+<li><p>Identify the likely sources of important bias in the data</p></li>
+<li><p>Identify the bias parameters needed to bias-adjusted</p></li>
+<li><p>Assign probability distributions to each bias parameter</p></li>
+<li><p>Use simple bias analysis methods to incorporate uncertainty in the bias parameters and random error</p></li>
+</ol>
+<p>4a. Sample from each bias parameter distribution</p>
+<p>4b. Use simple bias analysis methods to generate bias-adjusted data to inform the bias analysis and apply bias parameters probabilistically</p>
+<p>4c. Incorporate additional sources of random error</p>
+<ol start="5" type="1">
+<li><p>Save the bias-adjusted estimate and repeat steps 4a-c</p></li>
+<li><p>Summarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval</p></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Midterm review – EPID8313 (year 2025) Lab Review</title>
+<title>Lab 7 – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -173,7 +173,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Midterm_review.html">Midterm review</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab7.html">Lab 7</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -238,7 +238,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Midterm_review.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Midterm_review.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Midterm review</span></a>
   </div>
 </li>
@@ -250,7 +250,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab7.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab7.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 7</span></a>
   </div>
 </li>
@@ -265,9 +265,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Midterm_review.html">Midterm review</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab7.html">Lab 7</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Midterm review</h1>
+<h1 class="title">Lab 7</h1>
 </div>
 
 
@@ -284,675 +284,74 @@ window.Quarto = {
 </header>
 
 
+<p>Lab 7 covers</p>
 <ul>
-<li>Bias</li>
+<li><p><strong>Generalized Estimating Equations (GEE)</strong></p></li>
+<li><p><strong>Generalized Linear Mixed Models (GLMM)</strong></p></li>
 </ul>
-<p>Suppose the true population:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>Cases</th>
-<th>Controls</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Exposed</td>
-<td>30</td>
-<td>70</td>
-<td>100</td>
-</tr>
-<tr class="even">
-<td>Unexposed</td>
-<td>20</td>
-<td>80</td>
-<td>100</td>
-</tr>
-</tbody>
-</table>
-<p>Observed population:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>Cases</th>
-<th>Controls</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Exposed</td>
-<td>30</td>
-<td><strong>20</strong></td>
-<td>50</td>
-</tr>
-<tr class="even">
-<td>Unexposed</td>
-<td>20</td>
-<td>80</td>
-<td>100</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q1: What is this bias called? If the true population is unknown but the selection probabilities are known, how can this bias be corrected?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: selection bias.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Selection probabilities</th>
-<th>Cases</th>
-<th>Controls</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Exposed</td>
-<td><span class="math inline">\(S_{A,1}\)</span></td>
-<td><span class="math inline">\(S_{B,1}\)</span></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Unexposed</td>
-<td><span class="math inline">\(S_{A,0}\)</span></td>
-<td><span class="math inline">\(S_{B,0}\)</span></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>TRUE <span class="math inline">\(OR = \hat{OR}/\frac{S_{A,1}S_{B,0}}{S_{A,0}S_{B,1}}\)</span></p>
-<p>where selection odds ratio = <span class="math inline">\(\frac{S_{A,1}S_{B,0}}{S_{A,0}S_{B,1}}\)</span></p>
-<p>To cause selection bias, selection should depend jointly on the exposure and outcome.</p>
-<p>The following scenarios do not cause bias:</p>
+<section id="differences-between-gee-and-glmm" class="level1">
+<h1>Differences between GEE and GLMM</h1>
 <ul>
-<li><p>If selection depends only on exposure</p></li>
-<li><p>If selection depends only on outcome</p></li>
-<li><p>If selection depends proportionally on both (independently) <span class="math inline">\(\rightarrow P(selected|exposure,outcome)=f(exposure) \times g(outcome)\)</span></p></li>
+<li>Modeling correlation: GEE models within-subject correlation using a working correlation matrix, whereas GLMM models it through random effects.</li>
 </ul>
-</div>
-</div>
-</div>
-<p>Suppose the true population:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>True Smoking</th>
-<th>Lung Cancer</th>
-<th>No Lung Cancer</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Smoker</td>
-<td>40</td>
-<td>60</td>
-<td>100</td>
-</tr>
-<tr class="even">
-<td>Non-Smoker</td>
-<td>10</td>
-<td>90</td>
-<td>100</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q2: If 20% of smokers are misclassified as non-smokers, what is the observed odds ratio between smoking and lung cancer? What is this bias called?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Observed Smoking</th>
-<th>Lung Cancer</th>
-<th>No Lung Cancer</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Smoker</td>
-<td>40-40*0.2=32</td>
-<td>60-60*0.2=48</td>
-<td>80</td>
-</tr>
-<tr class="even">
-<td>Non-Smoker</td>
-<td>10+40*0.2=18</td>
-<td>90+60*0.2=102</td>
-<td>120</td>
-</tr>
-</tbody>
-</table>
-<p>A: The observed odds ratio is (32*102)/(48*18)=3.78. This bias is called non-differential misclassification of a binary exposure.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q3: Non-differential misclassification always biased the estimate toward the null. Is that correct?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: FALSE</p>
-<p>Exceptions:</p>
-<ul>
-<li><p>If the exposure has more than two categories</p></li>
-<li><p>If the exposure is continuous</p></li>
-<li><p>Outcome misclassification</p></li>
-</ul>
-<p>etc. (Please see the Journal Club)</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q4: In a prospective study comparing myocardial infarction mortality between office workers and longshoremen, individuals who self-select into longshoremen are generally fitter, which leads to lower myocardial infarction rates. What type of bias does this introduce?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: confounding bias from a traditional epidemiological view (not selection bias)</p>
-<p>The difference is that, in confounding, individuals self-select into exposure groups, whereas in selection bias, the researcher’s process of selecting participants into the study creates the bias.</p>
-<p>Traditional view is cohort studies don’t have selection bias at entry even if subjects self-select.</p>
-<p>Cohort studies/RCTs can have selection bias at end through differential loss to follow-up.</p>
+<p>GEE assumes “block independence”</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/bias.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<p><img src="figures/corr1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<ul>
-<li>Missing data</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q5: One important difference between single imputation and multiple imputation is that the latter can appropriately account for the uncertainty of the imputed values. Another important difference is that the outcome variable should be included in the multiple imputation model. Is that correct?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: TRUE</p>
-<p>It is recommended to include the outcome variable in the imputation model, even if the outcome is not missing, because omitting it can bias regression coefficients. However, imputing outcome is a debatable topic.</p>
-</div>
-</div>
-</div>
-<ul>
-<li>Model building</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q6: If you develop a prediction model, what model performance metrics would you report?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A:</p>
-<ol type="1">
-<li><p>Calibration: Measures how closely the predicted probabilities agree with the observed outcomes (e.g., calibration plot, Hosmer-Lemeshow test).</p></li>
-<li><p>Discrimination: Measures how well the model distinguishes between individuals with and without the outcome (e.g., AUC/ROC, C-statistic)</p></li>
-</ol>
-<p>We often use optimism-corrected performance metrics through internal validation (e.g., bootstrapping) to account for overfitting.</p>
-<p>You may report other metrics as well, such as overall performance (e.g., Brier score) and reclassification metrics (e.g., NRI, IDI)</p>
-</div>
-</div>
-</div>
-<ul>
-<li>Matching</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q7: Where do you select cases and controls in a case-control study? Are there any caveats regarding their sources?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A:</p>
-<ol type="1">
-<li><p>Determine cases and and identify a source from which to draw their cases.</p></li>
-<li><p>Identify controls from the same source population.The fundamental principle is that controls should be representative of the population from which the cases arose. In other words, they should be selected independently of exposures.</p></li>
-</ol>
-<p>Naturally occurring pairs, such as twins, can violate this principle in matched case-control studies because their inherent relationship introduces correlation beyond what matching accounts for, potentially biasing the results.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q8: In an individual (pair) case-control study, if you match on age and sex, you do not need to adjust for them in the conditional logistic regression model, even if they are potential confounders. Is that correct?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: FALSE</p>
-<p>Matching is for efficiency gain, not for controlling for confounders. Therefore, conditional logistic regression models should include all potential confounders, even if they are matching factors. (If we use frequency matching, we may use unconditional logistic regression with adjustment for all potential confounders, including matching factors)</p>
-<p>In addition, please note that association of age and sex with the outcome as well as interactions between the exposure and these matching factors cannot be estimated in the conditional logistic regression model.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q9: When the outcome is rare, what does the odds ratio estimated from the following matched design represent?: 1. case-cohort sampling, 2. risk-set sampling, and 3. survivor sampling
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>Case-cohort sampling: Risk ratio</p></li>
-<li><p>Risk-set sampling (density-based sampling): Incidence rate ratio</p></li>
-<li><p>Survivor sampling: Odds ratio</p></li>
-</ol>
-<p>The derivations are shown in the document I shared earlier.</p>
+<p>Random-intercept model</p>
+<p><span class="math inline">\(Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + \epsilon_{ij}=(\beta_0 + b_{0i}) + \beta_1 t_{ij} + \epsilon_{ij}\)</span></p>
+<p>Random-slope model (random slope + intercept)</p>
+<p><span class="math inline">\(Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + b_{1i}t_{ij} + \epsilon_{ij}=(\beta_0 + b_{0i}) + (\beta_1 + b_{1i}) t_{ij} + \epsilon_{ij}\)</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/case_control.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<p><img src="figures/random.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q10: What is the difference between a case-crossover design and a self-controlled case series?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: Both are “case-only” designs that use individuals as their own controls to study the effects of transient exposures on acute events.</p>
-<p>A case-crossover study is outcome-anchored design, while a self-controlled case series is exposure-anchored design.</p>
-<p>In a case-crossover study, researchers focus on a specific event (e.g., heart attack) and look back at the exposure history immediately before the event (the “case” period). They then compare this to the exposure history during an earlier period (the “control” period) for the same individual.</p>
-<p>A self-controlled case series, on the other hand, looks at the entire observation period for an individual and divides it into “at-risk” periods (times after a specific exposure) and “control” periods (all other time). It then compares the rate of events during the at-risk periods to the rate of events during the control periods.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/sccs.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <ul>
-<li>Propensity score analysis</li>
+<li>Unlike GEE, which typically handles only one level of clustering, GLMM can model more complex hierarchical structures</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q11: Propensity score is the probability of receiving treatment given covariates. Therefore, we should include predictors of treatment in the propensity score model. Is that correct?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: FALSE</p>
-<p>The propensity score model should include confounders and predictors of the outcome, but not instrumental variables.</p>
-</div>
-</div>
-</div>
-<p>Suppose 30% of the patients received the treatment, and the following table summarizes their potential outcomes.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Group</th>
-<th style="text-align: center;"><span class="math inline">\(E(Y^1)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(E(Y^0)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Treatment</td>
-<td style="text-align: center;"><strong>100</strong></td>
-<td style="text-align: center;"><em>60</em></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">No treatment</td>
-<td style="text-align: center;"><em>80</em></td>
-<td style="text-align: center;"><strong>50</strong></td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q12: Calculate the following treatment effects: ATE, ATT, and ATU.
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A:</p>
-<p>ATT: <span class="math inline">\(100-60=40\)</span></p>
-<p>ATU: <span class="math inline">\(80-50=30\)</span></p>
-<p>ATE: <span class="math inline">\(0.3*(100-60)+0.7*(80-50)=12+21=33\)</span></p>
-</div>
-</div>
-</div>
-<p>Based on the following tables,</p>
-<p><span class="math inline">\(C=0\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">50</td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">790</td>
-<td style="text-align: center;">3150</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td style="text-align: center;">800</td>
-<td style="text-align: center;">3200</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math inline">\(C=1\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">200</td>
-<td style="text-align: center;">250</td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">800</td>
-<td style="text-align: center;">750</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td style="text-align: center;">1000</td>
-<td style="text-align: center;">1000</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q13: Is C a confounder or effect modifier? Hand-calculate adjusted risk ratio using propensity score matching (1:1 matching) and inverse probability weighting.
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: C is a confounder because it is associated with both the treatment and the outcome.</p>
-<ol type="1">
-<li><p>Within each stratum of C, the treatment effect (RR = 0.8) is the same (if C is the effect modifier, RR is not the same across strata).</p></li>
-<li><p>The crude/overall effect (RR = 1.63) is very different from the stratum-specific effects.</p></li>
-</ol>
-<p>Propensity score calculation</p>
-<p><span class="math inline">\(Pr(Tr=1|C=0)=800/(800+3200)=0.2\)</span></p>
-<p><span class="math inline">\(Pr(Tr=1|C=1)=1000/(1000+1000)=0.5\)</span></p>
+<p>e.g., patients nested within hospitals and hospitals nested within regions</p>
 <ul>
-<li>Propensity score matching (1:1 matching)</li>
+<li>Assumptions about missing data: GEE assumes data are missing completely at random (MCAR), while GLMM assumes data are missing at random (MAR)</li>
 </ul>
-<p>It is equivalent to taking a random sample of the unexposed group that is equal in size to the exposed group (the risk of the outcome will remain the same as in the original unexposed group), because each exposed individual is matched to one unexposed individual with a similar propensity score (the matched unexposed group is a subset of the original unexposed group, chosen to resemble the exposed group in terms of covariates)</p>
-<p><span class="math inline">\(C=0\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">800*50/3200=<strong>12.5</strong></td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">790</td>
-<td style="text-align: center;">800*(3200-50)/3200=<strong>787.5</strong></td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td style="text-align: center;">800</td>
-<td style="text-align: center;"><strong>800</strong></td>
-</tr>
-</tbody>
-</table>
-<p><span class="math inline">\(C=1\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">200</td>
-<td style="text-align: center;">250</td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">800</td>
-<td style="text-align: center;">750</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td style="text-align: center;">1000</td>
-<td style="text-align: center;">1000</td>
-</tr>
-</tbody>
-</table>
-<p><span class="math inline">\(Overall\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">210</td>
-<td style="text-align: center;">262.5</td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">1590</td>
-<td style="text-align: center;">1537.5</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td style="text-align: center;">1800</td>
-<td style="text-align: center;">1800</td>
-</tr>
-</tbody>
-</table>
-<p>RR: 0.8</p>
+<p>GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. some patients are lost to follow-up, the model can still use the data from patients with complete or partial observations.</p>
+<p>Oh the other hand, in GEE, if data are missing in a non-MCAR way, estimates may be biased unless you use methods like weighted GEE or multiple imputation.</p>
 <ul>
-<li>Propensity score weighting</li>
+<li>Inference target: GEE estimates population-averaged (marginal) effects, whereas GLMM estimates subject-specific (conditional) effects.</li>
 </ul>
-<p><span class="math inline">\(C=0\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">10*(1/0.2)=50</td>
-<td style="text-align: center;">50*(1/0.8)=62.5</td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">790*(1/0.2)=3950</td>
-<td style="text-align: center;">3150*(1/0.8)=3937.5</td>
-</tr>
-</tbody>
-</table>
-<p>Treatment group weight = <span class="math inline">\(1/PS=1/0.2=5\)</span></p>
-<p>Non-treatment group weight = <span class="math inline">\(1/PS=1/(1-0.2)=1.25\)</span></p>
-<p><span class="math inline">\(C=1\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">200*(1/0.5)=400</td>
-<td style="text-align: center;">250*(1/0.5)=500</td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">800*(1/0.5)=1600</td>
-<td style="text-align: center;">750*(1/0.5)=1500</td>
-</tr>
-</tbody>
-</table>
-<p>Treatment group weight = <span class="math inline">\(1/PS=1/0.5=2\)</span></p>
-<p>Non-treatment group weight = <span class="math inline">\(1/PS=1/(1-0.5)=2\)</span></p>
-<p><span class="math inline">\(Overall\)</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Treatment</th>
-<th style="text-align: center;">No treatment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Event</td>
-<td style="text-align: center;">450</td>
-<td style="text-align: center;">562.5</td>
-</tr>
-<tr class="even">
-<td>No event</td>
-<td style="text-align: center;">5550</td>
-<td style="text-align: center;">5437.5</td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td style="text-align: center;">6000</td>
-<td style="text-align: center;">6000</td>
-</tr>
-</tbody>
-</table>
-<p>RR: 0.8</p>
-</div>
-</div>
-</div>
+<p>e.g., Mixed-effects logistic regression model provides odds ratio comparing the odds of death between a typical patient received treatment A and a typical patient of the same covariates received treatment B.</p>
+<p>“typical”: two subjects with the same random effect value.</p>
+<p>e.g., GEE provides an odds ratio comparing the odds of death if everyone received treatment A versus if everyone received treatment B.</p>
+<p><strong>When the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.</strong></p>
+<p>However, for binary or count outcomes, the two estimands differ.</p>
+</section>
+<section id="r-packages" class="level1">
+<h1>R packages</h1>
+<ul>
+<li><p><code>gee</code></p></li>
+<li><p><code>geepack</code></p></li>
+</ul>
+<p>These packages use different estimation algorithms.</p>
+<p>In my opinion, either can be used.</p>
+<ul>
+<li><p><code>nlme::lme</code></p></li>
+<li><p><code>lme4::lmer</code></p></li>
+</ul>
+<p>In my opinion, <code>lme4::lmer</code> is less flexible, but its output is widely supported by other R packages.</p>
+<p>Also, <code>lme4::glmer</code> allows fitting mixed-effects logistic regression and other models with alternative link functions.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
