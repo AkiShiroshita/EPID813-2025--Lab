@@ -134,5 +134,24 @@
       "Content",
       "Midterm review"
     ]
+  },
+  {
+    "objectID": "Lab7.html",
+    "href": "Lab7.html",
+    "title": "Lab 7",
+    "section": "",
+    "text": "Lab 7 covers\n\nGeneralized Estimating Equations (GEE)\nGeneralized Linear Mixed Models (GLMM)\n\n\nDifferences between GEE and GLMM\n\nModeling correlation: GEE models within-subject correlation using a working correlation matrix, whereas GLMM models it through random effects.\n\nGEE assumes “block independence”\n\n\n\n\n\n\n\n\n\nRandom-intercept model\n\\(Y_{ij}=\\beta_0+\\beta_1 t_{ij} + b_{0i} + \\epsilon_{ij}=(\\beta_0 + b_{0i}) + \\beta_1 t_{ij} + \\epsilon_{ij}\\)\nRandom-slope model (random slope + intercept)\n\\(Y_{ij}=\\beta_0+\\beta_1 t_{ij} + b_{0i} + b_{1i}t_{ij} + \\epsilon_{ij}=(\\beta_0 + b_{0i}) + (\\beta_1 + b_{1i}) t_{ij} + \\epsilon_{ij}\\)\n\n\n\n\n\n\n\n\n\n\nUnlike GEE, which typically handles only one level of clustering, GLMM can model more complex hierarchical structures\n\ne.g., patients nested within hospitals and hospitals nested within regions\n\nAssumptions about missing data: GEE assumes data are missing completely at random (MCAR), while GLMM assumes data are missing at random (MAR)\n\nGLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. some patients are lost to follow-up, the model can still use the data from patients with complete or partial observations.\nOh the other hand, in GEE, if data are missing in a non-MCAR way, estimates may be biased unless you use methods like weighted GEE or multiple imputation.\n\nInference target: GEE estimates population-averaged (marginal) effects, whereas GLMM estimates subject-specific (conditional) effects.\n\ne.g., Mixed-effects logistic regression model provides odds ratio comparing the odds of death between a typical patient received treatment A and a typical patient of the same covariates received treatment B.\n“typical”: two subjects with the same random effect value.\ne.g., GEE provides an odds ratio comparing the odds of death if everyone received treatment A versus if everyone received treatment B.\nWhen the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.\nHowever, for binary or count outcomes, the two estimands differ.\n\n\nR packages\n\ngee\ngeepack\n\nThese packages use different estimation algorithms.\nIn my opinion, either can be used.\n\nnlme::lme\nlme4::lmer\n\nIn my opinion, lme4::lmer is less flexible, but its output is widely supported by other R packages.\nAlso, lme4::glmer allows fitting mixed-effects logistic regression and other models with alternative link functions.",
+    "crumbs": [
+      "Home",
+      "Content",
+      "Lab 7"
+    ]
+  },
+  {
+    "objectID": "Lab9.html",
+    "href": "Lab9.html",
+    "title": "Lab 8",
+    "section": "",
+    "text": "Lab 9 covers\n\nBias analysis\n\n\nQuantitative bias analysis\n\nSimple bias analysis: aggregated data \\(\\rightarrow\\) Using provided Excel Spreadsheets\nProbalistic bias analysis: Specify the bias distributions and assume that there are no other sources of error\n\n\n\nProbalistic bias analysis\nAggregated data vs. Individual-level data\n\nAggregated data\n\n\nIdentify the likely source of important bias in the data\nIdentify the bias parameters needed to adjust for the bias\nAssign probability distributions to each bias parameter\nUse simple bias analysis methods to incorporate uncertainty in the bias parameters and random error\n\n4a. Incorporate bias parameter uncertainty by randomly sampling from each bias parameter distribution\n4b. Generate bias-adjusted data using simple bias analysis method and the sampled bias parameters\n4c. Incorporate conventional random error by sampling summary statistics\n\nSave the bias-adjusted estimate and repeat steps 4a-c\nSummarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval\n\n\nIndividual-level data\n\nThe measure limitation of the summary-level bias analysis is that is it difficult to adjust for other measured confounders for which adjustment have been.\n\nIdentify the likely sources of important bias in the data\nIdentify the bias parameters needed to bias-adjusted\nAssign probability distributions to each bias parameter\nUse simple bias analysis methods to incorporate uncertainty in the bias parameters and random error\n\n4a. Sample from each bias parameter distribution\n4b. Use simple bias analysis methods to generate bias-adjusted data to inform the bias analysis and apply bias parameters probabilistically\n4c. Incorporate additional sources of random error\n\nSave the bias-adjusted estimate and repeat steps 4a-c\nSummarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval"
   }
 ]

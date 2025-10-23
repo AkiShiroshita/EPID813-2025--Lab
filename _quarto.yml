@@ -25,6 +25,8 @@ website:
         text: 'Midterm review'
       - href: Lab6.qmd
         text: Lab6
+      - href: Lab7.qmd
+        text: Lab7
   sidebar:
     style: "floating"
     contents:
@@ -39,6 +41,7 @@ website:
           - Lab5.qmd
           - Midterm_review.qmd
           - Lab6.qmd
+          - Lab7.qmd
 
   page-footer: 
     left: "Created by Aki Shiroshita"

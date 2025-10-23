@@ -1,0 +1,76 @@
+---
+title: "Lab 7"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+  packages: ['data.table', 'tidyverse', 'ggplot2'] # Pre-install dependency
+editor_options: 
+  chunk_output_type: console
+---
+
+Lab 7 covers 
+
+* **Generalized Estimating Equations (GEE)** 
+
+* **Generalized Linear Mixed Models (GLMM)**
+
+# Differences between GEE and GLMM
+
+* Modeling correlation: GEE models within-subject correlation using a working correlation matrix, whereas GLMM models it through random effects.
+
+GEE assumes "block independence"
+
+```{r, echo=FALSE, out.width="70%", fig.align = "center"}
+knitr::include_graphics("figures/corr1.png")
+```
+
+Random-intercept model
+
+$Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + \epsilon_{ij}=(\beta_0 + b_{0i}) + \beta_1 t_{ij} + \epsilon_{ij}$
+
+Random-slope model (random slope + intercept)
+
+$Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + b_{1i}t_{ij} + \epsilon_{ij}=(\beta_0 + b_{0i}) + (\beta_1 + b_{1i}) t_{ij} + \epsilon_{ij}$
+
+```{r, echo=FALSE, out.width="70%", fig.align = "center"}
+knitr::include_graphics("figures/random.png")
+```
+
+* Unlike GEE, which typically handles only one level of clustering, GLMM can model more complex hierarchical structures
+
+e.g., patients nested within hospitals and hospitals nested within regions
+
+* Assumptions about missing data: GEE assumes data are missing completely at random (MCAR), while GLMM assumes data are missing at random (MAR)
+
+GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. some patients are lost to follow-up, the model can still use the data from patients with complete or partial observations.
+
+Oh the other hand, in GEE, if data are missing in a non-MCAR way, estimates may be biased unless you use methods like weighted GEE or multiple imputation.
+
+* Inference target: GEE estimates population-averaged (marginal) effects, whereas GLMM estimates subject-specific (conditional) effects.
+
+e.g., Mixed-effects logistic regression model provides odds ratio comparing the odds of death between a typical patient received treatment A and a typical patient of the same covariates received treatment B.
+
+"typical": two subjects with the same random effect value.
+
+e.g., GEE provides an odds ratio comparing the odds of death if everyone received treatment A versus if everyone received treatment B.
+
+**When the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.**
+
+However, for binary or count outcomes, the two estimands differ.
+
+# R packages
+
+* `gee`
+
+* `geepack`
+
+These packages use different estimation algorithms.
+
+In my opinion, either can be used.
+
+* `nlme::lme`
+
+* `lme4::lmer`
+
+In my opinion, `lme4::lmer` is less flexible, but its output is widely supported by other R packages.
+
+Also, `lme4::glmer` allows fitting mixed-effects logistic regression and other models with alternative link functions.

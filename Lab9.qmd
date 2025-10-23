@@ -1,0 +1,64 @@
+---
+title: "Lab 8"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+  packages: ['data.table', 'tidyverse', 'ggplot2', 'survival', 'survmine'] # Pre-install dependency
+editor_options: 
+  chunk_output_type: console
+---
+
+Lab 9 covers 
+
+* **Bias analysis** 
+
+# Quantitative bias analysis
+
+* Simple bias analysis: aggregated data $\rightarrow$ Using provided Excel Spreadsheets
+
+* Probalistic bias analysis: Specify the bias distributions and assume that there are no other sources of error
+
+# Probalistic bias analysis
+
+Aggregated data vs. Individual-level data
+
+* Aggregated data
+
+1.  Identify the likely source of important bias in the data
+
+2.  Identify the bias parameters needed to adjust for the bias
+
+3.  Assign probability distributions to each bias parameter
+
+4.  Use simple bias analysis methods to incorporate uncertainty in the bias parameters and random error
+
+4a. Incorporate bias parameter uncertainty by randomly sampling from each bias parameter distribution
+
+4b. Generate bias-adjusted data using simple bias analysis method and the sampled bias parameters
+
+4c. Incorporate conventional random error by sampling summary statistics
+
+5.  Save the bias-adjusted estimate and repeat steps 4a-c
+
+6.  Summarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval
+
+* Individual-level data
+
+**The measure limitation of the summary-level bias analysis is that is it difficult to adjust for other measured confounders for which adjustment have been.**
+
+1.  Identify the likely sources of important bias in the data
+
+2.  Identify the bias parameters needed to bias-adjusted
+
+3.  Assign probability distributions to each bias parameter
+
+4.  Use simple bias analysis methods to incorporate uncertainty in the bias parameters and random error
+
+4a. Sample from each bias parameter distribution
+
+4b. Use simple bias analysis methods to generate bias-adjusted data to inform the bias analysis and apply bias parameters probabilistically
+
+4c. Incorporate additional sources of random error
+
+5.  Save the bias-adjusted estimate and repeat steps 4a-c
+
+6.  Summarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval
