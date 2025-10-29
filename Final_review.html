@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 8 – EPID8313 (year 2025) Lab Review</title>
+<title>Final review – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -177,7 +177,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Lab 8</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Final review</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -277,7 +277,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 8</h1>
+<h1 class="title">Final review</h1>
 </div>
 
 
@@ -294,130 +294,192 @@ window.Quarto = {
 </header>
 
 
-<p>Lab 8 covers</p>
-<ul>
-<li><p><strong>Effect measure modification</strong></p></li>
-<li><p><strong>Mediation</strong></p></li>
-</ul>
-<section id="additive-vs.-multiplicative-interaction" class="level1">
-<h1>Additive vs.&nbsp;multiplicative interaction</h1>
-<ul>
-<li>What outcome scale are you referring to?</li>
-</ul>
-<p>e.g., A logistic regression model</p>
-<p><span class="math inline">\(logit(Pr(Y=1|X_1,X_2)=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_1X_2\)</span></p>
-<pre><code>glm(outcome ~ exposure1 + exposure2 + exposure1:expsoure2,
-family = binomial(link = "logit"), data = data)</code></pre>
+<p>Suppose the table below represents the number of outcomes within each exposure group:</p>
+<p>Exposure 2 = Yes</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Cases</th>
+<th>Controls</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposure 1 +</td>
+<td>30</td>
+<td>70</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>Exposure 1 -</td>
+<td>20</td>
+<td>80</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>Exposure 2 = No</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Cases</th>
+<th>Controls</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposure 1 +</td>
+<td>30</td>
+<td>70</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>Exposure 1 -</td>
+<td>20</td>
+<td>80</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Q: Does <span class="math inline">\(\beta_3\)</span> represent an additive or multiplicative interaction?
+Q1: Is there evidence of additive or multiplicative interaction?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Answer: On the logit scale ( <span class="math inline">\(\beta_3\)</span> ), it is additive, whereas on the odds ratio scale, it is multiplicative.</p>
-<p>Interaction (effect measure modification) = “Different treatment effects dependent on other variables”</p>
+<p>A: selection bias.</p>
+<p>Calculate risks</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q1: Although Cox regression is a semiparametric model, we can estimate the baseline hazard function. True or False?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A: TRUE</p>
+<p>When we use Cox regression, we do not specify the baseline hazard function, which makes the model semiparametric. However, we can estimate the baseline hazard function based on the observed data and the results from the Cox model.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q1: What is the difference between Generalized Estimating Equations (GEE) and Generalized Linear Mixed Models (GLMM)?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I addressed this question in Lab 7.</p>
+<ul>
+<li>Modeling correlation: GEE models within-subject correlation using a working correlation matrix, whereas GLMM models it through random effects.</li>
+</ul>
+<p>GEE assumes “block independence”</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/interaction.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+<p><img src="figures/corr1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Treatment effects are linear on a log-odds scale, while the probability of the outcomes changes depending on other variables without interaction terms</p>
-<p><span class="math inline">\(\rightarrow\)</span> Nonlinear regression analyses show an inherent interaction!</p>
-<p>We should be cautious about the outcome scales.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="difference-between-causal-mediation-analysis-and-conventional-mediation-analysis" class="level1">
-<h1>Difference between causal mediation analysis and conventional mediation analysis</h1>
-<ul>
-<li><p>Can incorporate confounders of the mediator-outcome relationship</p></li>
-<li><p>Can incorporate interactions between the effects of the exposure and the mediator</p></li>
-</ul>
+<p>Random-intercept model</p>
+<p><span class="math inline">\(Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + \epsilon_{ij}=(\beta_0 + b_{0i}) + \beta_1 t_{ij} + \epsilon_{ij}\)</span></p>
+<p>Random-slope model (random slope + intercept)</p>
+<p><span class="math inline">\(Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + b_{1i}t_{ij} + \epsilon_{ij}=(\beta_0 + b_{0i}) + (\beta_1 + b_{1i}) t_{ij} + \epsilon_{ij}\)</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/mediation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+<p><img src="figures/random.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="interpration-of-natural-direct-and-indirect-effects" class="level1">
-<h1>Interpration of natural direct and indirect effects</h1>
 <ul>
-<li>Controlled direct effect (CDE): Set the mediator to a reference value <span class="math inline">\(M=m\)</span> uniformly for everyone in the population</li>
+<li>Unlike GEE, which typically handles only one level of clustering, GLMM can model more complex hierarchical structures</li>
 </ul>
-<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
-# predict the outcome
-pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                     mediator = 0,
-                                                     covariates = w))
-pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
-                                                     mediator = 0,
-                                                     covariates = w))
-# CDE (fix mediator = 0)
-mean(pred_y1 - pred_y0)</code></pre>
+<p>e.g., patients nested within hospitals and hospitals nested within regions</p>
 <ul>
-<li>Natural direct effect (NDE): Varying treatment while keeping the mediator fixed at the value it would have taken under no treatment</li>
+<li>Assumptions about missing data: GEE assumes data are missing completely at random (MCAR), while GLMM assumes data are missing at random (MAR)</li>
 </ul>
-<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
-# NDE (letting mediator take the observed values)
-pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                     mediator = m,
-                                                     covariates = w))
-pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
-                                                     mediator = m,
-                                                     covariates = w))
-diff &lt;- pred_y1 - pred_y0
-# fit a model to estimate E[diff|treatment, covariates]
-fit_diff &lt;- lm(diff ~ treatment + covariates, data = data)
-# predict the value of the "diff" under treatment = 0
-pred_diff &lt;- predict(diff, newdata = data.frame(treatment = covariates, w = w))
-# NDE
-mean(pred_pseudo)</code></pre>
+<p>GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. In many projects, some patients are lost to follow-up, but the model can still use the data from patients with complete or partial observations.</p>
+<p>Oh the other hand, in GEE, if data are missing in a non-MCAR way, estimates may be biased unless you use methods like weighted GEE or multiple imputation.</p>
 <ul>
-<li>Natural indirect effect (NIE): Varying the mediator from <code>the value it would have taken under treatment</code> to <code>the value it would have taken under control</code>, while keeping treatment fixed</li>
+<li>Inference target: GEE estimates population-averaged (marginal) effects, whereas GLMM estimates subject-specific (conditional) effects.</li>
 </ul>
-<pre><code>fit_mediator &lt;- lm(mediator ~ treatment + covariates, data = data)
-# predict mediator values under treatment = 1 and treatment = 0
-m1 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 1,
-                                                 covariates = w))
-m0 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 0,
-                                                 covariates = w))
-# predict the outcome
-y1_m1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                   mediator = m1,
-                                                   covariates = w))
-y1_m0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                   mediator = m0,
-                                                   covariates = w))
-# NIE
-mean(y1_m1 - y1_m0)</code></pre>
-</section>
-<section id="assumptions-of-natural-direct-and-indirect-effects" class="level1">
-<h1>Assumptions of natural direct and indirect effects</h1>
+<p>e.g., Mixed-effects logistic regression model provides odds ratio comparing the odds of death between a typical patient received treatment A and a typical patient of the same covariates received treatment B.</p>
+<p>“typical”: two subjects with the same random effect value.</p>
+<p>e.g., GEE provides an odds ratio comparing the odds of death if everyone received treatment A versus if everyone received treatment B.</p>
+<p><strong>When the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.</strong></p>
+<p>However, for binary and count outcomes, the two estimands differ.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q1: In a target trial emulation using Medicare data to evaluate the effectiveness of colonoscopy in reducing colon cancer incidence among patients over 70 years old, the start of follow-up can be defined as the date of colonoscopy for the exposed group and the date of the first routine health check-up for the unexposed group. True or False?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A: FALSE</p>
+<p>To avoid immortal time bias, time zero should be defined such that:</p>
 <ul>
-<li><p>There are no unmeasured exposure-outcome confounders given <span class="math inline">\(C\)</span></p></li>
-<li><p>There are no unmeasured mediator-outcome confounders given <span class="math inline">\(C\)</span> and <span class="math inline">\(A\)</span></p></li>
-<li><p>There are no unmeasured exposure-mediator confounders given <span class="math inline">\(C\)</span></p></li>
-<li><p>There is no mediator-outcome confouder affected by exposure</p></li>
+<li><p>All eligibility criteria are met</p></li>
+<li><p>Treatment strategies are assigned</p></li>
+<li><p>Outcome ascertainment begins</p></li>
 </ul>
-<p>For controlled direct effects, only first two assumptions are needed.</p>
+<p>I will not discuss what the best strategy is here, but the definition of time zero given above is incorrect (see lecture slides).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q1: You want to evaluate the effectiveness of vitamin supplement X, a time-varying exposure (Yes vs.&nbsp;No), on yearly measured binary hospitalization outcomes (Yes vs.&nbsp;No at the X-year visit). Assuming there are no competing risks, should you use a mixed-effects logistic regression model or G-methods (e.g., a marginal structural model with inverse probability weighting)?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A: G-methods</p>
+<p>We should address the time-varying confounding affected by prior exposure (treament-confounder feedback). Mixed-effects logistic regression model cannot appropriately adjust for such confounding, whereas G-methods can.</p>
+</div>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

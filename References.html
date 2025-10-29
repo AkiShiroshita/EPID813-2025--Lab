@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 8 – EPID8313 (year 2025) Lab Review</title>
+<title>References – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -177,7 +177,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Lab 8</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">References</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -277,7 +277,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 8</h1>
+<h1 class="title">References</h1>
 </div>
 
 
@@ -294,130 +294,46 @@ window.Quarto = {
 </header>
 
 
-<p>Lab 8 covers</p>
 <ul>
-<li><p><strong>Effect measure modification</strong></p></li>
-<li><p><strong>Mediation</strong></p></li>
+<li><p>Providing p-values in Table 1: https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/</p></li>
+<li><p>Benchmarks for interpreting R² values</p></li>
 </ul>
-<section id="additive-vs.-multiplicative-interaction" class="level1">
-<h1>Additive vs.&nbsp;multiplicative interaction</h1>
+<p>Cohen (1988): Cohen, J. 1988. Statistical Power Analysis for the Behavioral Sciences, 2nd Ed. New York: Routledge. https://www.taylorfrancis.com/books/mono/10.4324/9780203771587/statistical-power-analysis-behavioral-sciences-jacob-cohen</p>
+<p><span class="math inline">\(R^2 &lt; 0.02\)</span> → Very weak</p>
+<p><span class="math inline">\(0.02 ≤ R^2\)</span> &lt; 0.13 → Weak</p>
+<p><span class="math inline">\(0.13 ≤ R^2\)</span> &lt; 0.26 → Moderate</p>
+<p><span class="math inline">\(R^2 ≥ 0.26\)</span> → Substantial</p>
+<p>Falk &amp; Miller (1992): Falk, R Frank, and Nancy B Miller. 1992. A Primer for Soft Modeling. University of Akron Press.</p>
+<p><span class="math inline">\(R^2 &lt; 0.10\)</span> → Negligible</p>
+<p><span class="math inline">\(R^2 ≥ 0.10\)</span> → Adequate</p>
 <ul>
-<li>What outcome scale are you referring to?</li>
+<li><p>A practical reference of self-controlled case series: http://sccs-studies.info/index.html</p></li>
+<li><p>Scoping review of biases in database research: https://pubmed.ncbi.nlm.nih.gov/30871502/</p></li>
+<li><p>Gail 1972 is the first to highlight people’s interest in immortal time bias: https://pubmed.ncbi.nlm.nih.gov/4554414/</p></li>
 </ul>
-<p>e.g., A logistic regression model</p>
-<p><span class="math inline">\(logit(Pr(Y=1|X_1,X_2)=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_1X_2\)</span></p>
-<pre><code>glm(outcome ~ exposure1 + exposure2 + exposure1:expsoure2,
-family = binomial(link = "logit"), data = data)</code></pre>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q: Does <span class="math inline">\(\beta_3\)</span> represent an additive or multiplicative interaction?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: On the logit scale ( <span class="math inline">\(\beta_3\)</span> ), it is additive, whereas on the odds ratio scale, it is multiplicative.</p>
-<p>Interaction (effect measure modification) = “Different treatment effects dependent on other variables”</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/interaction.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Treatment effects are linear on a log-odds scale, while the probability of the outcomes changes depending on other variables without interaction terms</p>
-<p><span class="math inline">\(\rightarrow\)</span> Nonlinear regression analyses show an inherent interaction!</p>
-<p>We should be cautious about the outcome scales.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="difference-between-causal-mediation-analysis-and-conventional-mediation-analysis" class="level1">
-<h1>Difference between causal mediation analysis and conventional mediation analysis</h1>
+<p>In the field of pharmacoepidemiology, this study of COPD and inhaled corticosteroid became a catalyst for attracting attention: https://pubmed.ncbi.nlm.nih.gov/11520719/</p>
+<p>Critique: https://pubmed.ncbi.nlm.nih.gov/12663327/</p>
+<p>Validation by RCT: https://www.nejm.org/doi/full/10.1056/NEJMoa063070</p>
 <ul>
-<li><p>Can incorporate confounders of the mediator-outcome relationship</p></li>
-<li><p>Can incorporate interactions between the effects of the exposure and the mediator</p></li>
+<li>Simulation study focused on outcome imputation: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-016-0281-5</li>
 </ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/mediation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="interpration-of-natural-direct-and-indirect-effects" class="level1">
-<h1>Interpration of natural direct and indirect effects</h1>
+<p>Although the method that imputes the outcome of interest and then removes observations where the outcome is imputed performed slightly better in some scenarios, especially for low and moderate levels of missingness, it was not always better and it is known to be biased in the presence of auxiliary variables. For very high levels of missingness, the higher power obtained when imputing the outcome (and not dropping observations) might make this approach somewhat more appealing.</p>
 <ul>
-<li>Controlled direct effect (CDE): Set the mediator to a reference value <span class="math inline">\(M=m\)</span> uniformly for everyone in the population</li>
+<li><p>IPCW: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01533-9</p></li>
+<li><p>Controversy regarding sample size and power calculation in observation studies: https://pubmed.ncbi.nlm.nih.gov/34461211/</p></li>
+<li><p>Matching in cohort studies: https://pubmed.ncbi.nlm.nih.gov/23761197/</p></li>
+<li><p>Paired nature of the data in propensity-score matching: https://pubmed.ncbi.nlm.nih.gov/18038446/</p></li>
 </ul>
-<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
-# predict the outcome
-pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                     mediator = 0,
-                                                     covariates = w))
-pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
-                                                     mediator = 0,
-                                                     covariates = w))
-# CDE (fix mediator = 0)
-mean(pred_y1 - pred_y0)</code></pre>
+<p>I recommend reviewing the associated comments on this article.</p>
 <ul>
-<li>Natural direct effect (NDE): Varying treatment while keeping the mediator fixed at the value it would have taken under no treatment</li>
+<li><p>Competing risk1: https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1765783</p></li>
+<li><p>Competing risk2: https://pubmed.ncbi.nlm.nih.gov/31985089/</p></li>
+<li><p>The hazards of hazard ratios: https://pmc.ncbi.nlm.nih.gov/articles/PMC3653612/</p></li>
+<li><p>A issue of <code>ggcoxzph</code>: https://github.com/kassambara/survminer/issues/454</p></li>
+<li><p>Imputation in longitudinal studies: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-018-0615-6</p></li>
 </ul>
-<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
-# NDE (letting mediator take the observed values)
-pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                     mediator = m,
-                                                     covariates = w))
-pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
-                                                     mediator = m,
-                                                     covariates = w))
-diff &lt;- pred_y1 - pred_y0
-# fit a model to estimate E[diff|treatment, covariates]
-fit_diff &lt;- lm(diff ~ treatment + covariates, data = data)
-# predict the value of the "diff" under treatment = 0
-pred_diff &lt;- predict(diff, newdata = data.frame(treatment = covariates, w = w))
-# NDE
-mean(pred_pseudo)</code></pre>
-<ul>
-<li>Natural indirect effect (NIE): Varying the mediator from <code>the value it would have taken under treatment</code> to <code>the value it would have taken under control</code>, while keeping treatment fixed</li>
-</ul>
-<pre><code>fit_mediator &lt;- lm(mediator ~ treatment + covariates, data = data)
-# predict mediator values under treatment = 1 and treatment = 0
-m1 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 1,
-                                                 covariates = w))
-m0 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 0,
-                                                 covariates = w))
-# predict the outcome
-y1_m1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                   mediator = m1,
-                                                   covariates = w))
-y1_m0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                   mediator = m0,
-                                                   covariates = w))
-# NIE
-mean(y1_m1 - y1_m0)</code></pre>
-</section>
-<section id="assumptions-of-natural-direct-and-indirect-effects" class="level1">
-<h1>Assumptions of natural direct and indirect effects</h1>
-<ul>
-<li><p>There are no unmeasured exposure-outcome confounders given <span class="math inline">\(C\)</span></p></li>
-<li><p>There are no unmeasured mediator-outcome confounders given <span class="math inline">\(C\)</span> and <span class="math inline">\(A\)</span></p></li>
-<li><p>There are no unmeasured exposure-mediator confounders given <span class="math inline">\(C\)</span></p></li>
-<li><p>There is no mediator-outcome confouder affected by exposure</p></li>
-</ul>
-<p>For controlled direct effects, only first two assumptions are needed.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

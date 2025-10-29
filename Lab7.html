@@ -157,6 +157,10 @@ window.Quarto = {
     <a class="nav-link" href="./Lab7.html"> 
 <span class="menu-text">Lab7</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Assignment3.html"> 
+<span class="menu-text">Assignment3</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -254,6 +258,12 @@ window.Quarto = {
  <span class="menu-text">Lab 7</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 3</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -324,7 +334,7 @@ window.Quarto = {
 <ul>
 <li>Assumptions about missing data: GEE assumes data are missing completely at random (MCAR), while GLMM assumes data are missing at random (MAR)</li>
 </ul>
-<p>GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. some patients are lost to follow-up, the model can still use the data from patients with complete or partial observations.</p>
+<p>GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. In many projects, some patients are lost to follow-up, but the model can still use the data from patients with complete or partial observations.</p>
 <p>Oh the other hand, in GEE, if data are missing in a non-MCAR way, estimates may be biased unless you use methods like weighted GEE or multiple imputation.</p>
 <ul>
 <li>Inference target: GEE estimates population-averaged (marginal) effects, whereas GLMM estimates subject-specific (conditional) effects.</li>
@@ -333,7 +343,7 @@ window.Quarto = {
 <p>“typical”: two subjects with the same random effect value.</p>
 <p>e.g., GEE provides an odds ratio comparing the odds of death if everyone received treatment A versus if everyone received treatment B.</p>
 <p><strong>When the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.</strong></p>
-<p>However, for binary or count outcomes, the two estimands differ.</p>
+<p>However, for binary and count outcomes, the two estimands differ.</p>
 </section>
 <section id="r-packages" class="level1">
 <h1>R packages</h1>

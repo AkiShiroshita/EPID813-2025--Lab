@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Assignment 1 – EPID8313 (year 2025) Lab Review</title>
+<title>Assignment 3 – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -1621,6 +1621,35 @@ globalThis.qwebrExecuteCode = async function (
 
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -1701,7 +1730,7 @@ globalThis.qwebrExecuteCode = async function (
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment1.html">Assignment 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment3.html">Assignment 3</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -1736,7 +1765,7 @@ globalThis.qwebrExecuteCode = async function (
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Assignment1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 1</span></a>
   </div>
 </li>
@@ -1784,7 +1813,7 @@ globalThis.qwebrExecuteCode = async function (
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment3.html" class="sidebar-item-text sidebar-link">
+  <a href="./Assignment3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 3</span></a>
   </div>
 </li>
@@ -2083,9 +2112,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 }
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment1.html">Assignment 1</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Assignment3.html">Assignment 3</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 1</h1>
+<h1 class="title">Assignment 3</h1>
 </div>
 
 
@@ -2102,110 +2131,52 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<section id="comments-on-the-assignment-1" class="level1">
-<h1>Comments on the assignment 1</h1>
+<section id="comments-on-the-assignment-3" class="level1">
+<h1>Comments on the assignment 3</h1>
+<p><strong>1. Confirm the causal assumptions</strong></p>
 <ul>
-<li>I prefer to provide a simple framework and/or figures alongside the text.</li>
+<li>Consistency</li>
 </ul>
-<p>Q1: the PECO format</p>
-<p>Q3: subject selection flow</p>
-<p>Q6: DAG</p>
+<p>The observed outcome for an individual who received a particular treatment is the same as their potential outcome if they had been given that treatment.</p>
+<p>If <span class="math inline">\(X = i\)</span>, <span class="math inline">\(Y=Y^{x=i}\)</span></p>
 <ul>
-<li>Information bias</li>
+<li>No interference</li>
 </ul>
-<p>Measurement error: mismeasurment of continuous variables (sometimes, random error, not systemic error, is called “measurement error”)</p>
-<p>Misclassification: inaccuracy of categorical variables (sometimes, this is called “information bias”)</p>
-</section>
-<section id="dag-may-help-understand-the-bias" class="level1">
-<h1>DAG may help understand the bias</h1>
+<p>The treatment received by one individual does not affect the outcome of another individual. In other words, my outcome only depends on my own treatment, not on anyone else’s.</p>
+<p><span class="math inline">\(Y^{x_1=i} \neq Y^{x_1=i,x_2=j} \rightarrow E[Y|{X=x}]=E[Y^{x}|{X=x}]\)</span></p>
 <ul>
-<li>Selection bias</li>
+<li>Exchangeability</li>
 </ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+<p>The treatment groups (e.g., treated vs.&nbsp;untreated) are comparable with respect to all factors that could influence the outcome, except for the treatment itself.</p>
+<p><span class="math inline">\(E[Y^{x}|{X=x}]=E(Y^{x})\)</span></p>
+<p>In observational studies, we usually assume the conditional exchangeability:</p>
+<p><span class="math inline">\(E[Y^{x}]=\sum_Z E[Y^{x}|{X=x,Z}]=\sum_Z E[Y^{x}|{X=x|Z}]=E(Y^x|Z=0)*P(Z=0)+E(Y^x|Z=1)*P(Z=1)+E(Y^x|Z=2)*P(Z=2)+....=E(E(Y^{x}|Z))\)</span></p>
 <ul>
-<li>Misclassification (Differentiality vs.&nbsp;Dependence)</li>
+<li>Positivity</li>
 </ul>
-<section id="differentiality" class="level3">
-<h3 class="anchored" data-anchor-id="differentiality">Differentiality</h3>
-<p>Nondifferential: Sensitivity and specificity are independent of another key variable</p>
-<p>vs.&nbsp;</p>
-<p>Differential: Sensitivity and specificity are not independent of another key variable</p>
-</section>
-<section id="dependence" class="level3">
-<h3 class="anchored" data-anchor-id="dependence">Dependence</h3>
-<p>Independent: Misclassification of one variable does not change the probability that subjects will be misclassified on a second variable</p>
-<p>vs.&nbsp;</p>
-<p>Dependent: The probability of being doubly misclassified is not equal to the product of the probabilities of being singly misclassified with respect to exposure and outcome. (e.g., sensitivity of exposure misclassification is correlated with sensitivity of outcome misclassification)</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag0.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag5.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/dag6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
+<p>For every set of characteristics a person might have, there is a non-zero probability of them receiving any of the treatment options.</p>
+<p><span class="math inline">\(E[Y^{x}]=\sum_Z E[Y^{x}|{X=x,Z}]=\sum_Z E[Y^{x}|{X=x|Z}]=E(Y^x|Z=0)*P(Z=0)+E(Y^x|Z=1)*P(Z=1)+E(Y^x|Z=2)*P(Z=2)+....=E(E(Y^{x}|Z))\)</span></p>
+<p><strong>2. Conduct the target trial emulation</strong></p>
+<ul>
+<li><p>Eligibility criteria</p></li>
+<li><p>Treatment strategies</p></li>
+<li><p>Randomized assignment</p></li>
+<li><p>Start/end of follow-up</p></li>
+<li><p>Outcomes</p></li>
+<li><p>Causal contrast</p></li>
+<li><p>Analysis</p></li>
+</ul>
+<p>To avoid immortal time bias, time zero should be defined such that:</p>
+<ul>
+<li><p>All eligibility criteria are met</p></li>
+<li><p>Treatment strategies are assigned</p></li>
+<li><p>Outcome ascertainment begins</p></li>
+</ul>
 </section>
 <section id="presentation" class="level1">
 <h1>Presentation</h1>
-<div class="cell">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
 
 
 </section>
