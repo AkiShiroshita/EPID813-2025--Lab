@@ -41,7 +41,7 @@ e.g., patients nested within hospitals and hospitals nested within regions
 
 * Assumptions about missing data: GEE assumes data are missing completely at random (MCAR), while GLMM assumes data are missing at random (MAR)
 
-GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. some patients are lost to follow-up, the model can still use the data from patients with complete or partial observations.
+GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. In many projects, some patients are lost to follow-up, but the model can still use the data from patients with complete or partial observations.
 
 Oh the other hand, in GEE, if data are missing in a non-MCAR way, estimates may be biased unless you use methods like weighted GEE or multiple imputation.
 
@@ -55,7 +55,7 @@ e.g., GEE provides an odds ratio comparing the odds of death if everyone receive
 
 **When the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.**
 
-However, for binary or count outcomes, the two estimands differ.
+However, for binary and count outcomes, the two estimands differ.
 
 # R packages
 

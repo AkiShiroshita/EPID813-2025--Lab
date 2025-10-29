@@ -1,0 +1,72 @@
+---
+title: "Assignment 3"
+webr:  
+  show-startup-message: true    # Display status of webR initialization
+editor_options: 
+  chunk_output_type: console
+---
+
+# Comments on the assignment 3
+
+**1. Confirm the causal assumptions**
+
+* Consistency
+
+The observed outcome for an individual who received a particular treatment is the same as their potential outcome if they had been given that treatment.
+
+If $X = i$, $Y=Y^{x=i}$
+
+* No interference
+
+The treatment received by one individual does not affect the outcome of another individual. In other words, my outcome only depends on my own treatment, not on anyone else's. 
+
+$Y^{x_1=i} \neq Y^{x_1=i,x_2=j} \rightarrow E[Y|{X=x}]=E[Y^{x}|{X=x}]$
+
+* Exchangeability
+
+The treatment groups (e.g., treated vs. untreated) are comparable with respect to all factors that could influence the outcome, except for the treatment itself.
+
+$E[Y^{x}|{X=x}]=E(Y^{x})$
+
+In observational studies, we usually assume the conditional exchangeability:
+
+$E[Y^{x}]=\sum_Z E[Y^{x}|{X=x,Z}]=\sum_Z E[Y^{x}|{X=x|Z}]=E(Y^x|Z=0)*P(Z=0)+E(Y^x|Z=1)*P(Z=1)+E(Y^x|Z=2)*P(Z=2)+....=E(E(Y^{x}|Z))$
+
+* Positivity
+
+For every set of characteristics a person might have, there is a non-zero probability of them receiving any of the treatment options.
+
+$E[Y^{x}]=\sum_Z E[Y^{x}|{X=x,Z}]=\sum_Z E[Y^{x}|{X=x|Z}]=E(Y^x|Z=0)*P(Z=0)+E(Y^x|Z=1)*P(Z=1)+E(Y^x|Z=2)*P(Z=2)+....=E(E(Y^{x}|Z))$
+
+**2. Conduct the target trial emulation**
+
+* Eligibility criteria
+
+* Treatment strategies
+
+* Randomized assignment
+
+* Start/end of follow-up
+
+* Outcomes
+
+* Causal contrast
+
+* Analysis
+
+To avoid immortal time bias, time zero should be defined such that:
+
+* All eligibility criteria are met
+
+* Treatment strategies are assigned
+
+* Outcome ascertainment begins
+
+# Presentation
+
+```{webr}
+names <- c("Huy", "Ha", "Christopher", "Samuel", "Zicheng", "Usman")
+# Random order without replacement
+sample(names, size = length(names), replace = FALSE)
+```
+
