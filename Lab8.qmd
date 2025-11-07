@@ -9,270 +9,128 @@ editor_options:
 
 Lab 8 covers 
 
-* **Mediation** 
-
 * **Effect measure modification**
 
-# Kaplan-Meier curve and Risk set
-
-* The `interval` in the survival analysis is `(start, stop]` (open on the left and closed on the right).
-
-e.g., `(0, 10]` means from just after time 0 to and including time 10.
-
-Do you find any unusual points in this Kaplan-Meier curve?
-
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-library(tidyverse)
-library(survival)
-library(survminer) 
-
-data(colon, package = "biostat3")
-colon_clean <- colon %>%
-  mutate(
-    # 1 if dead from any cause, 0 if alive (censored)
-    death_all = if_else(status == "Alive", 0, 1),
-    surv_yy = if_else(surv_yy == 0.5, 0, surv_yy) 
-  )
-
-# Fit the Kaplan-Meier curve for the whole population
-km_fit_overall <- survfit(Surv(surv_yy, death_all) ~ 1, data = colon_clean)
-
-# Use ggsurvplot for a publication-quality plot
-ggsurvplot(
-  km_fit_overall,
-  data = colon_clean,
-  risk.table = TRUE,       # Add a risk table below the plot
-  conf.int = TRUE,         # Show confidence intervals
-  xlab = "Years Since Diagnosis",
-  ylab = "Overall Survival Probability",
-  title = "Kaplan-Meier Curve for Overall Survival",
-  risk.table.y.text = FALSE,
-  ggtheme = theme_light()
-)
-
-summary(km_fit_overall)
-```
+* **Mediation** 
 
 ::: {.callout-tip collapse="true"}
-### Q: In a randomized controlled trial, we included 1,000 patients and conducted a longitudinal follow-up to assess the hazard ratio of death between Treatment A and Treatment B. We found 10 patients died on **day 0**, the same day the follow-up period began. Should we excluded these 10 patients?
+### Q1: Is the following statement true?: "Effect modification can be present with no interaction. Interaction can be present with no effect modification."
 
-Answer: It depends.
+A: TRUE
 
-If the follow-up began around 8 a.m. and the patients died around 11 p.m., they could be included in the analysis (for example, by assigning a small value such as 0.5 days instead of 0 days). However, if the follow-up started around 1 p.m. and the patients died before that time, they should be excluded.
+See VanderWeele 2009.
 
-$\rightarrow$ We require detailed information on timing and/or the application of consistent criteria across all patients in the cohort.
+Interaction may be used to describe instances in which potential interventions on a secondary exposure are in view (i.e., considers counterfactual outcome intervening on both exposures), while effect modification may be used to describe instances in which merely conditioning on a secondary exposure is in view (i.e., considers counterfactual outcome intervening on one exposure only).
 
-```{r}
-data(colon, package = "biostat3")
-colon_clean <- colon %>%
-  mutate(
-    # 1 if dead from any cause, 0 if alive (censored)
-    death_all = if_else(status == "Alive", 0, 1) 
-  )
+Examples:
 
-# Fit the Kaplan-Meier curve for the whole population
-km_fit_overall <- survfit(Surv(surv_yy, death_all) ~ 1, data = colon_clean)
+-   Effect modifier: Gene × Environment interaction (the gene is not modifiable, but the environment may be modifiable)
 
-# Use ggsurvplot for a publication-quality plot
-ggsurvplot(
-  km_fit_overall,
-  data = colon_clean,
-  risk.table = TRUE,       # Add a risk table below the plot
-  conf.int = TRUE,         # Show confidence intervals
-  xlab = "Years Since Diagnosis",
-  ylab = "Overall Survival Probability",
-  title = "Kaplan-Meier Curve for Overall Survival",
-  risk.table.y.text = FALSE,
-  ggtheme = theme_light()
-)
+-   Interaction: Medication × Medication interaction (both medications are modifiable)
 
-summary(km_fit_overall)
-```
-:::
+The distinction depends on the conceptual framework of your study.
 
-* Describe a Kaplan-Meier curve manually.
+Formulas:
 
-```{r echo=FALSE}
-data<-list(t0=c(0.5, 0.5, 1, 2.5, 0,
-                2, 1.5, 1.5, 2, 1)) %>% 
-    as_tibble() %>% 
-    mutate(censored=t0>2, t=if_else(censored,2,t0)) 
+-   Effect modifier: $E[D_{e1}|Q=q_1,X=x]-E[D_{e0}|Q=q_1,X=x] \neq E[D_{e1}|Q=q_0,X=x]-E[D_{e0}|Q=q_0,X=x]$
 
-data[1,3] <- 0.25
-data[7,2] <- TRUE
+-   Interaction: $E[D_{e_1,q_1}|X=x]-E[D_{e_0,q_1}|X=x] \neq E[D_{e_1,q_o}|X=x]-E[D_{e_0,q_0}|X=x]$
 
-ggplot(data, aes(x = t, y = 1:10, shape = censored, color = censored)) +
-  geom_segment(aes(x = 0, y = 1:10, xend = t, yend = 1:10), linetype = 3) +
-  geom_point(size = 3) +
-  scale_color_manual(
-    name = "Censoring status",
-    values = c("FALSE" = "blue", "TRUE" = "red"),
-    labels = c("FALSE" = "Event", "TRUE" = "Censored")
-  ) +
-  scale_shape_manual(
-    name = "Censoring status",
-    values = c("FALSE" = 16, "TRUE" = 1),   # <--- specify shapes
-    labels = c("FALSE" = "Event", "TRUE" = "Censored")
-  ) +
-  xlab("Time to death (years)") + 
-  ylab("Subject ID") +
-  scale_y_continuous(limits = c(0, 10), breaks = seq(1, 10, 1)) +
-  theme_bw()
-```
+Where there are 2 levels of E ( $e_0$ and $e_1$ ), and 2 levels of Q ( $q_0$ and $q_1$ )
 
-Rules in KM curve
-
-* Divide intervals at the time the event occurs
-
-* Censoring within an interval is subtracted from the risk set at the end of the interval
-
-* If censoring and the event occur at the same time, censoring is assumed to occur immediately after the event.
-
-```{r echo=FALSE}
-#| message: false
-#| warning: false
-library(kableExtra)
-tab <- data.frame(`Time` = c("(0,0.25]", "(0.25,0.5]", "(0.5,1.0]", "(1.0,1.5]", "(1.5,2.0]"),
-                  `Risk set` = c("?", "?", "?", "?", "?"),
-                  `N of events` = c("?", "?", "?", "?", "?"),
-                  `Interval-specific event rate` = c("?", "?", "?", "?", "?"))
-
-tab %>% knitr::kable('html') %>% kable_styling(font_size = 20)
-```
-
-::: {.callout-tip collapse="true"}
-### Q: Fill in the blanks.
-
-```{r echo=FALSE}
-data<-list(t0=c(0.5, 0.5, 1, 2.5, 0,
-                2, 1.5, 1.5, 2, 1)) %>% 
-    as_tibble() %>% 
-    mutate(censored=t0>2, t=if_else(censored,2,t0)) 
-
-data[1,3] <- 0.25
-data[7,2] <- TRUE
-
-ggplot(data, aes(x = t, y = 1:10, shape = censored, color = censored)) +
-  geom_segment(aes(x = 0, y = 1:10, xend = t, yend = 1:10), linetype = 3) +
-  geom_point(size = 3) +
-  scale_color_manual(
-    name = "Censoring status",
-    values = c("FALSE" = "blue", "TRUE" = "red"),
-    labels = c("FALSE" = "Event", "TRUE" = "Censored")
-  ) +
-  scale_shape_manual(
-    name = "Censoring status",
-    values = c("FALSE" = 16, "TRUE" = 1),   # <--- specify shapes
-    labels = c("FALSE" = "Event", "TRUE" = "Censored")
-  ) +
-  xlab("Time to death (years)") + 
-  ylab("Subject ID") +
-  scale_y_continuous(limits = c(0, 10), breaks = seq(1, 10, 1)) +
-  theme_bw()
-```
-
-```{r echo=FALSE}
-#| message: false
-#| warning: false
-library(kableExtra)
-tab <- data.frame(`Time` = c("(0,0.25]", "(0.25,0.5]", "(0.5,1.0]", "(1.0,1.5]", "(1.5,2.0]"),
-                  `Risk set` = c(9, 8, 7, 5, 3),
-                  `N of events` = c(1, 1, 2, 1, 2),
-                  `Interval-specific event rate` = round(c(1/9, 1/8, 2/7, 1/5, 2/3),3))
-
-tab %>% knitr::kable('html') %>% kable_styling(font_size = 20)
-```
-
-```{r}
-#| echo: false
-data <- data %>% 
-  mutate(event = 1-censored)
-
-data <- as_tibble(data) %>% arrange(t) 
-surv <- Surv(time = data$t, event = data$event)
-km <- survfit(surv~1, type="kaplan-meier")
-plot(km, mark.time = TRUE)
-```
+In other words, when investigating interaction, you need to account for confounders between $E$ and $D$ as well as those between $Q$ and $D$. In contrast, when focusing on effect modification, adjustment for confounders between $E$ and $D$ may be sufficient.
 
 :::
 
-# Proportional hazards assumption
+Suppose the table below represents the number of outcomes within each exposure group:
 
-When you check the proportional hazards assumption, ensure that categorical variables are converted to dummy variables beforehan.
+Exposure 2 = Yes
 
-Or you may acknowledge that `term=TRUE` (default) in `cox.zph()` function checks the proportional hazards assumption for each variable as a whole, while `term=FALSE` checks it for each level of the categorical variable.
+|              | Cases | Controls | Total |
+|--------------|-------|----------|-------|
+| Exposure 1 + | 20    | 80       | 100   |
+| Exposure 1 - | 10    | 90       | 100   |
 
-```{webr}
-colon <- read.csv('https://raw.githubusercontent.com/AkiShiroshita/EPID813-2025--Lab/refs/heads/main/data/colon.csv')
-colon_clean <- colon %>%
-  mutate(
-    # 1 if dead from any cause, 0 if alive (censored)
-    death_all = if_else(status == "Alive", 0, 1) 
-  )
-glimpse(colon)
-```
+Exposure 2 = No
 
-```{webr}
-cox_model_age <- coxph(Surv(surv_yy, death_all) ~ factor(agegrp), data = colon_clean)
-cox_model_age
-cox.zph(cox_model_age)
-#cox.zph(cox_model_age, term = FALSE)
-```
-
-```{webr}
-dummy_vars <- model.matrix(~ agegrp - 1, data = colon_clean)
-
-colon_clean2 <- colon_clean %>%
-  bind_cols(as_tibble(dummy_vars))
-
-cox_model_age2 <- coxph(Surv(surv_yy, death_all) ~ `agegrp45-59`+`agegrp60-74`+`agegrp75+`, data = colon_clean2)
-cox_model_age2
-cox.zph(cox_model_age2)
-```
-
-# Counting process data (Advanced topic)
-
-Mainly for extended Cox regression model (time-varying exposure)
-
-* Wide-format data
-
-```{r, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-| 患者ID | Treatment | Time to treatment |  Event indicator | Time to death |
-|--------|:---------:|:-----------------:|:--------------:| :--------------:|
-| 1 | 1 | 13 | 1 | 30 | 
-| 2 | 0 | NA | 0 | 30 | 
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
-
-* What is counting process data?
-
-Long-format data data where the exposure remains the same from the beginning to the end of the interval, and the outcome occurs at the end of the interval.
-
-`(start, stop]`: open on the left and closed on the right  
-
-```{r, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
-tabl <- "
-| 患者ID | Start | Stop |  Treatment |  Death |
-|--------|:---------:|:-----------------:|:--------------:|:--------------:|
-| 1 | 0  | 13 | 0 | 0 | 
-| 1 | 13 | 30 | 1 | 1 | 
-| 2 | 0 | 30 | 0 | 0 |
-"
-cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
-```
+|              | Cases | Controls | Total |
+|--------------|-------|----------|-------|
+| Exposure 1 + | 30    | 70       | 100   |
+| Exposure 1 - | 20    | 80       | 100   |
 
 ::: {.callout-tip collapse="true"}
-### Q: We found that some patients received treatment at time 13 and died on the same day. Should we classify them as exposed?
+### Q2: Is there evidence of additive or multiplicative interaction?
 
-Answer: Again, it depends.
+A:
 
-If the treatment began around 8 a.m. and the patients died around 11 p.m., they could be classified as "exposed" in the analysis (for example, by subtracting a small value from 13). However, if the treatment started around 1 p.m. and the patients died before that time, they should not be classified as "exposed".
+First, calculate the risks across all the combination of exposure 1 and exposure 2.
 
-$\rightarrow$ We require detailed information on timing and/or the application of consistent criteria across all patients in the cohort.
+|              | Exposure 2 + | Exposure 2 - |     |
+|--------------|--------------|--------------|-----|
+| Exposure 1 + | 0.2          | 0.3          |     |
+| Exposure 1 - | 0.1          | 0.2          |     |
+
+Calculate the following outcomes under:
+
+-   First exposure only
+
+-   Second exposure only
+
+-   Both exposures
+
+-   Neither exposure
+
+Using these risks, we can calculate additive and multiplicative interactions.
+
+-   Additive interaction (the extent to which of the two exposures together exceeds the effect of each considered individually **on the additive scale measure**):
+
+$(p_{11}-p_{00})-[(p_{10}-p_{00})+(p_{01}-p_{00})]=p_{11}-p_{10}-p_{01}+p_{00}=0.2-0.3-0.1+0.2=0$
+
+$\rightarrow$ No superadditive and supadditive interactions
+
+$RR_{10}=p_{10}/p_{00}$
+
+$RR_{01}=p_{01}/p_{00}$
+
+$RR_{11}=p_{11}/p_{00}$
+
+-   Multiplicative interaction(the extent to which of the two exposures together exceeds the effect of each considered individually **on the multiplicative scale measure**): $\frac{RR_{11}}{RR_{10} \times RR_{01}}=\frac{p_{11}p_{00}}{p_{10}p_{01}}=\frac{0.2 \times 0.2}{0.1 \times 0.3} \approx 1.33$
+
+$\rightarrow$ Supermultiplicative
 :::
+
+# Additive vs. multiplicative interaction
+
+* What outcome scale are you referring to?
+
+e.g., A logistic regression model
+
+$logit(Pr(Y=1|X_1,X_2))=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_1X_2$
+
+```
+glm(outcome ~ exposure1 + exposure2 + exposure1:expsoure2,
+family = binomial(link = "logit"), data = data)
+```
+::: {.callout-tip collapse="true"}
+### Q: Does $\beta_3$ represent an additive or multiplicative interaction?
+
+Answer: On the logit scale ( $\beta_3$ ), it is additive, whereas on the odds ratio scale, it is multiplicative.
+
+Interaction or effect measure modification = "Different treatment effects dependent on other variables"
+
+```{r, echo=FALSE, out.width="70%", fig.align = "center"}
+knitr::include_graphics("figures/interaction.png")
+```
+
+Treatment effects are linear on a log-odds scale, while the probability of the outcomes changes depending on other variables without interaction terms.
+
+The left figure illustrates a logistic regression model **with** an interaction term (on a **logit** scale), whereas the right figure shows a model **without** an interaction term (on a **probability** scale).
+
+$\rightarrow$ Nonlinear regression analyses show an inherent interaction! (An interaction term does not necessarily indicate "interaction")
+
+We should be cautious about the outcome scales.
+
+$\rightarrow$ This is the motivation for the weighting approach (marginal structural model).
+
+:::
+
