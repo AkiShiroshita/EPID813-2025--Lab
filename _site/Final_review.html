@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 4 – EPID8313 (year 2025) Lab Review</title>
+<title>Final review – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -216,7 +181,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Final review</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -263,7 +228,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab4.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 4</span></a>
   </div>
 </li>
@@ -320,9 +285,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 4</h1>
+<h1 class="title">Final review</h1>
 </div>
 
 
@@ -339,120 +304,82 @@ window.Quarto = {
 </header>
 
 
-<p>Lab 4 covers</p>
-<ul>
-<li><strong>Power and sample size calculation</strong></li>
-</ul>
-<p>In many cases, we want to perform power calculations for multivariable regression models.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Q1: Although Cox regression is a semiparametric model, we can estimate the baseline hazard function. True or False?
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Power = probability of rejecting the null hypothesis if a specific alternative is true</p>
+<p>A: TRUE</p>
+<p>When we use Cox regression, we do not specify the baseline hazard function, which makes the model semiparametric. However, we can estimate the baseline hazard function based on the observed data and the results from the Cox model.</p>
 </div>
 </div>
-<section id="brief-overview-of-software" class="level1">
-<h1>Brief overview of software</h1>
+</div>
+<p>::: {.callout-tip collapse=“true”} ### Q1: What is the difference between Generalized Estimating Equations (GEE) and Generalized Linear Mixed Models (GLMM)?</p>
+<p>I addressed this question in Lab 7.</p>
 <ul>
-<li><p>R packages: <code>pwr</code>, <code>pwrss</code>, etc.</p></li>
-<li><p>STATA</p></li>
-<li><p>SAS Proc Power</p></li>
-<li><p>PS: Power and Sample Size Calculation (Vanderbilt University, free): https://cqsclinical.app.vumc.org/ps/</p></li>
-<li><p>G*Power (free, less intuitive): https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower</p></li>
-<li><p>PASS (NCSS, <strong>commercial</strong>, <strong>most flexible</strong>): https://www.ncss.com/software/pass/</p></li>
-<li><p>EPI Info (CDC, free): https://www.cdc.gov/epiinfo/index.html</p></li>
-<li><p>Optimal Design (free, program for multilevel modeling): https://www.wtgrantfoundation.org/resources/optimal-design</p></li>
-<li><p>For conducting complex statistical analyses (e.g., propensity score analysis), I recommend using Monte Carlo simulations.</p></li>
+<li>Modeling correlation: GEE models within-subject correlation using a working correlation matrix, whereas GLMM models it through random effects.</li>
 </ul>
-</section>
-<section id="r-pwrss-package" class="level1">
-<h1>R <code>pwrss</code> package</h1>
-<p>Tutorial: https://rpubs.com/metinbulus/pwrss</p>
-<p>Power and sample size calculation based on the Wald test.</p>
-<p><strong>Scenario:</strong> You are planning a study where the outcome is binary and will be analyzed with logistic regression.</p>
-<p>What you need is</p>
-<ul>
-<li><p><code>p0</code>: probability of the outcome when the predictor is at reference level (e.g., control group).</p></li>
-<li><p><code>p1</code>: probability of the outcome when the predictor is at the exposure level (e.g., treatment group).</p></li>
-<li><p><code>r2.other.x</code>: A squared multiple correlation between an exposure and other covariates</p></li>
-</ul>
-<p>Higher values indicate more correlation, which will increase the required sample size.</p>
-<p>You can calculate <code>r2.other.x</code> by fitting a linear regression model where your main predictor of interest is treated as the outcome and all other covariates are the predictors.</p>
-<pre><code>fit &lt;- lm(exposure ~ cov1+cov2, data = data)
-# Extract the R-squared value
-summary_model &lt;- summary(fit)
-r2_estimate &lt;- summary_model$r.squared</code></pre>
-<ul>
-<li><p><code>dist</code>: distribution of the predictor (e.g., normal, bernoulli, etc.)</p></li>
-<li><p><code>n</code>: total sample size</p></li>
-<li><p><code>alpha = 0.05</code>: significance level</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pwrss<span class="sc">::</span><span class="fu">pwrss.z.logreg</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p0 =</span> <span class="fl">0.11</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p1 =</span> <span class="fl">0.10</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r2.other.x =</span> <span class="fl">0.10</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist =</span> <span class="fu">list</span>(<span class="at">dist =</span> <span class="st">"normal"</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">8000</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+--------------------------------------------------+
-|                POWER CALCULATION                 |
-+--------------------------------------------------+
-
-Logistic Regression Coefficient (Wald's Z-Test)
-
-  Method          : Demidenko (Variance Corrected)
-  Predictor Dist. : Normal
-
----------------------------------------------------
-Hypotheses
----------------------------------------------------
-  H0 (Null Claim) : Odds Ratio = 1
-  H1 (Alt. Claim) : Odds Ratio != 1
-
----------------------------------------------------
-Results
----------------------------------------------------
-  Sample Size          = 8000
-  Type 1 Error (alpha) = 0.050
-  Type 2 Error (beta)  = 0.050
-  Statistical Power    = 0.95  &lt;&lt;</code></pre>
+<p>GEE assumes “block independence”</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/corr1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Random-intercept model</p>
+<p><span class="math inline">\(Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + \epsilon_{ij}=(\beta_0 + b_{0i}) + \beta_1 t_{ij} + \epsilon_{ij}\)</span></p>
+<p>Random-slope model (random slope + intercept)</p>
+<p><span class="math inline">\(Y_{ij}=\beta_0+\beta_1 t_{ij} + b_{0i} + b_{1i}t_{ij} + \epsilon_{ij}=(\beta_0 + b_{0i}) + (\beta_1 + b_{1i}) t_{ij} + \epsilon_{ij}\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/random.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
-<li>Example writing of your method section</li>
+<li>Unlike GEE, which typically handles only one level of clustering, GLMM can model more complex hierarchical structures</li>
 </ul>
-<blockquote class="blockquote">
-<p>For our primary analysis, a sample size of 8,000 provides approximately 81% power to detect an odds ratio of 0.90 for PM2.5, assuming a baseline outcome prevalence of 11% and a normally distributed PM2.5 exposure (mean = 10, SD = 2). This calculation was performed using a two-sided z-test at a significance level of 0.05 and accounts for potential confounding by assuming that other covariates explain 10% of the variance in the exposure (i.e., a squared multiple correlation of 0.1 between the primary exposure and other covariates)</p>
-</blockquote>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<p>e.g., patients nested within hospitals and hospitals nested within regions</p>
 <ul>
-<li><p>Odds for the reference group: <span class="math inline">\(0.11/(1−0.11)=0.1236\)</span></p></li>
-<li><p>Odds for the comparison group: <span class="math inline">\(0.10/(1−0.10)=0.1111\)</span></p></li>
-<li><p>Odds Ratio <span class="math inline">\(= 0.1111/0.1236 \approx 0.90\)</span></p></li>
+<li>Assumptions about missing data: GEE assumes data are missing completely at random (MCAR), while GLMM assumes data are missing at random (MAR)</li>
 </ul>
-</div>
-</div>
+<p>GLMM can provide valid parameter estimates under MAR, because it uses likelihood-based estimation that borrows information from other observed data. In many projects, some patients are lost to follow-up, but the model can still use the data from patients with complete or partial observations.</p>
+<p>Oh the other hand, in GEE, if data are missing in a non-MCAR way, estimates may be biased unless you use methods like weighted GEE or multiple imputation.</p>
+<ul>
+<li>Inference target: GEE estimates population-averaged (marginal) effects, whereas GLMM estimates subject-specific (conditional) effects.</li>
+</ul>
+<p>e.g., Mixed-effects logistic regression model provides odds ratio comparing the odds of death between a typical patient received treatment A and a typical patient of the same covariates received treatment B.</p>
+<p>“typical”: two subjects with the same random effect value.</p>
+<p>e.g., GEE provides an odds ratio comparing the odds of death if everyone received treatment A versus if everyone received treatment B.</p>
+<p><strong>When the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.</strong></p>
+<p>However, for binary and count outcomes, the two estimands differ. :::</p>
+<p>::: {.callout-tip collapse=“true”} ### Q1: In a target trial emulation using Medicare data to evaluate the effectiveness of colonoscopy in reducing colon cancer incidence among patients over 70 years old, the start of follow-up can be defined as the date of colonoscopy for the exposed group and the date of the first routine health check-up for the unexposed group. True or False?</p>
+<p>A: FALSE</p>
+<p>To avoid immortal time bias, time zero should be defined such that:</p>
+<ul>
+<li><p>All eligibility criteria are met</p></li>
+<li><p>Treatment strategies are assigned</p></li>
+<li><p>Outcome ascertainment begins</p></li>
+</ul>
+<p>I will not discuss what the best strategy is here, but the definition of time zero given above is incorrect (see lecture slides). :::</p>
+<p>::: {.callout-tip collapse=“true”} ### Q1: You want to evaluate the effectiveness of vitamin supplement X, a time-varying exposure (Yes vs.&nbsp;No), on yearly measured binary hospitalization outcomes (Yes vs.&nbsp;No at the X-year visit). Assuming there are no competing risks, should you use a mixed-effects logistic regression model or G-methods (e.g., a marginal structural model with inverse probability weighting)?</p>
+<p>A: G-methods</p>
+<p>We should address the time-varying confounding affected by prior exposure (treament-confounder feedback). Mixed-effects logistic regression model cannot appropriately adjust for such confounding, whereas G-methods can. :::</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

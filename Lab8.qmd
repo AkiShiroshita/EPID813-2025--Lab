@@ -24,7 +24,7 @@ Interaction may be used to describe instances in which potential interventions o
 
 Examples:
 
--   Effect modifier: Gene × Environment interaction (the gene is not modifiable, but the environment may be modifiable)
+-   Effect modification: Gene × Environment interaction (the gene is not modifiable, but the environment may be modifiable)
 
 -   Interaction: Medication × Medication interaction (both medications are modifiable)
 
@@ -86,7 +86,7 @@ Using these risks, we can calculate additive and multiplicative interactions.
 
 $(p_{11}-p_{00})-[(p_{10}-p_{00})+(p_{01}-p_{00})]=p_{11}-p_{10}-p_{01}+p_{00}=0.2-0.3-0.1+0.2=0$
 
-$\rightarrow$ No superadditive and supadditive interactions
+$\rightarrow$ No superadditive or subadditive interactions
 
 $RR_{10}=p_{10}/p_{00}$
 
@@ -130,7 +130,7 @@ $\rightarrow$ Nonlinear regression analyses show an inherent interaction! (An in
 
 We should be cautious about the outcome scales.
 
-$\rightarrow$ This is the motivation for the weighting approach (marginal structural model).
+$\rightarrow$ This is the motivation for the weighting approach (marginal structural model). You can think about the 2×2 table (from the question above) in the pseudo-population!
 
 :::
 
