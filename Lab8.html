@@ -161,6 +161,10 @@ window.Quarto = {
     <a class="nav-link" href="./Assignment3.html"> 
 <span class="menu-text">Assignment3</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Lab8.html"> 
+<span class="menu-text">Lab8</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -177,7 +181,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Lab 8</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab8.html">Lab 8</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -264,6 +268,12 @@ window.Quarto = {
  <span class="menu-text">Assignment 3</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab8.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab 8</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -275,7 +285,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Content</a></li><li class="breadcrumb-item"><a href="./Lab8.html">Lab 8</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Lab 8</h1>
 </div>
@@ -299,17 +309,160 @@ window.Quarto = {
 <li><p><strong>Effect measure modification</strong></p></li>
 <li><p><strong>Mediation</strong></p></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q1: Is the following statement true?: “Effect modification can be present with no interaction. Interaction can be present with no effect modification.”
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A: TRUE</p>
+<p>See VanderWeele 2009.</p>
+<p>Interaction may be used to describe instances in which potential interventions on a secondary exposure are in view (i.e., considers counterfactual outcome intervening on both exposures), while effect modification may be used to describe instances in which merely conditioning on a secondary exposure is in view (i.e., considers counterfactual outcome intervening on one exposure only).</p>
+<p>Examples:</p>
+<ul>
+<li><p>Effect modifier: Gene × Environment interaction (the gene is not modifiable, but the environment may be modifiable)</p></li>
+<li><p>Interaction: Medication × Medication interaction (both medications are modifiable)</p></li>
+</ul>
+<p>The distinction depends on the conceptual framework of your study.</p>
+<p>Formulas:</p>
+<ul>
+<li><p>Effect modifier: <span class="math inline">\(E[D_{e1}|Q=q_1,X=x]-E[D_{e0}|Q=q_1,X=x] \neq E[D_{e1}|Q=q_0,X=x]-E[D_{e0}|Q=q_0,X=x]\)</span></p></li>
+<li><p>Interaction: <span class="math inline">\(E[D_{e_1,q_1}|X=x]-E[D_{e_0,q_1}|X=x] \neq E[D_{e_1,q_o}|X=x]-E[D_{e_0,q_0}|X=x]\)</span></p></li>
+</ul>
+<p>Where there are 2 levels of E ( <span class="math inline">\(e_0\)</span> and <span class="math inline">\(e_1\)</span> ), and 2 levels of Q ( <span class="math inline">\(q_0\)</span> and <span class="math inline">\(q_1\)</span> )</p>
+<p>In other words, when investigating interaction, you need to account for confounders between <span class="math inline">\(E\)</span> and <span class="math inline">\(D\)</span> as well as those between <span class="math inline">\(Q\)</span> and <span class="math inline">\(D\)</span>. In contrast, when focusing on effect modification, adjustment for confounders between <span class="math inline">\(E\)</span> and <span class="math inline">\(D\)</span> may be sufficient.</p>
+</div>
+</div>
+</div>
+<p>Suppose the table below represents the number of outcomes within each exposure group:</p>
+<p>Exposure 2 = Yes</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Cases</th>
+<th>Controls</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposure 1 +</td>
+<td>20</td>
+<td>80</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>Exposure 1 -</td>
+<td>10</td>
+<td>90</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>Exposure 2 = No</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Cases</th>
+<th>Controls</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposure 1 +</td>
+<td>30</td>
+<td>70</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>Exposure 1 -</td>
+<td>20</td>
+<td>80</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q2: Is there evidence of additive or multiplicative interaction?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A:</p>
+<p>First, calculate the risks across all the combination of exposure 1 and exposure 2.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Exposure 2 +</th>
+<th>Exposure 2 -</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposure 1 +</td>
+<td>0.2</td>
+<td>0.3</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Exposure 1 -</td>
+<td>0.1</td>
+<td>0.2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Calculate the following outcomes under:</p>
+<ul>
+<li><p>First exposure only</p></li>
+<li><p>Second exposure only</p></li>
+<li><p>Both exposures</p></li>
+<li><p>Neither exposure</p></li>
+</ul>
+<p>Using these risks, we can calculate additive and multiplicative interactions.</p>
+<ul>
+<li>Additive interaction (the extent to which of the two exposures together exceeds the effect of each considered individually <strong>on the additive scale measure</strong>):</li>
+</ul>
+<p><span class="math inline">\((p_{11}-p_{00})-[(p_{10}-p_{00})+(p_{01}-p_{00})]=p_{11}-p_{10}-p_{01}+p_{00}=0.2-0.3-0.1+0.2=0\)</span></p>
+<p><span class="math inline">\(\rightarrow\)</span> No superadditive and supadditive interactions</p>
+<p><span class="math inline">\(RR_{10}=p_{10}/p_{00}\)</span></p>
+<p><span class="math inline">\(RR_{01}=p_{01}/p_{00}\)</span></p>
+<p><span class="math inline">\(RR_{11}=p_{11}/p_{00}\)</span></p>
+<ul>
+<li>Multiplicative interaction(the extent to which of the two exposures together exceeds the effect of each considered individually <strong>on the multiplicative scale measure</strong>): <span class="math inline">\(\frac{RR_{11}}{RR_{10} \times RR_{01}}=\frac{p_{11}p_{00}}{p_{10}p_{01}}=\frac{0.2 \times 0.2}{0.1 \times 0.3} \approx 1.33\)</span></li>
+</ul>
+<p><span class="math inline">\(\rightarrow\)</span> Supermultiplicative</p>
+</div>
+</div>
+</div>
 <section id="additive-vs.-multiplicative-interaction" class="level1">
 <h1>Additive vs.&nbsp;multiplicative interaction</h1>
 <ul>
 <li>What outcome scale are you referring to?</li>
 </ul>
 <p>e.g., A logistic regression model</p>
-<p><span class="math inline">\(logit(Pr(Y=1|X_1,X_2)=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_1X_2\)</span></p>
+<p><span class="math inline">\(logit(Pr(Y=1|X_1,X_2))=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_1X_2\)</span></p>
 <pre><code>glm(outcome ~ exposure1 + exposure2 + exposure1:expsoure2,
 family = binomial(link = "logit"), data = data)</code></pre>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -318,10 +471,10 @@ Q: Does <span class="math inline">\(\beta_3\)</span> represent an additive or mu
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Answer: On the logit scale ( <span class="math inline">\(\beta_3\)</span> ), it is additive, whereas on the odds ratio scale, it is multiplicative.</p>
-<p>Interaction (effect measure modification) = “Different treatment effects dependent on other variables”</p>
+<p>Interaction or effect measure modification = “Different treatment effects dependent on other variables”</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -331,90 +484,14 @@ Q: Does <span class="math inline">\(\beta_3\)</span> represent an additive or mu
 </div>
 </div>
 </div>
-<p>Treatment effects are linear on a log-odds scale, while the probability of the outcomes changes depending on other variables without interaction terms</p>
-<p><span class="math inline">\(\rightarrow\)</span> Nonlinear regression analyses show an inherent interaction!</p>
+<p>Treatment effects are linear on a log-odds scale, while the probability of the outcomes changes depending on other variables without interaction terms.</p>
+<p>The left figure illustrates a logistic regression model <strong>with</strong> an interaction term (on a <strong>logit</strong> scale), whereas the right figure shows a model <strong>without</strong> an interaction term (on a <strong>probability</strong> scale).</p>
+<p><span class="math inline">\(\rightarrow\)</span> Nonlinear regression analyses show an inherent interaction! (An interaction term does not necessarily indicate “interaction”)</p>
 <p>We should be cautious about the outcome scales.</p>
+<p><span class="math inline">\(\rightarrow\)</span> This is the motivation for the weighting approach (marginal structural model).</p>
 </div>
 </div>
 </div>
-</section>
-<section id="difference-between-causal-mediation-analysis-and-conventional-mediation-analysis" class="level1">
-<h1>Difference between causal mediation analysis and conventional mediation analysis</h1>
-<ul>
-<li><p>Can incorporate confounders of the mediator-outcome relationship</p></li>
-<li><p>Can incorporate interactions between the effects of the exposure and the mediator</p></li>
-</ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/mediation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="interpration-of-natural-direct-and-indirect-effects" class="level1">
-<h1>Interpration of natural direct and indirect effects</h1>
-<ul>
-<li>Controlled direct effect (CDE): Set the mediator to a reference value <span class="math inline">\(M=m\)</span> uniformly for everyone in the population</li>
-</ul>
-<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
-# predict the outcome
-pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                     mediator = 0,
-                                                     covariates = w))
-pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
-                                                     mediator = 0,
-                                                     covariates = w))
-# CDE (fix mediator = 0)
-mean(pred_y1 - pred_y0)</code></pre>
-<ul>
-<li>Natural direct effect (NDE): Varying treatment while keeping the mediator fixed at the value it would have taken under no treatment</li>
-</ul>
-<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
-# NDE (letting mediator take the observed values)
-pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                     mediator = m,
-                                                     covariates = w))
-pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
-                                                     mediator = m,
-                                                     covariates = w))
-diff &lt;- pred_y1 - pred_y0
-# fit a model to estimate E[diff|treatment, covariates]
-fit_diff &lt;- lm(diff ~ treatment + covariates, data = data)
-# predict the value of the "diff" under treatment = 0
-pred_diff &lt;- predict(diff, newdata = data.frame(treatment = covariates, w = w))
-# NDE
-mean(pred_pseudo)</code></pre>
-<ul>
-<li>Natural indirect effect (NIE): Varying the mediator from <code>the value it would have taken under treatment</code> to <code>the value it would have taken under control</code>, while keeping treatment fixed</li>
-</ul>
-<pre><code>fit_mediator &lt;- lm(mediator ~ treatment + covariates, data = data)
-# predict mediator values under treatment = 1 and treatment = 0
-m1 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 1,
-                                                 covariates = w))
-m0 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 0,
-                                                 covariates = w))
-# predict the outcome
-y1_m1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                   mediator = m1,
-                                                   covariates = w))
-y1_m0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
-                                                   mediator = m0,
-                                                   covariates = w))
-# NIE
-mean(y1_m1 - y1_m0)</code></pre>
-</section>
-<section id="assumptions-of-natural-direct-and-indirect-effects" class="level1">
-<h1>Assumptions of natural direct and indirect effects</h1>
-<ul>
-<li><p>There are no unmeasured exposure-outcome confounders given <span class="math inline">\(C\)</span></p></li>
-<li><p>There are no unmeasured mediator-outcome confounders given <span class="math inline">\(C\)</span> and <span class="math inline">\(A\)</span></p></li>
-<li><p>There are no unmeasured exposure-mediator confounders given <span class="math inline">\(C\)</span></p></li>
-<li><p>There is no mediator-outcome confouder affected by exposure</p></li>
-</ul>
-<p>For controlled direct effects, only first two assumptions are needed.</p>
 
 
 </section>

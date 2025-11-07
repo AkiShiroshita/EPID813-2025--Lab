@@ -161,6 +161,10 @@ window.Quarto = {
     <a class="nav-link" href="./Assignment3.html"> 
 <span class="menu-text">Assignment3</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Lab8.html"> 
+<span class="menu-text">Lab8</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -264,6 +268,12 @@ window.Quarto = {
  <span class="menu-text">Assignment 3</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 8</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -294,76 +304,8 @@ window.Quarto = {
 </header>
 
 
-<p>Suppose the table below represents the number of outcomes within each exposure group:</p>
-<p>Exposure 2 = Yes</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>Cases</th>
-<th>Controls</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Exposure 1 +</td>
-<td>30</td>
-<td>70</td>
-<td>100</td>
-</tr>
-<tr class="even">
-<td>Exposure 1 -</td>
-<td>20</td>
-<td>80</td>
-<td>100</td>
-</tr>
-</tbody>
-</table>
-<p>Exposure 2 = No</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>Cases</th>
-<th>Controls</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Exposure 1 +</td>
-<td>30</td>
-<td>70</td>
-<td>100</td>
-</tr>
-<tr class="even">
-<td>Exposure 1 -</td>
-<td>20</td>
-<td>80</td>
-<td>100</td>
-</tr>
-</tbody>
-</table>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q1: Is there evidence of additive or multiplicative interaction?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A: selection bias.</p>
-<p>Calculate risks</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -372,25 +314,14 @@ Q1: Although Cox regression is a semiparametric model, we can estimate the basel
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A: TRUE</p>
 <p>When we use Cox regression, we do not specify the baseline hazard function, which makes the model semiparametric. However, we can estimate the baseline hazard function based on the observed data and the results from the Cox model.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q1: What is the difference between Generalized Estimating Equations (GEE) and Generalized Linear Mixed Models (GLMM)?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>::: {.callout-tip collapse=“true”} ### Q1: What is the difference between Generalized Estimating Equations (GEE) and Generalized Linear Mixed Models (GLMM)?</p>
 <p>I addressed this question in Lab 7.</p>
 <ul>
 <li>Modeling correlation: GEE models within-subject correlation using a working correlation matrix, whereas GLMM models it through random effects.</li>
@@ -434,22 +365,8 @@ Q1: What is the difference between Generalized Estimating Equations (GEE) and Ge
 <p>“typical”: two subjects with the same random effect value.</p>
 <p>e.g., GEE provides an odds ratio comparing the odds of death if everyone received treatment A versus if everyone received treatment B.</p>
 <p><strong>When the outcome is continuous and the identity link is used, population-averaged and subject-specific effects are identical.</strong></p>
-<p>However, for binary and count outcomes, the two estimands differ.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q1: In a target trial emulation using Medicare data to evaluate the effectiveness of colonoscopy in reducing colon cancer incidence among patients over 70 years old, the start of follow-up can be defined as the date of colonoscopy for the exposed group and the date of the first routine health check-up for the unexposed group. True or False?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>However, for binary and count outcomes, the two estimands differ. :::</p>
+<p>::: {.callout-tip collapse=“true”} ### Q1: In a target trial emulation using Medicare data to evaluate the effectiveness of colonoscopy in reducing colon cancer incidence among patients over 70 years old, the start of follow-up can be defined as the date of colonoscopy for the exposed group and the date of the first routine health check-up for the unexposed group. True or False?</p>
 <p>A: FALSE</p>
 <p>To avoid immortal time bias, time zero should be defined such that:</p>
 <ul>
@@ -457,27 +374,10 @@ Q1: In a target trial emulation using Medicare data to evaluate the effectivenes
 <li><p>Treatment strategies are assigned</p></li>
 <li><p>Outcome ascertainment begins</p></li>
 </ul>
-<p>I will not discuss what the best strategy is here, but the definition of time zero given above is incorrect (see lecture slides).</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q1: You want to evaluate the effectiveness of vitamin supplement X, a time-varying exposure (Yes vs.&nbsp;No), on yearly measured binary hospitalization outcomes (Yes vs.&nbsp;No at the X-year visit). Assuming there are no competing risks, should you use a mixed-effects logistic regression model or G-methods (e.g., a marginal structural model with inverse probability weighting)?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<p>I will not discuss what the best strategy is here, but the definition of time zero given above is incorrect (see lecture slides). :::</p>
+<p>::: {.callout-tip collapse=“true”} ### Q1: You want to evaluate the effectiveness of vitamin supplement X, a time-varying exposure (Yes vs.&nbsp;No), on yearly measured binary hospitalization outcomes (Yes vs.&nbsp;No at the X-year visit). Assuming there are no competing risks, should you use a mixed-effects logistic regression model or G-methods (e.g., a marginal structural model with inverse probability weighting)?</p>
 <p>A: G-methods</p>
-<p>We should address the time-varying confounding affected by prior exposure (treament-confounder feedback). Mixed-effects logistic regression model cannot appropriately adjust for such confounding, whereas G-methods can.</p>
-</div>
-</div>
-</div>
+<p>We should address the time-varying confounding affected by prior exposure (treament-confounder feedback). Mixed-effects logistic regression model cannot appropriately adjust for such confounding, whereas G-methods can. :::</p>
 
 
 

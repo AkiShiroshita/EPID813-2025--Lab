@@ -161,6 +161,10 @@ window.Quarto = {
     <a class="nav-link" href="./Assignment3.html"> 
 <span class="menu-text">Assignment3</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Lab8.html"> 
+<span class="menu-text">Lab8</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -264,6 +268,12 @@ window.Quarto = {
  <span class="menu-text">Assignment 3</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 8</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -331,9 +341,119 @@ window.Quarto = {
 <li><p>The hazards of hazard ratios: https://pmc.ncbi.nlm.nih.gov/articles/PMC3653612/</p></li>
 <li><p>A issue of <code>ggcoxzph</code>: https://github.com/kassambara/survminer/issues/454</p></li>
 <li><p>Imputation in longitudinal studies: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-018-0615-6</p></li>
+<li><p>Reporting guideline of target trial emulation: fbclid=IwY2xjawNs2lhleHRuA2FlbQIxMQBicmlkETFmRkt3RXNpaWpsdzNzeGJnAR4WHcMuyjIQBm5vyDUZzQyEg4BRP5p_gJTUIg9nmrwgm_aoFUrqIg3WnI0ULg_aem_oj318d8c-ogCvW7Erz-FcA</p></li>
+<li><p>Competing events:</p>
+<ul>
+<li><p>Effect on a composite outcome</p></li>
+<li><p>Total effect: Interpret the competing events as an event which prevents the development of the outcome thereafter (assign a value of 0 to the outcome variable after an individual has dies and estimate the total effect of the vaccine on the outcome = what is the effect of vaccination with a first dose of the CROWN vaccine at baseline vs.&nbsp;no vaccination at baseline on the 24-week risk of coronavirus hospitalization, had no one been lost to follow-up?)</p></li>
+<li><p>Controlled direct effect: Interpret the competing event as a censoring event (implies an intervention on death = what is the effect of vaccination with a first dose of the CROWN vaccine at baseline vs.&nbsp;no vaccination at baseline on the 24-week risk of coronavirus hospitalization, had no one died or been lost to follow-up?)</p></li>
+<li><p>Separable direct effect</p></li>
+<li><p>Survivor average causal effect</p></li>
+</ul></li>
 </ul>
+<section id="difference-between-causal-mediation-analysis-and-conventional-mediation-analysis" class="level1">
+<h1>Difference between causal mediation analysis and conventional mediation analysis</h1>
+<ul>
+<li><p>Can incorporate confounders of the mediator-outcome relationship</p></li>
+<li><p>Can incorporate interactions between the effects of the exposure and the mediator</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/mediation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpration-of-natural-direct-and-indirect-effects" class="level1">
+<h1>Interpration of natural direct and indirect effects</h1>
+<ul>
+<li>Controlled direct effect (CDE): Set the mediator to a reference value <span class="math inline">\(M=m\)</span> uniformly for everyone in the population</li>
+</ul>
+<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
+# predict the outcome
+pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                     mediator = 0,
+                                                     covariates = w))
+pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
+                                                     mediator = 0,
+                                                     covariates = w))
+# CDE (fix mediator = 0)
+mean(pred_y1 - pred_y0)</code></pre>
+<ul>
+<li>Natural direct effect (NDE): Varying treatment while keeping the mediator fixed at the value it would have taken under no treatment</li>
+</ul>
+<p>Comparing the effects of <span class="math inline">\(A=1\)</span> versus <span class="math inline">\(A=0\)</span>, setting <span class="math inline">\(M=M_0\)</span></p>
+<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
+# NDE (letting mediator take the observed values)
+pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                     mediator = m,
+                                                     covariates = w))
+pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
+                                                     mediator = m,
+                                                     covariates = w))
+diff &lt;- pred_y1 - pred_y0
+# fit a model to estimate E[diff|treatment, covariates]
+fit_diff &lt;- lm(diff ~ treatment + covariates, data = data)
+# predict the value of the "diff" under treatment = 0
+pred_diff &lt;- predict(diff, newdata = data.frame(treatment = 0,
+                                                covariates = w))
+# NDE
+mean(pred_pseudo)</code></pre>
+<ul>
+<li>Natural indirect effect (NIE): Varying the mediator from <code>the value it would have taken under treatment</code> to <code>the value it would have taken under control</code>, while keeping treatment fixed</li>
+</ul>
+<p>Comparing the effects of <span class="math inline">\(M=M_1\)</span> versus <span class="math inline">\(M=M_0\)</span>, setting <span class="math inline">\(A=1\)</span></p>
+<pre><code>fit_mediator &lt;- lm(mediator ~ treatment + covariates, data = data)
+# predict mediator values under treatment = 1 and treatment = 0
+m1 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 1,
+                                                 covariates = w))
+m0 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 0,
+                                                 covariates = w))
+# predict the outcome
+y1_m1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                   mediator = m1,
+                                                   covariates = w))
+y1_m0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                   mediator = m0,
+                                                   covariates = w))
+# NIE
+mean(y1_m1 - y1_m0)</code></pre>
+</section>
+<section id="assumptions-of-natural-direct-and-indirect-effects" class="level1">
+<h1>Assumptions of natural direct and indirect effects</h1>
+<ul>
+<li><p>There are no unmeasured exposure-outcome confounders given <span class="math inline">\(C\)</span></p></li>
+<li><p>There are no unmeasured mediator-outcome confounders given <span class="math inline">\(C\)</span> and <span class="math inline">\(A\)</span></p></li>
+<li><p>There are no unmeasured exposure-mediator confounders given <span class="math inline">\(C\)</span></p></li>
+<li><p>There is no mediator-outcome confouder affected by exposure</p></li>
+</ul>
+<p>For controlled direct effects, only first two assumptions are needed.</p>
+</section>
+<section id="weighting-approach-mediation" class="level1">
+<h1>Weighting approach (mediation)</h1>
+<ol type="1">
+<li><p>First, create a new dataset which has two copies of each individual</p></li>
+<li><p>Create a additional new variables we will call <span class="math inline">\(A^*\)</span></p></li>
+<li><p>The variable <span class="math inline">\(A^*\)</span> is set equal to <span class="math inline">\(A\)</span> for the first copy of the individual</p></li>
+<li><p>The variable <span class="math inline">\(A^*\)</span> is set equal to <span class="math inline">\(1-A\)</span> for the second copy of the individual</p></li>
+</ol>
+<p><span class="math inline">\(w^A_i=\frac{P(A=a_i)}{P(A=a_i|C=c_i)}\)</span></p>
+<p><span class="math inline">\(w^M_i=\frac{P(M=m_i|A=a^*_i, C=c_i)}{P(A=a_i|A=a_i, C=c_i)}\)</span></p>
+<p>The numerator is the predicted probability of having the value of the mediator that the individual in fact had a value of the exposure which was in fact equal to <span class="math inline">\(A=a^*\)</span> (i.e., equal to what the individual actually had for the first replication and to 1 minus this value for the second replication)</p>
+<p>Overall weight: <span class="math inline">\(w_i=w^A_i \times w^M_i\)</span></p>
+</section>
+<section id="weighting-approach-interaction-not-effect-modification" class="level1">
+<h1>Weighting approach (interaction [not effect modification])</h1>
+<p>Exposure 1: <span class="math inline">\(E\)</span> , exposure 2: <span class="math inline">\(Q\)</span></p>
+<p><span class="math inline">\(w^E_i=\frac{P(E=e_i|Q=q_i)}{P(E=e_i|Q=q_i, X=x_i)}\)</span></p>
+<p><span class="math inline">\(w^Q_i=\frac{P(Q=q_i)}{P(Q=q_i|X=x_i)}\)</span></p>
+<p>Overall weight: <span class="math inline">\(w_i=w^A_i \times w^M_i\)</span></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
