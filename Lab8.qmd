@@ -94,12 +94,15 @@ $RR_{01}=p_{01}/p_{00}$
 
 $RR_{11}=p_{11}/p_{00}$
 
--   Multiplicative interaction(the extent to which of the two exposures together exceeds the effect of each considered individually **on the multiplicative scale measure**): $\frac{RR_{11}}{RR_{10} \times RR_{01}}=\frac{p_{11}p_{00}}{p_{10}p_{01}}=\frac{0.2 \times 0.2}{0.1 \times 0.3} \approx 1.33$
+-   Multiplicative interaction (the extent to which of the two exposures together exceeds the effect of each considered individually **on the multiplicative scale measure**): $\frac{RR_{11}}{RR_{10} \times RR_{01}}=\frac{p_{11}p_{00}}{p_{10}p_{01}}=\frac{0.2 \times 0.2}{0.1 \times 0.3} \approx 1.33$
 
 $\rightarrow$ Supermultiplicative
+
+:::callout-note
+The presence of an additive interaction does not imply the presence of a multiplicative interaction, and vice versa.
 :::
 
-# Additive vs. multiplicative interaction
+:::
 
 * What outcome scale are you referring to?
 
@@ -131,6 +134,10 @@ $\rightarrow$ Nonlinear regression analyses show an inherent interaction! (An in
 We should be cautious about the outcome scales.
 
 $\rightarrow$ This is the motivation for the weighting approach (marginal structural model). You can think about the 2×2 table (from the question above) in the pseudo-population!
+
+:::callout-note
+Weighting is very cool, as it allows us to simplify complex situations into just 2×2 table questions.
+:::
 
 :::
 

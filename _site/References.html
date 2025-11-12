@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meta-analysis Lab – EPID8313 (year 2025) Lab Review</title>
+<title>References – EPID8313 (year 2025) Lab Review</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -181,7 +181,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Meta-analysis Lab</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">References</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -287,7 +287,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meta-analysis Lab</h1>
+<h1 class="title">References</h1>
 </div>
 
 
@@ -304,134 +304,156 @@ window.Quarto = {
 </header>
 
 
-<p>You are supervising a medical student conducting a systematic review and meta-analysis of RCTs on the effects of a new drug X (vs.&nbsp;placebo) on some QOL scores (e.g., SF36 [0-100], EQ-5D [-0.594 to 1.0], etc). The student has gathered data from the included studies, however, the reporting formats differ across studies. The student is uncertain about how to proceed with the meta-analysis.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q1: What effect size measure would you use for the meta-analysis? Why?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Standardized mean difference (SMD) because the QOL scores are measured on different scales across studies, and SMD allows for comparison by standardizing the differences.</p>
-<p>Option A: Meta-analysis of QOL scores at the follow-up visit</p>
-<p>If randomization worked and baseline means are similar, this is usually acceptable.</p>
-<p>Option B: Meta-analysis of change scores (follow-up minus baseline) in QOL scores</p>
-<p>From here,</p>
-<p><strong>because change scores in QOL scores are not reported in many studies, you decided to focus on Option A.</strong></p>
+<ul>
+<li><p>Providing p-values in Table 1: https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/</p></li>
+<li><p>Benchmarks for interpreting R² values</p></li>
+</ul>
+<p>Cohen (1988): Cohen, J. 1988. Statistical Power Analysis for the Behavioral Sciences, 2nd Ed. New York: Routledge. https://www.taylorfrancis.com/books/mono/10.4324/9780203771587/statistical-power-analysis-behavioral-sciences-jacob-cohen</p>
+<p><span class="math inline">\(R^2 &lt; 0.02\)</span> → Very weak</p>
+<p><span class="math inline">\(0.02 ≤ R^2\)</span> &lt; 0.13 → Weak</p>
+<p><span class="math inline">\(0.13 ≤ R^2\)</span> &lt; 0.26 → Moderate</p>
+<p><span class="math inline">\(R^2 ≥ 0.26\)</span> → Substantial</p>
+<p>Falk &amp; Miller (1992): Falk, R Frank, and Nancy B Miller. 1992. A Primer for Soft Modeling. University of Akron Press.</p>
+<p><span class="math inline">\(R^2 &lt; 0.10\)</span> → Negligible</p>
+<p><span class="math inline">\(R^2 ≥ 0.10\)</span> → Adequate</p>
+<ul>
+<li><p>A practical reference of self-controlled case series: http://sccs-studies.info/index.html</p></li>
+<li><p>Scoping review of biases in database research: https://pubmed.ncbi.nlm.nih.gov/30871502/</p></li>
+<li><p>Gail 1972 is the first to highlight people’s interest in immortal time bias: https://pubmed.ncbi.nlm.nih.gov/4554414/</p></li>
+</ul>
+<p>In the field of pharmacoepidemiology, this study of COPD and inhaled corticosteroid became a catalyst for attracting attention: https://pubmed.ncbi.nlm.nih.gov/11520719/</p>
+<p>Critique: https://pubmed.ncbi.nlm.nih.gov/12663327/</p>
+<p>Validation by RCT: https://www.nejm.org/doi/full/10.1056/NEJMoa063070</p>
+<ul>
+<li>Simulation study focused on outcome imputation: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-016-0281-5</li>
+</ul>
+<p>Although the method that imputes the outcome of interest and then removes observations where the outcome is imputed performed slightly better in some scenarios, especially for low and moderate levels of missingness, it was not always better and it is known to be biased in the presence of auxiliary variables. For very high levels of missingness, the higher power obtained when imputing the outcome (and not dropping observations) might make this approach somewhat more appealing.</p>
+<ul>
+<li><p>IPCW: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01533-9</p></li>
+<li><p>Controversy regarding sample size and power calculation in observation studies: https://pubmed.ncbi.nlm.nih.gov/34461211/</p></li>
+<li><p>Matching in cohort studies: https://pubmed.ncbi.nlm.nih.gov/23761197/</p></li>
+<li><p>Paired nature of the data in propensity-score matching: https://pubmed.ncbi.nlm.nih.gov/18038446/</p></li>
+</ul>
+<p>I recommend reviewing the associated comments on this article.</p>
+<ul>
+<li><p>Competing risk1: https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1765783</p></li>
+<li><p>Competing risk2: https://pubmed.ncbi.nlm.nih.gov/31985089/</p></li>
+<li><p>The hazards of hazard ratios: https://pmc.ncbi.nlm.nih.gov/articles/PMC3653612/</p></li>
+<li><p>A issue of <code>ggcoxzph</code>: https://github.com/kassambara/survminer/issues/454</p></li>
+<li><p>Imputation in longitudinal studies: https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-018-0615-6</p></li>
+<li><p>Reporting guideline of target trial emulation: fbclid=IwY2xjawNs2lhleHRuA2FlbQIxMQBicmlkETFmRkt3RXNpaWpsdzNzeGJnAR4WHcMuyjIQBm5vyDUZzQyEg4BRP5p_gJTUIg9nmrwgm_aoFUrqIg3WnI0ULg_aem_oj318d8c-ogCvW7Erz-FcA</p></li>
+<li><p>Competing events:</p>
+<ul>
+<li><p>Effect on a composite outcome</p></li>
+<li><p>Total effect: Interpret the competing events as an event which prevents the development of the outcome thereafter (assign a value of 0 to the outcome variable after an individual has dies and estimate the total effect of the vaccine on the outcome = what is the effect of vaccination with a first dose of the CROWN vaccine at baseline vs.&nbsp;no vaccination at baseline on the 24-week risk of coronavirus hospitalization, had no one been lost to follow-up?)</p></li>
+<li><p>Controlled direct effect: Interpret the competing event as a censoring event (implies an intervention on death = what is the effect of vaccination with a first dose of the CROWN vaccine at baseline vs.&nbsp;no vaccination at baseline on the 24-week risk of coronavirus hospitalization, had no one died or been lost to follow-up?)</p></li>
+<li><p>Separable direct effect</p></li>
+<li><p>Survivor average causal effect</p></li>
+</ul></li>
+</ul>
+<section id="difference-between-causal-mediation-analysis-and-conventional-mediation-analysis" class="level1">
+<h1>Difference between causal mediation analysis and conventional mediation analysis</h1>
+<ul>
+<li><p>Can incorporate confounders of the mediator-outcome relationship</p></li>
+<li><p>Can incorporate interactions between the effects of the exposure and the mediator</p></li>
+</ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/pre_post.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<p><img src="figures/mediation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q2: Study A reported the standardized mean difference (SMD) and its standard error (SE), comparing follow-up scores between the treatment and control groups. However, it reported a “strange” happiness score ranging from -50 to 50, where lower scores indicate better QOL (In other QOL scores, higher scores indicate better QOL). Can this study be included in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Yes.</p>
-<p>You can include this study by reversing the sign of the SMD and its SE.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q3: Study B did not report the standardized mean difference (SMD) or its standard error (SE). However, it provided the mean and standard deviation (SD) for both the drug X and placebo groups at the follow-up visit. Can this study still be included in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Yes.</p>
-<p><span class="math inline">\(SMD=\frac{Mean_{Drug}-Mean_{Placebo}}{SD_{pooled}}\)</span></p>
-<p>where</p>
-<p><span class="math inline">\(SD_{pooled}=\sqrt{\frac{(n_1-1)SD^2_1 + (n_2-1)SD^2_2}{n_1+n_2-2}}\)</span></p>
-<p>Then, SE of SMD can be calculated as:</p>
-<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
-<p>(There are other formulas for SE of SMD. This is one of the commonly used formulas.)</p>
-<p><strong>Please note that you do not use SMD for pre- and post- comparisons within the same group.</strong></p>
-<p><span class="math inline">\(SMD = \frac{Mean_{post}-Mean_{pre}}{SD_{change}}\)</span></p>
-<p>where <span class="math inline">\(SD_{change}\)</span> : standard deviation of the change scores</p>
-<p>or <span class="math inline">\(SD_{change}=\sqrt{SD^2_{pre}+SD^2_{post}-2 \times r \times SD_{pre} \times SD_{post}}\)</span></p>
-<p>(You need correlation coefficient <span class="math inline">\(r\)</span> )</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q4: Study C did not report SMD and its standard error (SE). However, it reported the mean difference (MD) and SE(MD) between the drug X and placebo groups at the follow-up visit. The means and standard deviations (SDs) for the drug X and placebo groups at follow-up are not available. Are you able to use this study in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: Yes.</p>
-<p><span class="math inline">\(SMD=\frac{Mean_{Drug}-Mean_{Placebo}}{SD_{pooled}}\)</span></p>
-<p>where</p>
-<p><span class="math inline">\(SD_{pooled}=\sqrt{\frac{(n_1-1)SD^2_1 + (n_2-1)SD^2_2}{n_1+n_2-2}}\)</span></p>
-<p>Then, SE of SMD can be calculated as:</p>
-<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
-<p>If you do not have SDs, you cannot directly compute SMD.</p>
-<p>However, you can approximate SMD if you have a “reasonable” estimate of the SD from other studies.:</p>
-<p><span class="math inline">\(SMD \approx \frac{MD}{SD_{reference}}\)</span></p>
-<p>and adjust SE accordingly:</p>
-<p><span class="math inline">\(SE_{SMD} \approx \frac{SE_{MD}}{SD_{reference}}\)</span></p>
-<p>There is no clear rule for this, as the evidence is based on case series. In general, we select a study with a similar design, sample size, and other relevant characteristics.</p>
-<blockquote class="blockquote">
-<p>The simplest imputation is to borrow the SD from one or more other studies. Furukawa and colleagues found that imputing SDs either from other studies in the same meta-analysis, or from studies in another meta-analysis, yielded approximately correct results in two case studies (Furukawa et al 2006). If several candidate SDs are available, review authors should decide whether to use their average, the highest, a ‘reasonably high’ value, or some other strategy. For meta-analyses of MDs, choosing a higher SD down-weights a study and yields a wider confidence interval. However, for SMD meta-analyses, choosing a higher SD will bias the result towards a lack of effect. More complicated alternatives are available for making use of multiple candidate SDs. For example, Marinho and colleagues implemented a linear regression of log(SD) on log(mean), because of a strong linear relationship between the two (Marinho et al 2003).</p>
-</blockquote>
-<p>https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-06</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Q5: Study D reported Cohen’s d comparing pre- and post-intervention QOL scores within both the treatment and control groups. Can this study be included in the meta-analysis?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Answer: No.</p>
-<p>In Q1, you decided to focus on Option A (meta-analysis of QOL scores at the follow-up visit). Therefore, pre-post comparisons within the same group cannot be used for this meta-analysis.</p>
-<p>If this study reported Cohen’s d comparing the drug X and placebo groups at follow-up, then it could be included, even if SD or SE of Cohen’s d were not reported.</p>
-<p><span class="math inline">\(SE_{SMD}=\sqrt{\frac{n_1+n_2}{n_1 n_2}+\frac{SMD^2}{2(n_1+n_2-2)}}\)</span></p>
-<p>(There are other formulas for SE of SMD. This is one of the commonly used formulas.)</p>
-</div>
-</div>
-</div>
+</section>
+<section id="interpration-of-natural-direct-and-indirect-effects" class="level1">
+<h1>Interpration of natural direct and indirect effects</h1>
+<ul>
+<li>Controlled direct effect (CDE): Set the mediator to a reference value <span class="math inline">\(M=m\)</span> uniformly for everyone in the population</li>
+</ul>
+<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
+# predict the outcome
+pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                     mediator = 0,
+                                                     covariates = w))
+pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
+                                                     mediator = 0,
+                                                     covariates = w))
+# CDE (fix mediator = 0)
+mean(pred_y1 - pred_y0)</code></pre>
+<ul>
+<li>Natural direct effect (NDE): Varying treatment while keeping the mediator fixed at the value it would have taken under no treatment</li>
+</ul>
+<p>Comparing the effects of <span class="math inline">\(A=1\)</span> versus <span class="math inline">\(A=0\)</span>, setting <span class="math inline">\(M=M_0\)</span></p>
+<pre><code>fit_outcome &lt;- lm(outcome ~ mediator + treatment + covariates, data = data)
+# NDE (letting mediator take the observed values)
+pred_y1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                     mediator = m,
+                                                     covariates = w))
+pred_y0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 0,
+                                                     mediator = m,
+                                                     covariates = w))
+diff &lt;- pred_y1 - pred_y0
+# fit a model to estimate E[diff|treatment, covariates]
+fit_diff &lt;- lm(diff ~ treatment + covariates, data = data)
+# predict the value of the "diff" under treatment = 0
+pred_diff &lt;- predict(diff, newdata = data.frame(treatment = 0,
+                                                covariates = w))
+# NDE
+mean(pred_pseudo)</code></pre>
+<ul>
+<li>Natural indirect effect (NIE): Varying the mediator from <code>the value it would have taken under treatment</code> to <code>the value it would have taken under control</code>, while keeping treatment fixed</li>
+</ul>
+<p>Comparing the effects of <span class="math inline">\(M=M_1\)</span> versus <span class="math inline">\(M=M_0\)</span>, setting <span class="math inline">\(A=1\)</span></p>
+<pre><code>fit_mediator &lt;- lm(mediator ~ treatment + covariates, data = data)
+# predict mediator values under treatment = 1 and treatment = 0
+m1 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 1,
+                                                 covariates = w))
+m0 &lt;- predict(fit_mediator, newdata = data.frame(treatment = 0,
+                                                 covariates = w))
+# predict the outcome
+y1_m1 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                   mediator = m1,
+                                                   covariates = w))
+y1_m0 &lt;- predict(fit_outcome, newdata = data.frame(treatment = 1,
+                                                   mediator = m0,
+                                                   covariates = w))
+# NIE
+mean(y1_m1 - y1_m0)</code></pre>
+</section>
+<section id="assumptions-of-natural-direct-and-indirect-effects" class="level1">
+<h1>Assumptions of natural direct and indirect effects</h1>
+<ul>
+<li><p>There are no unmeasured exposure-outcome confounders given <span class="math inline">\(C\)</span></p></li>
+<li><p>There are no unmeasured mediator-outcome confounders given <span class="math inline">\(C\)</span> and <span class="math inline">\(A\)</span></p></li>
+<li><p>There are no unmeasured exposure-mediator confounders given <span class="math inline">\(C\)</span></p></li>
+<li><p>There is no mediator-outcome confouder affected by exposure</p></li>
+</ul>
+<p>For controlled direct effects, only first two assumptions are needed.</p>
+</section>
+<section id="weighting-approach-mediation" class="level1">
+<h1>Weighting approach (mediation)</h1>
+<ol type="1">
+<li><p>First, create a new dataset which has two copies of each individual</p></li>
+<li><p>Create a additional new variables we will call <span class="math inline">\(A^*\)</span></p></li>
+<li><p>The variable <span class="math inline">\(A^*\)</span> is set equal to <span class="math inline">\(A\)</span> for the first copy of the individual</p></li>
+<li><p>The variable <span class="math inline">\(A^*\)</span> is set equal to <span class="math inline">\(1-A\)</span> for the second copy of the individual</p></li>
+</ol>
+<p><span class="math inline">\(w^A_i=\frac{P(A=a_i)}{P(A=a_i|C=c_i)}\)</span></p>
+<p><span class="math inline">\(w^M_i=\frac{P(M=m_i|A=a^*_i, C=c_i)}{P(A=a_i|A=a_i, C=c_i)}\)</span></p>
+<p>The numerator is the predicted probability of having the value of the mediator that the individual in fact had a value of the exposure which was in fact equal to <span class="math inline">\(A=a^*\)</span> (i.e., equal to what the individual actually had for the first replication and to 1 minus this value for the second replication)</p>
+<p>Overall weight: <span class="math inline">\(w_i=w^A_i \times w^M_i\)</span></p>
+</section>
+<section id="weighting-approach-interaction-not-effect-modification" class="level1">
+<h1>Weighting approach (interaction [not effect modification])</h1>
+<p>Exposure 1: <span class="math inline">\(E\)</span> , exposure 2: <span class="math inline">\(Q\)</span></p>
+<p><span class="math inline">\(w^E_i=\frac{P(E=e_i|Q=q_i)}{P(E=e_i|Q=q_i, X=x_i)}\)</span></p>
+<p><span class="math inline">\(w^Q_i=\frac{P(Q=q_i)}{P(Q=q_i|X=x_i)}\)</span></p>
+<p>Overall weight: <span class="math inline">\(w_i=w^A_i \times w^M_i\)</span></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -506,7 +528,7 @@ Q5: Study D reported Cohen’s d comparing pre- and post-intervention QOL scores
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/AkiShiroshita\.github\.io\/EPID813-2025--Lab\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

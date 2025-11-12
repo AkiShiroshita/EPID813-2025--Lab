@@ -1,8 +1,8 @@
 ---
-title: "Lab 8"
+title: "Lab 9"
 webr:  
   show-startup-message: true    # Display status of webR initialization
-  packages: ['data.table', 'tidyverse', 'ggplot2', 'survival', 'survmine'] # Pre-install dependency
+  packages: ['tidyverse'] # Pre-install dependency
 editor_options: 
   chunk_output_type: console
 ---
@@ -13,52 +13,133 @@ Lab 9 covers
 
 # Quantitative bias analysis
 
-* Simple bias analysis: aggregated data $\rightarrow$ Using provided Excel Spreadsheets
+* Simple bias analysis: Deterministic
 
-* Probalistic bias analysis: Specify the bias distributions and assume that there are no other sources of error
+e.g., sensitivity and specificity of outcome measurement is 85% (95% CI: 80%-90%) and 90% (95% CI: 85%-95%), respectively. $\rightarrow$ Use the point estimates alone to calculate a single bias-corrected effect estimate.
 
-# Probalistic bias analysis
+* Probalistic bias analysis: Probalistic
 
-Aggregated data vs. Individual-level data
+e.g., sensitivity and specificity of outcome measurement is 85% (95% CI: 80%-90%) and 90% (95% CI: 85%-95%), respectively. $\rightarrow$ Assume probability distributions (e.g., beta distribution) for sensitivity and specificity and simulate many times to obtain a distribution of bias-corrected effect estimates.
 
-* Aggregated data
+```{r, echo=FALSE, out.width="70%", fig.align = "center"}
+knitr::include_graphics("figures/beta.png")
+```
 
-1.  Identify the likely source of important bias in the data
+* Multidimensional bias analysis: Extend simple bias analysis to simulate various parameters 
 
-2.  Identify the bias parameters needed to adjust for the bias
+* Multiple bias modeling: Adjust for multiple sources of bias simultaneously.
 
-3.  Assign probability distributions to each bias parameter
+The order in which bias adjustments should be made is **the reverse of the order in which the biases occurred** when the data were generated. In other words, we should adjust for the biases that occurred last before addressing those that occurred earlier. Bias adjustments should proceed in reverse chronological order because our goal is to reconstruct the data as they would have appeared had each bias been absent. Correcting in this order allows each adjustment to build appropriately on the previous one.
 
-4.  Use simple bias analysis methods to incorporate uncertainty in the bias parameters and random error
+**Confounding is ordinarily perceived as a population-level phenomenon, whereas misclassification and selection bias typically arises during data collection or tabulation.** The simple bias analysis to address misclassification and selection bias should precede the simple bias analysis to address unmeasured confounding.
 
-4a. Incorporate bias parameter uncertainty by randomly sampling from each bias parameter distribution
+Example: This order should be determined by the context of the study.
 
-4b. Generate bias-adjusted data using simple bias analysis method and the sampled bias parameters
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("figures/multidim_bias.png")
+```
 
-4c. Incorporate conventional random error by sampling summary statistics
+We will use a case–control study examining the association between antidepressant use and the occurrence of breast cancer. The observed OR was 1.2 [0.9--1.6].
 
-5.  Save the bias-adjusted estimate and repeat steps 4a-c
+```{webr}
+chien <- matrix(c(118, 832, 103, 884),
+                dimnames = list(c("BC+", "BC-"), c("AD+", "AD-")),
+                nrow = 2, byrow = TRUE)
+chien
+```
 
-6.  Summarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval
+1. The observed association between antidepressant use and breast cancer may be **confounded** by unmeasured factors, such as family history of breast cancer.
 
-* Individual-level data
+2. Cases and controls were enrolled into the study at different rates, introducing the **selection bias** (cases were more likely to participate than controls).
 
-**The measure limitation of the summary-level bias analysis is that is it difficult to adjust for other measured confounders for which adjustment have been.**
+3. Information on medication use differed across participants, as some data were obtained from pharmacy records while others were based on self-reported use, leading to potential **exposure misclassification**.
 
-1.  Identify the likely sources of important bias in the data
+Let's perform a simple bias analysis to adjust for multiple sources of bias in the reverse order.
 
-2.  Identify the bias parameters needed to bias-adjusted
+3. Information on medication use differed across participants, as some data were obtained from pharmacy records while others were based on self-reported use, leading to potential exposure misclassification.
 
-3.  Assign probability distributions to each bias parameter
+```{webr}
+# observed data
+a <- 118
+b <- 832
+c <- 103
+d <- 884
 
-4.  Use simple bias analysis methods to incorporate uncertainty in the bias parameters and random error
+# Sensitivity of exposure classification among those with the outcome: .56
+# Sensitivity of exposure classification among those without the outcome: .58
+# Specificity of exposure classification among those with the outcome: .99
+# Sensitivity of exposure classification among those without the outcome: .97
+A <- (a - (1 - .99) * (a + b)) / (.56 - (1 - .99))
+C <- (c - (1 - .97) * (c + d)) / (.58 - (1 - .97))
+B <- (a + b) - A
+D <- (c + d) - C
 
-4a. Sample from each bias parameter distribution
+# Bias-corrected cells
+matrix(round(c(A, B, C, D),2),
+       dimnames = list(c("BC+", "BC-"), c("AD+", "AD-")),
+       nrow = 2, byrow = TRUE)
+```
 
-4b. Use simple bias analysis methods to generate bias-adjusted data to inform the bias analysis and apply bias parameters probabilistically
 
-4c. Incorporate additional sources of random error
+2. Cases and controls were enrolled into the study at different rates, introducing the selection bias.
 
-5.  Save the bias-adjusted estimate and repeat steps 4a-c
+```{webr}
+# Selection probability among cases exposed: .73
+# Selection probability among cases unexposed: .61
+# Selection probability among noncases exposed: .82
+# Selection probability among noncases unexposed: .76
+AA <- A / .73
+BB <- B / .61
+CC <- C / .82
+DD <- D / .76
 
-6.  Summarize the bias-adjusted estimates with a frequency distribution that yields a central tendency and simulation interval
+# Bias-corrected cells
+matrix(round(c(AA, BB, CC, DD),2),
+       dimnames = list(c("BC+", "BC-"), c("AD+", "AD-")),
+       nrow = 2, byrow = TRUE)
+```
+
+1. The observed association between antidepressant use and breast cancer may be confounded by unmeasured factors, such as family history of breast cancer.
+
+Let's assume this is no effect measure modification for the simplicity.
+
+```{webr}
+# The association between the confounder and the outcome among those who were not exposed: .92
+# The prevalence of the confounder among the exposed: .30
+# The prevalence of the confounder among the unexposed: .44
+C1 <- CC * .30
+D1 <- DD * .44
+A1 <- (.92 * C1 * AA) / (.92 * C1 + CC - C1)
+B1 <- (.92 * D1 * BB) / (.92 * D1 + DD - D1)
+M1 <- A1 + C1
+N1 <- B1 + D1
+A0 <- AA - A1
+B0 <- BB - B1
+C0 <- CC - C1
+D0 <- DD - D1
+M0 <- A0 + C0
+N0 <- B0 + D0
+
+print("C=1")
+matrix(round(c(A1, B1, C1, D1),2),
+       dimnames = list(c("BC+", "BC-"), c("AD+", "AD-")),
+       nrow = 2, byrow = TRUE)
+
+print("C=0")
+matrix(round(c(A0, B0, C0, D0),2),
+       dimnames = list(c("BC+", "BC-"), c("AD+", "AD-")),
+       nrow = 2, byrow = TRUE)
+```
+
+Bias-corrected Odds ratio
+
+```{webr}
+(A1 * D1 / (M1 + N1) + A0 * D0 / (M0 + N0)) / (B1 * C1 / (M1 + N1) + B0 * C0 / (M0 + N0))
+```
+
+
+# Summary-level data vs. Individual-level data
+
+We focused on summary-level data for its simplicity.
+
+**A major limitation of the summary-level bias analysis is that is it difficult to adjust for other measured confounders for which adjustment have been.**
