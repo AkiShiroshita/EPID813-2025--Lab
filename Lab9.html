@@ -2165,10 +2165,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <ul>
-<li>Multidimensional bias analysis: Extend simple bias analysis to simulate various parameters and/or adjust for multiple sources of bias simultaneously.</li>
+<li><p>Multidimensional bias analysis: Extend simple bias analysis to simulate various parameters</p></li>
+<li><p>Multiple bias modeling: Adjust for multiple sources of bias simultaneously.</p></li>
 </ul>
-<p>The order in which bias adjustments should be made is the reverse of the order in which the biases occurred when the data were generated. In other words, we should adjust for the biases that occurred last before addressing those that occurred earlier. Bias adjustments should proceed in reverse chronological order because our goal is to reconstruct the data as they would have appeared had each bias been absent. Correcting in this order allows each adjustment to build appropriately on the previous one.</p>
-<p>Confounding is ordinarily perceived as a population-level phenomenon, whereas misclassification and selection bias typically arises during data collection or tabulation. The simple bias analysis to address misclassification and selection bias should precede the simple bias analysis to address unmeasured confounding.</p>
+<p>The order in which bias adjustments should be made is <strong>the reverse of the order in which the biases occurred</strong> when the data were generated. In other words, we should adjust for the biases that occurred last before addressing those that occurred earlier. Bias adjustments should proceed in reverse chronological order because our goal is to reconstruct the data as they would have appeared had each bias been absent. Correcting in this order allows each adjustment to build appropriately on the previous one.</p>
+<p><strong>Confounding is ordinarily perceived as a population-level phenomenon, whereas misclassification and selection bias typically arises during data collection or tabulation.</strong> The simple bias analysis to address misclassification and selection bias should precede the simple bias analysis to address unmeasured confounding.</p>
+<p>Example: This order should be determined by the context of the study.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -2184,20 +2186,20 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 <ol type="1">
-<li><p>The observed association between antidepressant use and breast cancer may be confounded by unmeasured factors, such as family history of breast cancer.</p></li>
-<li><p>Information on medication use differed across participants, as some data were obtained from pharmacy records while others were based on self-reported use, leading to potential exposure misclassification.</p></li>
-<li><p>Cases and controls were enrolled into the study at different rates, introducing the selection bias.</p></li>
+<li><p>The observed association between antidepressant use and breast cancer may be <strong>confounded</strong> by unmeasured factors, such as family history of breast cancer.</p></li>
+<li><p>Cases and controls were enrolled into the study at different rates, introducing the <strong>selection bias</strong> (cases were more likely to participate than controls).</p></li>
+<li><p>Information on medication use differed across participants, as some data were obtained from pharmacy records while others were based on self-reported use, leading to potential <strong>exposure misclassification</strong>.</p></li>
 </ol>
 <p>Let’s perform a simple bias analysis to adjust for multiple sources of bias in the reverse order.</p>
 <ol start="3" type="1">
-<li>Cases and controls were enrolled into the study at different rates, introducing the selection bias.</li>
+<li>Information on medication use differed across participants, as some data were obtained from pharmacy records while others were based on self-reported use, leading to potential exposure misclassification.</li>
 </ol>
 <div class="cell">
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 <ol start="2" type="1">
-<li>Information on medication use differed across participants, as some data were obtained from pharmacy records while others were based on self-reported use, leading to potential exposure misclassification.</li>
+<li>Cases and controls were enrolled into the study at different rates, introducing the selection bias.</li>
 </ol>
 <div class="cell">
 <div id="qwebr-insertion-location-3"></div>

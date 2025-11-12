@@ -392,7 +392,7 @@ Q1: Is the following statement true?: “Effect modification can be present with
 </tbody>
 </table>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -401,7 +401,7 @@ Q2: Is there evidence of additive or multiplicative interaction?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A:</p>
 <p>First, calculate the risks across all the combination of exposure 1 and exposure 2.</p>
@@ -446,14 +446,25 @@ Q2: Is there evidence of additive or multiplicative interaction?
 <p><span class="math inline">\(RR_{01}=p_{01}/p_{00}\)</span></p>
 <p><span class="math inline">\(RR_{11}=p_{11}/p_{00}\)</span></p>
 <ul>
-<li>Multiplicative interaction(the extent to which of the two exposures together exceeds the effect of each considered individually <strong>on the multiplicative scale measure</strong>): <span class="math inline">\(\frac{RR_{11}}{RR_{10} \times RR_{01}}=\frac{p_{11}p_{00}}{p_{10}p_{01}}=\frac{0.2 \times 0.2}{0.1 \times 0.3} \approx 1.33\)</span></li>
+<li>Multiplicative interaction (the extent to which of the two exposures together exceeds the effect of each considered individually <strong>on the multiplicative scale measure</strong>): <span class="math inline">\(\frac{RR_{11}}{RR_{10} \times RR_{01}}=\frac{p_{11}p_{00}}{p_{10}p_{01}}=\frac{0.2 \times 0.2}{0.1 \times 0.3} \approx 1.33\)</span></li>
 </ul>
 <p><span class="math inline">\(\rightarrow\)</span> Supermultiplicative</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The presence of an additive interaction does not imply the presence of a multiplicative interaction, and vice versa.</p>
 </div>
 </div>
 </div>
-<section id="additive-vs.-multiplicative-interaction" class="level1">
-<h1>Additive vs.&nbsp;multiplicative interaction</h1>
+</div>
+</div>
 <ul>
 <li>What outcome scale are you referring to?</li>
 </ul>
@@ -462,7 +473,7 @@ Q2: Is there evidence of additive or multiplicative interaction?
 <pre><code>glm(outcome ~ exposure1 + exposure2 + exposure1:expsoure2,
 family = binomial(link = "logit"), data = data)</code></pre>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -471,7 +482,7 @@ Q: Does <span class="math inline">\(\beta_3\)</span> represent an additive or mu
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Answer: On the logit scale ( <span class="math inline">\(\beta_3\)</span> ), it is additive, whereas on the odds ratio scale, it is multiplicative.</p>
 <p>Interaction or effect measure modification = “Different treatment effects dependent on other variables”</p>
@@ -489,12 +500,24 @@ Q: Does <span class="math inline">\(\beta_3\)</span> represent an additive or mu
 <p><span class="math inline">\(\rightarrow\)</span> Nonlinear regression analyses show an inherent interaction! (An interaction term does not necessarily indicate “interaction”)</p>
 <p>We should be cautious about the outcome scales.</p>
 <p><span class="math inline">\(\rightarrow\)</span> This is the motivation for the weighting approach (marginal structural model). You can think about the 2×2 table (from the question above) in the pseudo-population!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Weighting is very cool, as it allows us to simplify complex situations into just 2×2 table questions.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
